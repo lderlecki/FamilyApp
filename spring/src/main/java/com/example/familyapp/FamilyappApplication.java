@@ -16,23 +16,23 @@ public class FamilyappApplication {
         SpringApplication.run(FamilyappApplication.class, args);
     }
 
-    @Bean
-    ApplicationRunner applicationRunner(ProfileRepository profileRepository, FamilyRepository familyRepository){
-        return args -> {
-            Profile p=new Profile();
-            p.setName("Janek");
-            p.setSurname("Kowalski");
-            Family f=new Family();
-            f.setFamilyName("Kowalscy");
-            familyRepository.save(f);
-            p.setFamily(f);
-            p.setFamilyHead(true);
-            Profile p2=new Profile();
-            p2.setName("John");
-            p2.setSurname("Smith");
-            p2.setFamily(f);
-            profileRepository.save(p);
-            profileRepository.save(p2);
-        };
-    }
+//    @Bean
+//    ApplicationRunner applicationRunner(ProfileRepository profileRepository, FamilyRepository familyRepository){
+//        return args -> {
+//            Profile p=new Profile();
+//            p.setName("Janek");
+//            p.setSurname("Kowalski");
+//            Family f=new Family();
+//            f.setFamilyName("Kowalscy");
+//            familyRepository.save(f);
+//            p.setFamily(f);
+//            p.setFamilyHead(true);
+//            Profile p2=new Profile();
+//            p2.setName("John");
+//            p2.setSurname("Smith");
+//            p2.setFamily(f);
+//            profileRepository.save(p);
+//            profileRepository.save(p2);
+//        };
+//    }
 }

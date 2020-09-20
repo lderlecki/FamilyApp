@@ -2,6 +2,7 @@ package com.example.familyapp.controller;
 
 import com.example.familyapp.dao.ProfileRepository;
 import com.example.familyapp.model.Profile;
+import com.example.familyapp.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,28 +11,33 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/profile")
 public class ProfileController {
 
+    ProfileService profileService;
+
     @Autowired
-    ProfileRepository profileRepository;
+    public ProfileController(ProfileService profileService) {
+        this.profileService = profileService;
+    }
 
     @PostMapping(value = "/")
     Profile saveProfile(@RequestBody Profile profile){
-        return profileRepository.save(profile);
+        return profileService.save(profile);
     }
     @GetMapping(value = "/")
     Profile getProfile(@RequestParam long id){
 
-        System.out.println(profileRepository.findById(id).getFamily());
-        profileRepository.findById(id).getFamily().getFamilyMembers().forEach(profile -> System.out.println(profile.getName()));
+        //System.out.println(profileService.findById(id).getFamily());
+       // profileService.findById(id).getFamily().getFamilyMembers().forEach(profile -> System.out.println(profile.getName()));
 
-        return profileRepository.findById(id);
+        return profileService.findById(id);
     }
+
     @PutMapping(value = "/")
     Profile update(@RequestBody Profile profile){
-        return profileRepository.save(profile);
+        return profileService.save(profile);
     }
 
     @DeleteMapping(value = "/")
     void deleteProfile(@RequestParam long id){
-        profileRepository.delete(profileRepository.findById(id));
+        profileService.delete(profileService.findById(id));
     }
 }

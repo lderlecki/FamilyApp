@@ -1,0 +1,52 @@
+List of basic docker commands with examples below each commmand
+
+1.Listing images
+
+docker image ls
+
+2.Deleting image
+
+docker rmi -f <IMAGE ID>
+docker rmi -f 15a39a1631b6
+
+3.Creating image
+
+docker build -t <IMAGE NAME:version> .
+docker build -t my-new-app:v1 .
+
+4.Running one image 
+
+ANGULAR:
+docker run -it -p 80:80/tcp --name <YOUR OWN NAME>  <IMAGE ID>
+docker run -it -p 80:80/tcp --name my-new-app  15a39a1631b6
+SPRING:
+docker run -it -p 7997:8080 --name spring_app 23c21f96aa48
+
+PROPER PORT FORWARDING SHOULD LOOK LIKE THIS (COLUMN PORTS)
+0.0.0.0:7997->8080/tcp
+
+IMPROPER PORT FORWADING (usually it means that second port value (after ':' ) is not corrrect)
+8080/tcp, 0.0.0.0:7997->80/tcp
+
+5.Listing containers
+
+docker container ls
+
+6.Listing ALL containers
+docker container ls -a
+
+7.Stopping container
+
+docker stop <CONTAINER ID>
+docker stop 15a39a1631b6
+
+7.Deleting container
+
+docker container rm <CONTAINER ID>
+docker container rm 15a39a1631b6
+
+you can delete multiple containers 
+
+docker container rm 15a39a1631b6 98c98a131d3 17098a4354d
+
+

@@ -1,0 +1,8 @@
+.idea/
+*.iml
+*.iws
+target/
+!target/lib/*
+!target/*.jar
+.sonar/
+.sonarlint/
