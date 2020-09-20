@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+  db:
+    image: postgres:9.4
+    environment:
+      - POSTGRES_ROOT_PASSWORD=familyapp123456
+      - POSTGRES_DATABASE=familyapp_db
+      - POSTGRES_PASSWORD=familyapp123456
+      - POSTGRES_USER=familyadmin
+    ports:
+      - 5432:5432
+    restart: always
+
+  backend:
+    image: spring-boot
+    build:
+      context: ./spring
+      dockerfile: ./Dockerfile
+    depends_on:
+      - db
+    ports:
+      - 8080:8080
+    restart: always
+  frontend:
+    image: angular
+    build:
+      context: ./familyapp-front
+      dockerfile: ./Dockerfile
+    ports:
+      - 80:80/tcp
+    depends_on:
+      - backend

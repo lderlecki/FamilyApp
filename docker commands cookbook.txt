@@ -40,7 +40,7 @@ docker container ls -a
 docker stop <CONTAINER ID>
 docker stop 15a39a1631b6
 
-7.Deleting container
+8.Deleting container
 
 docker container rm <CONTAINER ID>
 docker container rm 15a39a1631b6
@@ -48,5 +48,17 @@ docker container rm 15a39a1631b6
 you can delete multiple containers 
 
 docker container rm 15a39a1631b6 98c98a131d3 17098a4354d
+
+9.Docker compose
+
+a) delete old images (if any exists)
+docker-compose down -v --rmi
+b) build new images 
+docker-compose -f docker-compose.yml build
+c) create containers and start services 
+docker-compose up
+d) shut down container and services
+docker-compose down
+
 
 
