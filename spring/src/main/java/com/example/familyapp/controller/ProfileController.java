@@ -1,6 +1,5 @@
 package com.example.familyapp.controller;
 
-import com.example.familyapp.dao.ProfileRepository;
 import com.example.familyapp.model.Profile;
 import com.example.familyapp.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
