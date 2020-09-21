@@ -1,13 +1,12 @@
 # Stage 1
 FROM node:latest as build-step
-WORKDIR /app
-COPY . .
-RUN npm install
-RUN npm run build --prod
-  # Stage 2
-FROM nginx:alpine
-#destination folder name in angular.json
-COPY --from=build-step /app/dist/familyapp-front /usr/share/nginx/html
-EXPOSE 4200
 
+WORKDIR /app
+COPY package.json ./
+
+RUN npm install -g @angular/cli @angular-devkit/build-angular && npm install
+
+EXPOSE 4201
+
+CMD ["npm", "start"]
 

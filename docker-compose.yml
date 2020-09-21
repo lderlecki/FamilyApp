@@ -36,12 +36,15 @@ services:
     restart: always
   
   frontend:
-    image: angular
-    build:
-      context: ./familyapp-front
-      dockerfile: ./Dockerfile
+    build: ./familyapp-front
+
     ports:
-      - 80:80/tcp
+      - '4201:4201'
+
+    volumes:
+      - ./familyapp-front:/app
+      - /app/node_modules
+    
     depends_on:
       - spring
       - django
