@@ -12,7 +12,7 @@ services:
       - 5432:5432
     restart: always
 
-  backend:
+  spring:
     image: spring-boot
     build:
       context: ./spring
@@ -22,6 +22,19 @@ services:
     ports:
       - 8080:8080
     restart: always
+  
+  django:
+    build: ./django/
+    ports:
+        - 8000:8000
+    volumes: 
+        - ./django:/familyapp
+    command: >
+        pipenv run python manage.py runserver 0.0.0.0:8000
+    depends_on:
+        -   db
+    restart: always
+  
   frontend:
     image: angular
     build:
@@ -30,4 +43,5 @@ services:
     ports:
       - 80:80/tcp
     depends_on:
-      - backend
+      - spring
+      - django
