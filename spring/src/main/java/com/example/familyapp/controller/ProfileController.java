@@ -24,9 +24,6 @@ public class ProfileController {
     @GetMapping(value = "/")
     Profile getProfile(@RequestParam long id){
 
-        //System.out.println(profileService.findById(id).getFamily());
-       // profileService.findById(id).getFamily().getFamilyMembers().forEach(profile -> System.out.println(profile.getName()));
-
         return profileService.findById(id);
     }
 
