@@ -1,0 +1,19 @@
+<p>Register</p>
+<div class="example-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input [(ngModel)]="registerData.email"  matInput>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input [(ngModel)]="registerData.password" type="password"  matInput>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Repeat password</mat-label>
+    <input [(ngModel)]="registerData.password2" type="password" matInput>
+  </mat-form-field>
+  <br>
+  <button (click)="registerUser()">Register</button>
+</div>
