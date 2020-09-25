@@ -9,5 +9,4 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface ProfileRepository extends JpaRepository<Profile,Long> {
     Profile findById(long id);
-    Profile findByFamilyHeadIsTrue();
 }

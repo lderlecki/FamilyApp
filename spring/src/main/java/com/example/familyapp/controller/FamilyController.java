@@ -20,20 +20,20 @@ public class FamilyController {
     }
 
     @PostMapping(value = "/")
-    Family saveProfile(@RequestBody Family family){
+    Family saveFamily(@RequestBody Family family){
         return familyService.save(family);
     }
     @GetMapping(value = "/")
-    Family getProfile(@RequestParam long id){
+    Family getFamily(@RequestParam long id){
         return familyService.findById(id);
     }
     @PutMapping(value = "/")
-    Family update(@RequestBody Family family){
+    Family updateFamily(@RequestBody Family family){
         return familyService.save(family);
     }
 
     @DeleteMapping(value = "/")
-    void deleteProfile(@RequestParam long id){
+    void deleteFamily(@RequestParam long id){
         familyService.delete(familyService.findById(id));
     }
 }

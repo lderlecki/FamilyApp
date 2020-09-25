@@ -20,8 +20,7 @@ public class FamilyServiceImpl implements FamilyService {
     }
     @Override
     public Profile findFamilyHead(long id) {
-        familyRepository.findById(id).getFamilyMembers().stream().filter(profile -> profile.isFamilyHead()).collect(Collectors.toSet());
-        return null;
+        return familyRepository.findById(id).getFamilyHead();
     }
 
     @Override

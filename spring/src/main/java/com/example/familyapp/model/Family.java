@@ -13,19 +13,32 @@ public class Family {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
+
     private String familyName;
-    private float budget;
+    private double budget;
     @OneToMany(mappedBy = "family")
     private Set<Profile> familyMembers;
 
     @Column(unique = true)
     private UUID groupId = UUID.randomUUID();;
 
+    @OneToOne
+    @JoinColumn(name="family_head_id")
+    private Profile familyHead;
+
+    public Profile getFamilyHead() {
+        return familyHead;
+    }
+
+    public void setFamilyHead(Profile familyHead) {
+        this.familyHead = familyHead;
+    }
+
     public long getId() { return id; }
     public String getFamilyName() { return familyName; }
     public void setFamilyName(String familyName) { this.familyName = familyName; }
-    public float getBudget() { return budget; }
-    public void setBudget(float budget) { this.budget = budget; }
+    public double getBudget() { return budget; }
+    public void setBudget(double budget) { this.budget = budget; }
     public Set<Profile> getFamilyMembers() { return familyMembers; }
     public void setFamilyMembers(Set<Profile> familyMembers) { this.familyMembers = familyMembers; }
 

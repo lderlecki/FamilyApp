@@ -16,8 +16,21 @@ public class Profile {
     private String phone;
     @JsonIgnore
     @ManyToOne
+    @JoinColumn(name="family_id")
     private Family family;
-    private boolean familyHead;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id")
+    @JsonIgnore
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public String toString() {
@@ -28,7 +41,6 @@ public class Profile {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", family=" + family +
-                ", familyHead=" + familyHead +
                 '}';
     }
 
@@ -80,11 +92,4 @@ public class Profile {
         this.family = family;
     }
 
-    public boolean isFamilyHead() {
-        return familyHead;
-    }
-
-    public void setFamilyHead(boolean familyHead) {
-        this.familyHead = familyHead;
-    }
 }
