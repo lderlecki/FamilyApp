@@ -70,9 +70,9 @@ class Profile(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     surname = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(max_length=255, blank=True, null=True)
-    family_head = models.BooleanField(blank=True, null=True)
+    # family_head = models.BooleanField(blank=True, null=True)
     phone = models.CharField(max_length=255, blank=True, null=True)
-    family = models.ForeignKey(Family, on_delete=models.SET_NULL, blank=True, null=True)
+    family = models.ForeignKey('family.Family', on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return f"{self.name} {self.surname}"

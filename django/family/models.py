@@ -10,7 +10,7 @@ class Family(models.Model):
     budget = models.FloatField()
     family_name = models.CharField(max_length=255)
     group_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    # family_head = models.OneToOneField('accounts.Profile', on_delete=models.CASCADE, related_name='family_head')
+    family_head = models.OneToOneField('accounts.Profile', on_delete=models.CASCADE, related_name='family_head')
 
     def __str__(self):
         return f'{self.family_name}'  # - {self.family_head}'
