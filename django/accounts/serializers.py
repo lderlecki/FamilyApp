@@ -1,3 +1,5 @@
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 from .models import User, Profile
 from rest_framework import serializers
 
@@ -28,6 +30,22 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         password2 = self.validated_data['password2']
         if password != password2:
             raise serializers.ValidationError({'password': 'Passwords must match.'})
-        return User.objects.create_user(self.validated_data['email'], password=password, **kwargs)
 
+        user = User.objects.create_user(email=self.validated_data['email'], password=password)
+        # user.set_password(password)
+        # user.save()
+        return user
+
+
+# Add custom data to the token
+# class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+#
+#     @classmethod
+#     def get_token(cls, user):
+#         token = super(CustomTokenObtainPairSerializer, cls).get_token(user)
+#
+#         # Add custom claims
+#         token['test'] = 'testLALALAtest'
+#
+#         return token
 

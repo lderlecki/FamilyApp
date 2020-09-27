@@ -19,6 +19,7 @@ class UserRegisterView(views.APIView):
         serializer = UserRegisterSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
+            return Response(serializer.data)
         else:
             return Response(serializer.errors)
 

@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '0.0.0.0',
     '127.0.0.1',
+    'localhost',
     ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -154,5 +155,6 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-'ACCESS_TOKEN_LIFETIME': datetime.timedelta(hours=5)
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(hours=5),
+    'SIGNING_KEY': 'qwerty12#',
 }
