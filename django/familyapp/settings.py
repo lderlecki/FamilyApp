@@ -26,8 +26,9 @@ SECRET_KEY = 'cahj0gi11@gka%$mee&ktx3uhn%7@y!hzj((+4hmp1)y3lei9*'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'localhost',
     '0.0.0.0',
-    '127.0.0.1',
+    '127.0.0.1',		
     ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -154,5 +155,6 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-'ACCESS_TOKEN_LIFETIME': datetime.timedelta(hours=5)
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(hours=5),
+    'SIGNING_KEY': 'qwerty12#',
 }

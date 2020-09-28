@@ -20,11 +20,19 @@ export class LoginComponent implements OnInit {
   loginUser() {
     this.userService.loginUser(this.loginData).subscribe(
       response => {
-        console.log(response);
+        console.log(response['access']);
         sessionStorage.setItem('access', response['access']);
         sessionStorage.setItem('refresh', response['refresh']);
       },
       error => console.log(error)
+    );
+  }
+
+  generateTokenViaSpring(): void {
+    this.userService.attemptAuthViaSpring(this.loginData.email, this.loginData.password).subscribe(
+      data => {
+       console.log("token generated via spring \n"+ data.token.token);
+      }
     );
   }
 

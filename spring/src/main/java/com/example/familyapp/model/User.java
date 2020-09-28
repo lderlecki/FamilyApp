@@ -11,6 +11,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
     long id;
 
     @Size(min = 0, max = 60)
@@ -23,6 +24,18 @@ public class User {
     private LocalDateTime last_login;
     @OneToOne(mappedBy = "user")
     private Profile profile;
+
+//ROLES
+//    @ManyToOne
+//    private Role userRole;
+//
+//    public Role getUserRole() {
+//        return userRole;
+//    }
+//
+//    public void setUserRole(Role userRole) {
+//        this.userRole = userRole;
+//    }
 
     private boolean is_admin;
 

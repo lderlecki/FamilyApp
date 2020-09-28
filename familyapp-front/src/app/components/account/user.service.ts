@@ -7,12 +7,19 @@ import {Observable} from 'rxjs';
 })
 export class UserService {
   API_REGISTER_URL = 'http://0.0.0.0:8000/api/register/';
-  API_AUTH_URL = 'http://0.0.0.0:8000/api/token/';
+  API_AUTH_URL = 'http://localhost:8000/api/token/';
 
   private httpHeaders: HttpHeaders;
   private params: HttpParams;
 
+
   constructor(private http: HttpClient) {  }
+
+  attemptAuthViaSpring(email: string, password: string): Observable<any> {
+    const credentials = {email: email, password: password};
+    console.log('attempAuth');
+    return this.http.post<any>('http://localhost:8081/token/generate-token', credentials);
+  }
 
   registerUser(userData): Observable<any> {
     return this.http.post(this.API_REGISTER_URL, userData);
