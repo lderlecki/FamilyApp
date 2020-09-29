@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/profile")
 public class ProfileController {
 
-    ProfileService profileService;
+    private ProfileService profileService;
 
     @Autowired
     public ProfileController(ProfileService profileService) {

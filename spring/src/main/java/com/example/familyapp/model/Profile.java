@@ -3,6 +3,8 @@ package com.example.familyapp.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Profile {
@@ -19,10 +21,23 @@ public class Profile {
     @JoinColumn(name="family_id")
     private Family family;
 
+
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id")
     @JsonIgnore
     private User user;
+
+    @OneToMany(mappedBy = "responsiblePerson")
+    private List<Task> taskList = new ArrayList<>();
+
+    public List<Task> getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
 
     public User getUser() {
         return user;
