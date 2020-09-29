@@ -39,6 +39,7 @@ CORS_ORIGIN_WHITELIST = [
 INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'family.apps.FamilyConfig',
+    'task_list.apps.TaskListConfig',
 
     'rest_framework',
     'corsheaders',
@@ -156,6 +157,7 @@ SIMPLE_JWT = {
     'SIGNING_KEY': 'qwerty12#',
 }
 
+# SITMPE_JWT settings that can be changed
 # SIMPLE_JWT = {
 #     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(hours=5),
 #     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
