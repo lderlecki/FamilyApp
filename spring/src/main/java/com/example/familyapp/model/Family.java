@@ -20,7 +20,7 @@ public class Family {
     private Set<Profile> familyMembers;
 
     @Column(unique = true)
-    private UUID groupId = UUID.randomUUID();;
+    private UUID groupId = UUID.randomUUID();
 
     @OneToOne
     @JoinColumn(name="family_head_id")

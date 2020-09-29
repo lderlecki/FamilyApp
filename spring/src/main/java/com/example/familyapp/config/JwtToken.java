@@ -2,6 +2,7 @@ package com.example.familyapp.config;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 import java.util.function.Function;
 
 import com.auth0.jwt.JWT;
@@ -72,6 +73,7 @@ private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver
         //HS256 mechanism
         Algorithm algorithm = Algorithm.HMAC256(SIGNING_KEY);
         return JWT.create()
+                .withClaim("jti", (UUID.randomUUID()+"").replaceAll("-", ""))
                 .withClaim("user_id", user.getId())
                 .withClaim("token_type", "access")
                 .withClaim("exp", new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS * 1000))

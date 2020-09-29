@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()//AUTHORIZE REQUEST BELOW
                 .csrf().disable().authorizeRequests().antMatchers("/profile/*").authenticated()
                 //ALLOW REQUESTS BELOW
-                .antMatchers( "/*","/**","/.~~spring-boot!~/restart").permitAll()
+                .antMatchers( "/token/generate-token","/*","/**","/.~~spring-boot!~/restart").permitAll()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
                 .and()
