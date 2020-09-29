@@ -19,13 +19,14 @@ class UserRegisterView(views.APIView):
         serializer = UserRegisterSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
+            return Response(serializer.data)
         else:
             return Response(serializer.errors)
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
-    # authentication_classes = [JWTAuthentication, ]
-    # permission_classes = [IsAuthenticated, ]
+    authentication_classes = [JWTAuthentication, ]
+    permission_classes = [IsAuthenticated, ]
 
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
