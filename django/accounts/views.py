@@ -25,8 +25,8 @@ class UserRegisterView(views.APIView):
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
-    # authentication_classes = [JWTAuthentication, ]
-    # permission_classes = [IsAuthenticated, ]
+    authentication_classes = [JWTAuthentication, ]
+    permission_classes = [IsAuthenticated, ]
 
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
