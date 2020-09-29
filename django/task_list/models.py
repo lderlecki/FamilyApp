@@ -17,7 +17,9 @@ class TodoList(models.Model):
 class Task(models.Model):
     class Meta:
         db_table = 'task'
+
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     todolist = models.ForeignKey('TodoList', on_delete=models.SET_NULL, blank=True, null=True)
     profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, blank=True, null=True)
+    done = models.BooleanField(default=False)
