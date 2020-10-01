@@ -1,13 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../user.service';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import {ErrorStateMatcher} from "@angular/material/core";
+
+export class EmailErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.scss'],
   providers: [UserService],
 })
 export class LoginComponent implements OnInit {
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email
+  ]);
+  matcher = new EmailErrorStateMatcher();
   loginData;
   constructor(private userService: UserService) { }
 
@@ -31,7 +45,7 @@ export class LoginComponent implements OnInit {
   generateTokenViaSpring(): void {
     this.userService.attemptAuthViaSpring(this.loginData.email, this.loginData.password).subscribe(
       data => {
-       console.log("token generated via spring \n"+ data.token.token);
+       console.log('token generated via spring \n' + data.token.token);
       }
     );
   }

@@ -1,19 +1,29 @@
-<body>
-  <header class="container">
-    <h2>FamilyApp</h2>
-    <ul>
-      <li><a routerLink="/account/login" routerLinkActive='active'>Login</a></li>
-      <li><a routerLink="/register" routerLinkActive='active'>Register</a></li>
-    </ul>
-    <hr>
-  </header>
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-items">
+      <a class="nav-item" routerLink="" routerLinkActive='active'>Home</a>
+      <a class="nav-item" routerLink="#" routerLinkActive='active'>El_1</a>
+      <a class="nav-item" routerLink="#" routerLinkActive='active'>El_2</a>
+      <a class="nav-item" routerLink="#" routerLinkActive='active'>El_3</a>
+    </div>
+    <div class="nav-account">
+      <a class="nav-item" routerLink="/account/login" routerLinkActive='active'>Login</a>
+      <a class="nav-item" routerLink="/register" routerLinkActive='active'>Register</a>
+    </div>
+  </div>
+</nav>
 
-</body>
+<div class="container">
+  <section class="content">
+    <router-outlet></router-outlet>
+  </section>
+</div>
+
+
 
 <!-- Copyright 2020 Google LLC. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
+    Use of this source code is governed bsy an MIT-style license that
     can be found in the LICENSE file at http://angular.io/license -->
 
 
 
-<router-outlet></router-outlet>

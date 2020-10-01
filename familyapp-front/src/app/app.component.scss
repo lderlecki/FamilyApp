@@ -1,0 +1,61 @@
+@import "./src/styles.scss";
+
+/*---------------------
+  Navbar
+-----------------------*/
+
+.navbar {
+  overflow: hidden;
+  background-color: $nav-color;
+  position: relative;
+  font-size: 18px;
+  color: $content-color;
+  a:link{
+    color: $content-color;
+  }
+  a:visited {
+    color: $content-color;
+  }
+
+}
+
+.nav-account{
+  float: right;
+  display: flex;
+  position: relative;
+}
+
+.nav-items{
+  display: flex;
+  position: relative;
+  float: left;
+}
+
+.nav-item{
+  padding: 10px 15px 9px 15px;
+  text-decoration: none;
+  text-align: center;
+}
+.nav-item:hover{
+  transition: all 1s ease;
+  background-color: black;
+}
+
+/*---------------------
+  Main Container
+-----------------------*/
+
+.container {
+  width: 70%;
+  position: relative;
+  //background-color: gray;
+  margin: 0 auto;
+}
+
+.content {
+  position: relative;
+  min-height: 600px;
+  //background-color: $content-color;
+  //border-radius: 25px;
+  padding: 10px;
+}

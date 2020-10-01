@@ -1,19 +1,56 @@
-<p>Register</p>
-<div class="example-container">
-  <mat-form-field appearance="fill">
-    <mat-label>Email</mat-label>
-    <input [(ngModel)]="registerData.email"  matInput>
-  </mat-form-field>
-  <br>
-  <mat-form-field appearance="fill">
-    <mat-label>Password</mat-label>
-    <input [(ngModel)]="registerData.password" type="password"  matInput>
-  </mat-form-field>
-  <br>
-  <mat-form-field appearance="fill">
-    <mat-label>Repeat password</mat-label>
-    <input [(ngModel)]="registerData.password2" type="password" matInput>
-  </mat-form-field>
-  <br>
-  <button (click)="registerUser()">Register</button>
+<div class="account">
+  <div class="account-container">
+    <h4>Register</h4>
+    <div class="account-content">
+      <div class="account-form">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input required matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                 [(ngModel)]="registerData.email" placeholder="Ex. pat@example.com">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input required [(ngModel)]="registerData.password" type="password" matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Repeat password</mat-label>
+          <input required [(ngModel)]="registerData.password2" type="password" matInput>
+        </mat-form-field>
+      </div>
+
+      <div class="profile-form">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input required [(ngModel)]="profileData.name" matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Surname</mat-label>
+          <input required [(ngModel)]="profileData.surname" matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Phone</mat-label>
+          <input required [(ngModel)]="profileData.phoneNumber" matInput>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <button (click)="registerUser()" style="margin-right: 5px" mat-raised-button color="primary">Register</button>
+    <br>
+    <div class="subscript">
+      <span>Already have an account? <a class="url_rm_visited" routerLink="/account/login" routerLinkActive='active'>Login</a></span>
+    </div>
+  </div>
 </div>
+
+
+

@@ -1,0 +1,18 @@
+@import "./src/app/components/account/account.style";
+
+.account-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.account-form {
+  padding-right: 15px;
+  margin-right: 0;
+  border-right: 4px solid $bg-color ;
+}
+
+.profile-form {
+  margin: 15px;
+  //margin: auto;
+}

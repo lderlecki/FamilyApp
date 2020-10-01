@@ -15,10 +15,20 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class UserRegisterView(views.APIView):
+
     def post(self, request, *args, **kwargs):
-        serializer = UserRegisterSerializer(data=request.data)
+        user_data = request.data['userData']
+        serializer = UserRegisterSerializer(data=user_data)
         if serializer.is_valid():
             user = serializer.save()
+            profile_data = request.data.get('profileData', None)
+            if profile_data:
+                profile = user.profile
+                profile.name = profile_data.get('name', None)
+                profile.surname = profile_data.get('surname', None)
+                profile.phone = profile_data.get('phoneNumber', None)
+                profile.save()
+
             return Response(serializer.data)
         else:
             return Response(serializer.errors)

@@ -30,7 +30,8 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         password2 = self.validated_data['password2']
         if password != password2:
             raise serializers.ValidationError({'password': 'Passwords must match.'})
-
+        if not password:
+            raise serializers.ValidationError({'password': 'Enter password.'})
         user = User.objects.create_user(email=self.validated_data['email'], password=password)
         # user.set_password(password)
         # user.save()
@@ -45,7 +46,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 #         token = super(CustomTokenObtainPairSerializer, cls).get_token(user)
 #
 #         # Add custom claims
-#         token['test'] = 'testLALALAtest'
+#         token['test'] = 'test_value'
 #
 #         return token
 

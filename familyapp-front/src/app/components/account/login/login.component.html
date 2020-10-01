@@ -1,15 +1,29 @@
-<p>Login</p>
-<div class="example-container">
-  <mat-form-field appearance="fill">
-    <mat-label>Email</mat-label>
-    <input [(ngModel)]="loginData.email" matInput>
-  </mat-form-field>
-  <br>
-  <mat-form-field appearance="fill">
-    <mat-label>Password</mat-label>
-    <input [(ngModel)]="loginData.password" type="password" matInput>
-  </mat-form-field>
-  <br>
-  <button (click)="loginUser()">Login</button>
-  <button (click)="generateTokenViaSpring()">Login via spring</button>
-</div>
+<section class="account">
+  <div class="account-container">
+    <div class="account-form">
+      <h4>Login</h4>
+      <mat-form-field class="form-field">
+        <mat-label>Email</mat-label>
+        <input required matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+               [(ngModel)]="loginData.email" placeholder="Ex. pat@example.com">
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="form-field">
+        <mat-label>Password</mat-label>
+        <input required [(ngModel)]="loginData.password" type="password" matInput>
+      </mat-form-field>
+      <br>
+      <button (click)="loginUser()" style="margin-right: 5px" mat-raised-button color="primary">Login</button>
+      <button (click)="generateTokenViaSpring()" mat-raised-button color="primary">Login Spring</button>
+    </div>
+    <span class="subscript">Don't have an account?
+      <a class="url_rm_visited" routerLink="/register" routerLinkActive='active'>Register</a>
+    </span>
+  </div>
+</section>

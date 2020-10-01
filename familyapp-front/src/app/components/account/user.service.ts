@@ -21,8 +21,12 @@ export class UserService {
     return this.http.post<any>('http://localhost:8081/token/generate-token', credentials);
   }
 
-  registerUser(userData): Observable<any> {
-    return this.http.post(this.API_REGISTER_URL, userData);
+  registerUser(userData, profileData): Observable<any> {
+    const data = {
+      'userData': userData,
+      'profileData': profileData,
+    };
+    return this.http.post(this.API_REGISTER_URL, data);
   }
 
   loginUser(loginData): Observable<any> {
