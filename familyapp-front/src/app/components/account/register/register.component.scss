@@ -1,4 +1,5 @@
-@import "./src/app/components/account/account.style";
+@import "../account.style";
+@import '../../../../globalScssVariables';
 
 .account-content {
   display: flex;

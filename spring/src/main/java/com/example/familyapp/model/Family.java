@@ -19,6 +19,9 @@ public class Family {
     @OneToMany(mappedBy = "family")
     private Set<Profile> familyMembers;
 
+    @OneToOne(mappedBy = "family")
+    private Address address;
+
     @Column(unique = true)
     private UUID groupId = UUID.randomUUID();
 
@@ -32,6 +35,15 @@ public class Family {
 
     public void setFamilyHead(Profile familyHead) {
         this.familyHead = familyHead;
+    }
+
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public long getId() { return id; }

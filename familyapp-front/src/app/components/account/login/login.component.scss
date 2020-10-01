@@ -1,5 +1,5 @@
-@import "./src/styles.scss";
-@import "./src/app/components/account/account.style";
+@import '../../../../globalScssVariables';
+@import "../account.style";
 
 .account-container {
   max-width: 250px;

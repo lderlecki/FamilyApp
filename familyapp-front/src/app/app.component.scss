@@ -1,9 +1,4 @@
-@import "./src/styles.scss";
-
-/*---------------------
-  Navbar
------------------------*/
-
+@import '../globalScssVariables';
 .navbar {
   overflow: hidden;
   background-color: $nav-color;
@@ -59,3 +54,4 @@
   //border-radius: 25px;
   padding: 10px;
 }
+
