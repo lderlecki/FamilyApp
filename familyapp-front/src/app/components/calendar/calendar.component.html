@@ -1,0 +1,88 @@
+
+    <div id="calendarFlex">
+      <div id="flexContainer">
+        <div class="box">
+          <div class="navBox">
+            <img class="arrow" src="../../../assets/images/arrowL24.png"  (click)="prevYear()">
+          </div>
+        </div>
+        <div class="box">
+          <div class="navBox">
+            {{years[yearIndex]}}
+          </div>
+        </div>
+        <div class="box">
+          <div class="navBox">
+            <img class="arrow" src="../../../assets/images/arrowR24.png" (click)="nextYear()">
+          </div>
+        </div>
+        <div class="box">
+          <div class="dayBoxEmpty1">
+          </div>
+        </div>
+        <div class="box">
+          <div class="navBox">
+            <img class="arrow" src="../../../assets/images/arrowL24.png"  (click)="prevMonth()">
+          </div>
+        </div>
+        <div class="box">
+          <div class="navBox">
+            {{monthsEng[monthIndex]}}
+          </div>
+        </div>
+        <div class="box">
+          <div class="navBox">
+            <img class="arrow" src="../../../assets/images/arrowR24.png" (click)="nextMonth()">
+          </div>
+        </div>
+        <div class="box">
+          <div class="dayBox" id="mon">
+            Mon
+          </div>
+        </div>
+        <div class="box">
+          <div class="dayBox" id="tue">
+            <b>Tue</b>
+          </div>
+        </div>
+        <div class="box">
+          <div class="dayBox" id="wed">
+            Wed
+          </div>
+        </div>
+        <div class="box">
+          <div class="dayBox" id="thu">
+            Thu
+          </div>
+        </div>
+        <div class="box">
+        <div class="dayBox" id="fri">
+          Fri
+        </div>
+      </div>
+        <div class="box">
+          <div class="dayBox" id="sat">
+            Sat
+          </div>
+        </div>
+        <div class="box">
+        <div class="dayBox" id="sun">
+          Sun
+        </div>
+      </div>
+        <div *ngFor="let in of counter(firstDay)" class="box">
+          <div class="dayBoxEmpty">
+          </div>
+        </div>
+        <div class="box" *ngFor="let day of daysInMonth">
+          <div class="dayBox" (click)="getClickedDayAndCreateFullDate($event);" *ngIf="appYearAndMonth==true && day == currentDate.getDate()" style="border: 2px solid #DA3A21; left: 0px">
+        {{day}}
+          </div>
+          <div class="dayBox" (click)="getClickedDayAndCreateFullDate($event);" *ngIf="appYearAndMonth==false || day != currentDate.getDate()">
+            {{day}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+

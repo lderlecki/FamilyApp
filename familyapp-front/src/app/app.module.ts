@@ -39,12 +39,15 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {LoginComponent} from './components/account/login/login.component';
 import {RegisterComponent} from './components/account/register/register.component';
+import {CalendarComponent} from './components/calendar/calendar.component';
+import {UserService} from './components/account/user.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CalendarComponent
   ],
   imports: [
     AppRoutingModule,
