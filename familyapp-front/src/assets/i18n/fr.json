@@ -1,0 +1,49 @@
+{
+  "NAV": {
+    "HOME": "Principale",
+    "CALENDAR": "Calendrier",
+    "REGISTER": "S'inscrire",
+    "LOGIN": "S'identifier"
+  },
+  "LOGIN": {
+    "PASSWORD": "Mot de passe",
+    "LOGIN": "S'identifier",
+    "DONTHAVEACC": "Je n'ai pas de compte?",
+    "REGISTER": "S'inscrire"
+  },
+  "CALENDAR": {
+    "MONTHS": [
+      "Janvier",
+      "Février",
+      "Mars",
+      "Avril",
+      "Mai",
+      "Juin",
+      "Juillet",
+      "Août",
+      "Septembre",
+      "Octobre",
+      "Novembre",
+      "Décembre"
+    ],
+    "WEEKDAYS": [
+      "Lun",
+      "Mar",
+      "Mer",
+      "Jeu",
+      "Ven",
+      "Sam",
+      "Dim"
+    ]
+  },
+  "REGISTER": {
+  "PASSWORD": "Mot de passe",
+  "RPASSWORD": "Répéter le mot de passe",
+  "NAME": "Nom",
+  "SURNAME": "Nom de famille",
+  "PHONE": "Téléphone",
+  "REGISTER": "S'inscrire",
+  "ALREADYHAVEACC": "Vous avez déjà un compte?",
+  "LOGIN": "S'identifier"
+}
+}

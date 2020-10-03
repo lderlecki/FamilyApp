@@ -1,7 +1,7 @@
 <section class="account">
   <div class="account-container">
     <div class="account-form">
-      <h4>Login</h4>
+      <h4>{{ 'LOGIN.LOGIN' | translate }}</h4>
       <mat-form-field class="form-field">
         <mat-label>Email</mat-label>
         <input required matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
@@ -15,15 +15,15 @@
       </mat-form-field>
       <br>
       <mat-form-field class="form-field">
-        <mat-label>Password</mat-label>
+        <mat-label>{{ 'LOGIN.PASSWORD' | translate }}</mat-label>
         <input required [(ngModel)]="loginData.password" type="password" matInput>
       </mat-form-field>
       <br>
-      <button (click)="loginUser()" style="margin-right: 5px" mat-raised-button color="primary">Login</button>
-      <button (click)="generateTokenViaSpring()" mat-raised-button color="primary">Login Spring</button>
+      <button (click)="loginUser()" style="margin-right: 5px" mat-raised-button color="primary">{{ 'LOGIN.LOGIN' | translate }}</button>
+      <button (click)="generateTokenViaSpring()" mat-raised-button color="primary">{{ 'LOGIN.LOGIN' | translate }} Spring</button>
     </div>
-    <span class="subscript">Don't have an account?
-      <a class="url_rm_visited" routerLink="/register" routerLinkActive='active'>Register</a>
+    <span class="subscript">{{ 'LOGIN.DONTHAVEACC' | translate }}
+      <a class="url_rm_visited" routerLink="/register" routerLinkActive='active'>{{ 'LOGIN.REGISTER' | translate }}</a>
     </span>
   </div>
 </section>

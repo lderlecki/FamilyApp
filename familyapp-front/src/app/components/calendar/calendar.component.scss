@@ -40,12 +40,12 @@
   box-shadow: inset 0px 0px 15px 8px rgba($blue,1);
   font-weight: bold;
 }
-#mon,#tue,#wed,#thu,#fri,#sat,#sun
+.dayBoxName
 {
   font-weight: bold;
   background: $brick;
 }
-#mon:hover,#tue:hover,#wed:hover,#thu:hover,#fri:hover,#sat:hover,#sun:hover,#flexContainer .box .dayBoxEmpty:hover
+.dayBoxName:hover .dayBoxEmpty:hover
 {
   border-radius: 0 !important;
   box-shadow: none !important;
@@ -58,7 +58,7 @@
   font-weight: bold;
   user-select: none;
 }
-#flexContainer .box .dayBox,#flexContainer .box .dayBoxEmpty, #flexContainer .box .navBox
+#flexContainer .box .dayBox,#flexContainer .box .dayBoxName,#flexContainer .box .dayBoxEmpty, #flexContainer .box .navBox
 {
   line-height: 50px;
   text-align: center;

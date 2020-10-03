@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatTableModule} from "@angular/material/table";
@@ -41,7 +41,12 @@ import {LoginComponent} from './components/account/login/login.component';
 import {RegisterComponent} from './components/account/register/register.component';
 import {CalendarComponent} from './components/calendar/calendar.component';
 import {UserService} from './services/user.service';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,6 +97,13 @@ import {UserService} from './services/user.service';
     ToastrModule.forRoot(),
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

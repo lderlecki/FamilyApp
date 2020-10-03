@@ -27,7 +27,7 @@
         </div>
         <div class="box">
           <div class="navBox">
-            {{monthsEng[monthIndex]}}
+            {{ 'CALENDAR.MONTHS.'+monthIndex | translate }}
           </div>
         </div>
         <div class="box">
@@ -35,41 +35,11 @@
             <img class="arrow" src="../../../assets/images/arrowR24.png" (click)="nextMonth()">
           </div>
         </div>
-        <div class="box">
-          <div class="dayBox" id="mon">
-            Mon
+        <div class="box" *ngFor="let item of counter(7); let i = index;">
+          <div class="dayBoxName">
+            {{ 'CALENDAR.WEEKDAYS.'+i | translate }}
           </div>
         </div>
-        <div class="box">
-          <div class="dayBox" id="tue">
-            <b>Tue</b>
-          </div>
-        </div>
-        <div class="box">
-          <div class="dayBox" id="wed">
-            Wed
-          </div>
-        </div>
-        <div class="box">
-          <div class="dayBox" id="thu">
-            Thu
-          </div>
-        </div>
-        <div class="box">
-        <div class="dayBox" id="fri">
-          Fri
-        </div>
-      </div>
-        <div class="box">
-          <div class="dayBox" id="sat">
-            Sat
-          </div>
-        </div>
-        <div class="box">
-        <div class="dayBox" id="sun">
-          Sun
-        </div>
-      </div>
         <div *ngFor="let in of counter(firstDay)" class="box">
           <div class="dayBoxEmpty">
           </div>

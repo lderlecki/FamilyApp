@@ -1,0 +1,49 @@
+{
+  "NAV": {
+    "HOME": "Strona główna",
+    "CALENDAR": "Kalendarz",
+    "REGISTER": "Zerejestruj",
+    "LOGIN": "Zaloguj"
+  },
+  "LOGIN": {
+    "PASSWORD": "Hasło",
+    "LOGIN": "Zaloguj",
+    "DONTHAVEACC": "Nie masz konta?",
+    "REGISTER": "Zarejestruj"
+  },
+  "CALENDAR": {
+    "MONTHS": [
+      "Styczeń",
+      "Luty",
+      "Marzec",
+      "Kwiecień",
+      "Maj",
+      "Czerwiec",
+      "Lipiec",
+      "Sierpień",
+      "Wrzesień",
+      "Październik",
+      "Listopad",
+      "Grudzień"
+    ],
+    "WEEKDAYS": [
+      "Pon",
+      "Wt",
+      "Śr",
+      "Czw",
+      "Pt",
+      "Sob",
+      "Ndz"
+    ]
+  },
+  "REGISTER": {
+    "PASSWORD": "Hasło",
+    "RPASSWORD": "Powtórz hasło",
+    "NAME": "Imię",
+    "SURNAME": "Nazwisko",
+    "PHONE": "Numer telefonu",
+    "REGISTER": "Zarejestruj",
+    "ALREADYHAVEACC": "Masz już konto?",
+    "LOGIN": "Zaloguj"
+  }
+}

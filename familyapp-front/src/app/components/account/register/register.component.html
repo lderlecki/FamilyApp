@@ -1,6 +1,6 @@
 <div class="account">
   <div class="account-container">
-    <h4>Register</h4>
+    <h4>{{ 'REGISTER.REGISTER' | translate }}</h4>
     <div class="account-content">
       <div class="account-form">
         <mat-form-field>
@@ -16,38 +16,38 @@
         </mat-form-field>
         <br>
         <mat-form-field>
-          <mat-label>Password</mat-label>
+          <mat-label>{{ 'REGISTER.PASSWORD' | translate }}</mat-label>
           <input required [(ngModel)]="registerData.password" type="password" matInput>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <mat-label>Repeat password</mat-label>
+          <mat-label>{{ 'REGISTER.RPASSWORD' | translate }}</mat-label>
           <input required [(ngModel)]="registerData.password2" type="password" matInput>
         </mat-form-field>
       </div>
 
       <div class="profile-form">
         <mat-form-field>
-          <mat-label>Name</mat-label>
+          <mat-label>{{ 'REGISTER.NAME' | translate }}</mat-label>
           <input required [(ngModel)]="profileData.name" matInput>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <mat-label>Surname</mat-label>
+          <mat-label>{{ 'REGISTER.SURNAME' | translate }}</mat-label>
           <input required [(ngModel)]="profileData.surname" matInput>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <mat-label>Phone</mat-label>
+          <mat-label>{{ 'REGISTER.PHONE' | translate }}</mat-label>
           <input required [(ngModel)]="profileData.phoneNumber" matInput>
         </mat-form-field>
       </div>
     </div>
 
-    <button (click)="registerUser()" style="margin-right: 5px" mat-raised-button color="primary">Register</button>
+    <button (click)="registerUser()" style="margin-right: 5px" mat-raised-button color="primary">{{ 'REGISTER.REGISTER' | translate }}</button>
     <br>
     <div class="subscript">
-      <span>Already have an account? <a class="url_rm_visited" routerLink="/account/login" routerLinkActive='active'>Login</a></span>
+      <span>{{ 'REGISTER.ALREADYHAVEACC' | translate }} <a class="url_rm_visited" routerLink="/account/login" routerLinkActive='active'>{{ 'REGISTER.LOGIN' | translate }}</a></span>
     </div>
   </div>
 </div>
