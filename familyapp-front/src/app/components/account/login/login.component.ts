@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user.service';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import {ErrorStateMatcher} from "@angular/material/core";
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+import {TokenAuthService} from '../../../services/tokenAuth.service';
 
 export class EmailErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -23,31 +24,58 @@ export class LoginComponent implements OnInit {
   ]);
   matcher = new EmailErrorStateMatcher();
   loginData;
-  constructor(private userService: UserService) { }
+
+  constructor(
+    private userService: UserService,
+    public authService: TokenAuthService,
+  ) {
+  }
 
   ngOnInit(): void {
     this.loginData = {
-    email: '',
-    password: '',
+      email: '',
+      password: '',
     };
   }
+
   loginUser() {
     this.userService.loginUser(this.loginData).subscribe(
       response => {
-        console.log(response['access']);
-        sessionStorage.setItem('access', response['access']);
-        sessionStorage.setItem('refresh', response['refresh']);
+        console.log(response);
+        if (response.status === 200 && response.ok) {
+          const body = response['body'];
+          const accessToken = body['access'];
+          this.authService.set('access', accessToken);
+          this.authService.set('refresh', body['refresh']);
+          this.authService.authenticate();
+          this.getUserData(accessToken);
+        }
+
       },
-      error => console.log(error)
+      err => console.log(err)
+    );
+  }
+
+  getUserData(accessToken) {
+    // this.authService.isAuthenticated();
+    this.userService.getProfileData(accessToken).subscribe(
+      response => {
+        window.localStorage.setItem('profile', JSON.stringify(response));
+      },
+      err => console.log(err)
     );
   }
 
   generateTokenViaSpring(): void {
     this.userService.attemptAuthViaSpring(this.loginData.email, this.loginData.password).subscribe(
       data => {
-       console.log('token generated via spring \n' + data.token.token);
+        console.log('token generated via spring \n' + data.token.token);
       }
     );
+  }
+
+  getAuthService() {
+    return this.authService;
   }
 
 }

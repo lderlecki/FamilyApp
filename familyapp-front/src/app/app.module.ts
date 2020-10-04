@@ -41,6 +41,8 @@ import {LoginComponent} from './components/account/login/login.component';
 import {RegisterComponent} from './components/account/register/register.component';
 import {CalendarComponent} from './components/calendar/calendar.component';
 import {UserService} from './services/user.service';
+import {CookieService} from 'ngx-cookie-service';
+
 
 @NgModule({
   declarations: [
@@ -93,7 +95,7 @@ import {UserService} from './services/user.service';
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
   ],
-  providers: [],
+  providers: [CookieService,],
   bootstrap: [AppComponent]
 })
 export class AppModule {
