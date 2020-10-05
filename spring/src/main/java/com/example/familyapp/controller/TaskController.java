@@ -20,7 +20,7 @@ public class TaskController {
         return taskService.save(task);
     }
     @GetMapping(value = "/")
-    Task getTask(@RequestParam long id){
+    public Task getTask(@RequestParam long id){
         return taskService.findById(id);
     }
     @PutMapping(value = "/")

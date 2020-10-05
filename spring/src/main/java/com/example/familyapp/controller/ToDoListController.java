@@ -21,7 +21,7 @@ public class ToDoListController {
         return toDoListService.save(toDoList);
     }
     @GetMapping(value = "/")
-    ToDoList getToDoList(@RequestParam long id){
+    public ToDoList getToDoList(@RequestParam long id){
         return toDoListService.findById(id);
     }
     @PutMapping(value = "/")

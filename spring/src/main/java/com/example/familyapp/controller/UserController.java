@@ -21,7 +21,7 @@ public class UserController {
         return userService.save(user);
     }
     @GetMapping(value = "/")
-    User getUser(@RequestParam long id){
+    public User getUser(@RequestParam long id){
         return userService.findById(id);
     }
     @PutMapping(value = "/")
