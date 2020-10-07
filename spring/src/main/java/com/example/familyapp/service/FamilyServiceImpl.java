@@ -6,6 +6,7 @@ import com.example.familyapp.model.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,5 +37,10 @@ public class FamilyServiceImpl implements FamilyService {
     @Override
     public void delete(Family family) {
         familyRepository.delete(family);
+    }
+
+    @Override
+    public List<Family> getAll() {
+        return familyRepository.findAll();
     }
 }

@@ -45,12 +45,11 @@
   font-weight: bold;
   background: $brick;
 }
-.dayBoxName:hover .dayBoxEmpty:hover
+.dayBoxName:hover, .dayBoxEmpty:hover
 {
   border-radius: 0 !important;
   box-shadow: none !important;
   cursor: not-allowed !important;
-  font-weight: normal;
 }
 .navBox
 {

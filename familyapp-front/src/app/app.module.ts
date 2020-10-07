@@ -43,16 +43,20 @@ import {CalendarComponent} from './components/calendar/calendar.component';
 import {UserService} from './services/user.service';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {MyTableComponent} from './components/table/my-table.component';
+import {ListFamilyComponent} from './views/list-families/list-family.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
 @NgModule({
   declarations: [
+    ListFamilyComponent,
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    CalendarComponent
+    CalendarComponent,
+    MyTableComponent
   ],
   imports: [
     AppRoutingModule,

@@ -45,5 +45,14 @@
     "REGISTER": "Register",
     "ALREADYHAVEACC": "Already have an account?",
     "LOGIN": "Login"
+  },
+  "MYTABLE": {
+    "FILTER": "Filter"
+  },
+  "LIST_FAMILIES": {
+    "COLUMN_HEADER":
+     {"familyName": "Surname", "budget": "Budget"},
+    "FETCHSUCCESS": "Table data fetched succesfully",
+    "FETCHERROR": "Upss something went wrong"
   }
 }

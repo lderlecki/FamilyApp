@@ -45,5 +45,14 @@
   "REGISTER": "S'inscrire",
   "ALREADYHAVEACC": "Vous avez déjà un compte?",
   "LOGIN": "S'identifier"
-}
+},
+  "MYTABLE": {
+  "FILTER": "Filtre"
+},
+  "LIST_FAMILIES": {
+    "COLUMN_HEADER":
+    {"familyName": "Nom", "budget": "Budget"},
+    "FETCHSUCCESS": "Les données de la table ont été récupérées avec succès",
+    "FETCHERROR": "Upss quelque chose s'est mal passé"
+  }
 }

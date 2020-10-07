@@ -8,6 +8,8 @@ import com.example.familyapp.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/family")
 public class FamilyController {
@@ -23,6 +25,8 @@ public class FamilyController {
     Family saveFamily(@RequestBody Family family){
         return familyService.save(family);
     }
+    @GetMapping(value = "/all")
+    public List<Family> getAllFamilies() { return familyService.getAll();}
     @GetMapping(value = "/")
     Family getFamily(@RequestParam long id){
         return familyService.findById(id);
