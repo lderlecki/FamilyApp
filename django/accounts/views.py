@@ -7,6 +7,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import User, Profile
+from .permissions import IsOwnerOrReadOnly
 from .serializers import UserSerializer, UserRegisterSerializer, ProfileSerializer
 
 
@@ -16,6 +17,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class UserRegisterView(views.APIView):
+
     def post(self, request, *args, **kwargs):
         user_data = request.data['userData']
         serializer = UserRegisterSerializer(data=user_data)
@@ -35,27 +37,17 @@ class UserRegisterView(views.APIView):
 
 class ProfileViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication, ]
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly, ]
 
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
-    def retrieve(self, request, *args, **kwargs):
-        user = request.user
-        profile_user_id = kwargs.get('pk', None)
-        if str(user.id) == profile_user_id:
-            serializer = ProfileSerializer(Profile.objects.get(user=user))
-            return Response(serializer.data)
-        return Response('Not authorized to get this user data', status=status.HTTP_401_UNAUTHORIZED)
-
-
-class ProfileView(views.APIView):
-    authentication_classes = [JWTAuthentication, ]
-    permission_classes = [IsAuthenticated, ]
-
-    def get(self, request, *args, **kwargs):
-        serializer = ProfileSerializer(Profile.objects.get(user=request.user))
-        return Response(serializer.data)
+    # def retrieve(self, request, pk=None, *args, **kwargs):
+    #     user = request.user
+    #     if str(user.id) == pk:
+    #         serializer = ProfileSerializer(Profile.objects.get(user=user))
+    #         return Response(serializer.data)
+    #     return Response('Not authorized to get this user data', status=status.HTTP_401_UNAUTHORIZED)
 
 
 class LoginView(TokenObtainPairView):
@@ -83,6 +75,7 @@ class LoginView(TokenObtainPairView):
         data = {
             'refresh': refresh_token,
             'access': access_token,
+            'uid': user.id,
         }
         return Response(data=data, status=status.HTTP_200_OK)
 

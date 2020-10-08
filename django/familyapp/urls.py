@@ -25,7 +25,9 @@ urlpatterns = [
     path('api/', include('family.urls')),
     path('auth/', include('rest_framework.urls')),
     # path('family/', include('family.urls')),'
-    path('api/token/', LoginView.as_view()),
-    path('api/token/refresh/', TokenRefreshView.as_view()),
+
+    # Authentication
+    path('api/token/', LoginView.as_view(), name='login'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
 
 ]

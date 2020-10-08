@@ -5,7 +5,6 @@ from .models import User, Profile
 def create_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance, email=instance.email)
-        print('profile created')
 
 
 post_save.connect(create_profile, sender=User)
