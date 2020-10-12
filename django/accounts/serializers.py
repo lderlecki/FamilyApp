@@ -1,4 +1,7 @@
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.utils.encoding import DjangoUnicodeDecodeError, force_str
+from django.utils.http import urlsafe_base64_decode
 
 from .models import User, Profile
 from rest_framework import serializers
@@ -14,6 +17,10 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ('id', 'user', 'name', 'surname', 'email', 'phone', 'family_name')
+
+    def save(self, **kwargs):
+        if Profile.objects.filter(user=self.validated_data['user']).exists():
+            raise serializers.ValidationError({'profile': 'Profile already exists'})
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -38,15 +45,53 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         return user
 
 
-# Add custom data to the token
-# class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-#
-#     @classmethod
-#     def get_token(cls, user):
-#         token = super(CustomTokenObtainPairSerializer, cls).get_token(user)
-#
-#         # Add custom claims
-#         token['test'] = 'test_value'
-#
-#         return token
+class RequestPasswordResetEmailSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(min_length=2, required=True)
 
+    class Meta:
+        model = User
+        fields = ('email', )
+
+    def validate(self, attrs):
+        email = attrs.get('email', None)
+        if not User.objects.filter(email=email).exists():
+            raise serializers.ValidationError('User with this email does not exist.')
+        return super().validate(attrs)
+
+
+class SetNewPasswordSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(style={'input_type': 'password'}, write_only=True, required=True)
+    password_repeat = serializers.CharField(style={'input_type': 'password'}, write_only=True, required=True)
+    uidb64 = serializers.CharField(write_only=True, required=True)
+    token = serializers.CharField(write_only=True, required=True)
+
+    class Meta:
+        model = User
+        fields = ('password', 'password_repeat', 'uidb64', 'token', )
+
+    def validate(self, attrs):
+        password = attrs.get('password')
+        password_repeat = attrs.get('password_repeat')
+        uidb64 = attrs.get('uidb64')
+        token = attrs.get('token')
+        if password != password_repeat:
+            raise serializers.ValidationError({'password': 'Passwords must match each other'})
+        validate_password(password)
+
+        try:
+            user_id = force_str(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(id=user_id)
+            if not PasswordResetTokenGenerator().check_token(user, token):
+                raise DjangoUnicodeDecodeError('Reset password link is invalid', 401)
+        except DjangoUnicodeDecodeError as e:
+            pass
+
+        return super().validate(attrs)
+
+    def save(self, **kwargs):
+        user_id = force_str(urlsafe_base64_decode(self.validated_data['uidb64']))
+        user = User.objects.get(id=user_id)
+        user.set_password(self.validated_data['password'])
+        user.save()
+
+        return user

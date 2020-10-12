@@ -69,12 +69,6 @@ class LoginTestCase(APITestCase):
         jwt_user = self.jwt_obj.get_user(validated_token)
         self.assertEqual(jwt_user.id, self.user.id)
 
-    # def test_token_validation_view(self):
-    #     # Test if request requiring authentication passes
-    #     data = {'Authorization': f"Bearer {response.data['access']}"}
-    #     response = self.client.get('/validate/access/', data)
-    #     self.assertTrue(response.data['authenticated'])
-
 
 class ProfileViewSetTestCase(APITestCase):
     list_url = reverse('profile-list')
@@ -108,7 +102,7 @@ class ProfileViewSetTestCase(APITestCase):
     def test_profile_detail_view(self):
         response = self.client.get(reverse('profile-detail',
                                            kwargs={'pk': self.user.profile.id}))
-        valid_data = {'id': 1, 'user': 1, 'name': 'John', 'surname': 'Smith',
+        valid_data = {'id': self.user.profile.id, 'user': self.user.id, 'name': 'John', 'surname': 'Smith',
                       'email': 'test@gmail.com', 'phone': '987654321',
                       'family_name': None}
         self.assertEqual(response.status_code, status.HTTP_200_OK)
