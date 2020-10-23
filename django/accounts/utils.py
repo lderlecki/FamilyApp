@@ -1,5 +1,6 @@
 import threading
 
+from django.conf import settings
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail, EmailMessage
@@ -21,19 +22,17 @@ class EmailThread(threading.Thread):
 def generate_password_reset_email(request, user):
     uidb64 = urlsafe_base64_encode(smart_bytes(user.id))
     token = PasswordResetTokenGenerator().make_token(user)
-    domain = get_current_site(request).domain
-    rel_link = reverse(
-        'password-reset-confirm',
-        kwargs={'uidb64': uidb64, 'token': token}
-    )
-    baseurl = 'http://{domain}{relLink}'.format(domain=domain, relLink=rel_link, token=token)
+
+    domain = settings.FRONTEND_URL
+    rel_link = f'password-reset-confirm/{uidb64}/{token}'
+
+    baseurl = '{domain}{relLink}'.format(domain=domain, relLink=rel_link)
     body = f'Hello, \n Use link below to reset your password. \n {baseurl}'
     email = {
         'email_body': body,
         'to_email': (user.email, ),
         'email_subject': 'Reset your password'
     }
-    # 18:00
     return email
 
 

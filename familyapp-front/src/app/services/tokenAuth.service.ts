@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class TokenAuthService extends CookieService {
+export class TokenAuthService {
   private BASE_URL = 'http://localhost:8000/api/';
   private ACCESS_AUTH_URL = 'validate/access/';
   private authorized = false;
@@ -13,8 +13,14 @@ export class TokenAuthService extends CookieService {
   private httpHeaders: HttpHeaders;
 
   constructor(private http: HttpClient, private cookieService: CookieService) {
-    // @ts-ignore
-    super(cookieService);
+  }
+
+  get(name: string) {
+    return this.cookieService.get(name);
+  }
+
+  set(name: string, value: string) {
+    this.cookieService.set(name, value);
   }
 
   isAuthenticated() {

@@ -1,6 +1,7 @@
 @import "../account.style";
 @import '../../../../globalScssVariables';
 
+
 .account-content {
   display: flex;
   flex-wrap: wrap;
@@ -11,9 +12,4 @@
   padding-right: 15px;
   margin-right: 0;
   border-right: 4px solid $bg-color ;
-}
-
-.profile-form {
-  margin: 15px;
-  //margin: auto;
 }

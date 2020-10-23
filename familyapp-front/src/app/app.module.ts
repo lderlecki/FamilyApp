@@ -42,6 +42,8 @@ import {RegisterComponent} from './components/account/register/register.componen
 import {CalendarComponent} from './components/calendar/calendar.component';
 import {UserService} from './services/user.service';
 import {CookieService} from 'ngx-cookie-service';
+import { PasswordResetComponent } from './components/account/password-reset/password-reset.component';
+import { ResponseResetPasswordComponent } from './components/account/response-reset-password/response-reset-password.component';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import {CookieService} from 'ngx-cookie-service';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    CalendarComponent
+    CalendarComponent,
+    PasswordResetComponent,
+    ResponseResetPasswordComponent
   ],
   imports: [
     AppRoutingModule,

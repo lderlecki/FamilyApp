@@ -20,6 +20,7 @@ env = environ.Env(
     # default types and values
     DEBUG=(bool, False),
     ALLOWED_HOSTS=(list, []),
+    CORS_ORIGIN_WHITELIST=(list, []),
 )
 
 # Quick-start development settings - unsuitable for production
@@ -154,7 +155,7 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(hours=5),
-    'SIGNING_KEY': 'qwerty12#',
+    'SIGNING_KEY': env('SIGNING_KEY')
 }
 '''
 SITMPE_JWT settings that can be changed
@@ -165,7 +166,7 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
 
     'ALGORITHM': 'HS256',
-    'SIGNING_KEY': 'qwerty12#',
+    'SIGNING_KEY': '',
     'VERIFYING_KEY': None,
     'AUDIENCE': None,
     'ISSUER': None,
@@ -193,3 +194,4 @@ EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 
+FRONTEND_URL = 'http://localhost:4201/'

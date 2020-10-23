@@ -24,6 +24,8 @@ services:
     restart: always
   
   django:
+    environment:
+      PYTHONUNBUFFERED: 1
     build: ./django/
     ports:
         - 8000:8000
@@ -34,6 +36,7 @@ services:
     depends_on:
         -   db
     restart: always
+    
   frontend:
     build: ./familyapp-front
 

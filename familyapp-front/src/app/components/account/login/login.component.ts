@@ -3,6 +3,7 @@ import {UserService} from '../../../services/user.service';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {TokenAuthService} from '../../../services/tokenAuth.service';
+import {CookieService} from "ngx-cookie-service";
 
 export class EmailErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService: UserService,
     public authService: TokenAuthService,
+    public cookieService: CookieService
   ) {
   }
 
@@ -43,12 +45,14 @@ export class LoginComponent implements OnInit {
       response => {
         console.log(response);
         if (response.status === 200 && response.ok) {
+          console.log('logged in');
           const body = response['body'];
           const accessToken = body['access'];
           this.authService.set('access', accessToken);
           this.authService.set('refresh', body['refresh']);
           this.authService.authenticate();
-          this.getUserData(accessToken);
+          this.getUserData(accessToken, body['uid']);
+          window.alert('User logged in');
         }
 
       },
@@ -56,9 +60,9 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  getUserData(accessToken) {
+  getUserData(accessToken, user_id) {
     // this.authService.isAuthenticated();
-    this.userService.getProfileData(accessToken).subscribe(
+    this.userService.getProfileData(accessToken, user_id).subscribe(
       response => {
         window.localStorage.setItem('profile', JSON.stringify(response));
       },
