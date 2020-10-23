@@ -22,7 +22,7 @@ public class AddressController {
         return addressService.save(address);
     }
     @GetMapping(value = "/")
-    Address getAddress(@RequestParam long id){
+    public Address getAddress(@RequestParam long id){
         return addressService.findById(id);
     }
     @GetMapping(value = "/all")

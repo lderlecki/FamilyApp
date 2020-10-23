@@ -45,6 +45,10 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MyTableComponent} from './components/table/my-table.component';
 import {ListFamilyComponent} from './views/list-families/list-family.component';
+import {CookieService} from 'ngx-cookie-service';
+import { PasswordResetComponent } from './components/account/password-reset/password-reset.component';
+import { ResponseResetPasswordComponent } from './components/account/response-reset-password/response-reset-password.component';
+
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -56,7 +60,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     LoginComponent,
     RegisterComponent,
     CalendarComponent,
-    MyTableComponent
+    MyTableComponent,
+    PasswordResetComponent,
+    ResponseResetPasswordComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -109,7 +115,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       }
     }),
   ],
-  providers: [],
+  providers: [CookieService,],
   bootstrap: [AppComponent]
 })
 export class AppModule {

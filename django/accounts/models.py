@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
@@ -70,7 +71,6 @@ class Profile(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     surname = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(max_length=255, blank=True, null=True)
-    # family_head = models.BooleanField(blank=True, null=True)
     phone = models.CharField(max_length=255, blank=True, null=True)
     family = models.ForeignKey('family.Family', on_delete=models.SET_NULL, blank=True, null=True)
 
@@ -83,4 +83,7 @@ class Profile(models.Model):
 
     @property
     def family_name(self):
-        return self.family.family_name
+        try:
+            return self.family.family_name
+        except AttributeError:
+            return None

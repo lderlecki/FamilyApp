@@ -49,6 +49,23 @@ you can delete multiple containers
 
 docker container rm 15a39a1631b6 98c98a131d3 17098a4354d
 
+
+Docker ADD vs Copy
+ADD może kopiować rzeczy z zewnątrz, jeśli zrobimy add i podamy jakiś adres URL to pobierze i rozpakuje dane
+
+ports:
+8000:8100 -> port 8000 udostępniamy na zewnątrz na port 8100
+tzn. lokalnie można odpalić aplikację na localhost:8000/
+
+depends_on:
+mówi to o tym, ze razem z danym kontenerem uruchomi się inny kontener
+services:
+  django:
+    ...
+    depends_on:
+      - db -> uruchamia kontener db przy uruchomieniu komendy docker-compose run django 
+      (uruchomi się przed django, ale nie znaczy ot, ze skończy się inicjalizować przed django)
+
 9.Docker compose
 
 a) delete old images (if any exists)

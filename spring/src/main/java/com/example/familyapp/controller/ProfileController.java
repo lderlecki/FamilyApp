@@ -22,8 +22,7 @@ public class ProfileController {
         return profileService.save(profile);
     }
     @GetMapping(value = "/")
-    Profile getProfile(@RequestParam long id){
-
+    public Profile getProfile(@RequestParam long id){
         return profileService.findById(id);
     }
 

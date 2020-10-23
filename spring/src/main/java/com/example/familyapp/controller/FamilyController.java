@@ -28,7 +28,7 @@ public class FamilyController {
     @GetMapping(value = "/all")
     public List<Family> getAllFamilies() { return familyService.getAll();}
     @GetMapping(value = "/")
-    Family getFamily(@RequestParam long id){
+    public Family getFamily(@RequestParam long id){
         return familyService.findById(id);
     }
     @PutMapping(value = "/")
