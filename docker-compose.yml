@@ -46,6 +46,6 @@ services:
     
     depends_on:
       - spring
-      - django  
+      - django 
   
 
