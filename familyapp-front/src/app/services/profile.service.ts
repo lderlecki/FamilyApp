@@ -1,0 +1,22 @@
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ProfileService {
+  API_PROFILE_URL = 'http://localhost:8081/profile/';
+
+  private httpHeaders: HttpHeaders;
+  private params: HttpParams;
+
+
+  constructor(private http: HttpClient) {  }
+
+  getAllProfiles(): Observable<any> {
+    console.log('fetching families');
+    return this.http.get<any>(this.API_PROFILE_URL + 'all', {observe: 'response'});
+  }
+}

@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .cors()
                 .and()//AUTHORIZE REQUEST BELOW
-                .csrf().disable().authorizeRequests().antMatchers("/profile/*").authenticated()
+                .csrf().disable().authorizeRequests().antMatchers().authenticated()
                 //ALLOW REQUESTS BELOW
                 .antMatchers( "/token/generate-token","/*","/**","/.~~spring-boot!~/restart").permitAll()
                 .and()

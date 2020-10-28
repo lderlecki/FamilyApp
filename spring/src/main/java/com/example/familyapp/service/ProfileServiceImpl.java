@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 @Service
 public class ProfileServiceImpl implements ProfileService {
@@ -30,5 +32,10 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public void delete(Profile profile) {
         profileRepository.delete(profile);
+    }
+
+    @Override
+    public List<Profile> getAllProfiles() {
+        return profileRepository.findAll();
     }
 }

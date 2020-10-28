@@ -53,6 +53,43 @@
     "COLUMN_HEADER":
      {"familyName": "Surname", "budget": "Budget"},
     "FETCHSUCCESS": "Table data fetched succesfully",
-    "FETCHERROR": "Upss something went wrong"
+    "FETCHERROR": "Upss something went wrong",
+    "BUTTON_INVITE": "Join family",
+    "INVITE_CONFLICT_1": "You already have invitation to family ",
+    "INVITE_CONFLICT_2": " Check your invitations!",
+    "INVITE_NOT_ACCEPTABLE_1": "You are already member of family ",
+    "INVITE_SUCCESS_1": "Invitation request has been sucessfully sent to family "
+  },
+  "LIST_PROFILES": {
+    "COLUMN_HEADER":
+    {"name": "Name", "surname": "Surname"},
+    "FETCHSUCCESS": "Table data fetched succesfully",
+    "FETCHERROR": "Upss something went wrong",
+    "BUTTON_INVITE": "Invite to family",
+    "INVITE_CONFLICT_1": "User ",
+    "INVITE_CONFLICT_2": " already has invitation to your family",
+    "INVITE_NOT_ACCEPTABLE_1": "User ",
+    "INVITE_NOT_ACCEPTABLE_2": " is already member of your family",
+    "INVITE_SUCCESS_1": "The invitation to your family has been sucessfully sent to user "
+  },
+  "LIST_INVITATIONS": {
+    "COLUMN_HEADER_FAMILY":
+    {"profile": "Username", "actions": "Actions"},
+    "COLUMN_HEADER_PROFILE":
+    {"family": "Family name", "actions": "Actions"},
+    "FETCHSUCCESS": "Table data fetched succesfully",
+    "FETCHERROR": "Upss something went wrong",
+    "BUTTON_ACCEPT": "Accept",
+    "BUTTON_REJECT_1": "Reject",
+    "BUTTON_REJECT_2": "Undo invitation",
+    "ACCEPT_ALREADY_IN_FAMILY": "Profile already in family"
+  },
+  "INVITE_FAMILY_DIALOG": {
+    "TITLE": "Send family invitation/request",
+    "TEXT1": "Create new invitation to family ",
+    "TEXT2": "for user ",
+    "ACCEPT": "Yes",
+    "REJECT": "No"
+
   }
 }

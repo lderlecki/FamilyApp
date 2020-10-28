@@ -28,6 +28,10 @@ public class Profile {
     @JsonIgnore
     private User user;
 
+    @OneToMany(mappedBy = "profile")
+    @JsonIgnore
+    private List<Invitation> invitations;
+
     @OneToMany(mappedBy = "responsiblePerson")
     private List<Task> taskList = new ArrayList<>();
 
@@ -45,6 +49,14 @@ public class Profile {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Invitation> getInvitations() {
+        return invitations;
+    }
+
+    public void setInvitations(List<Invitation> invitations) {
+        this.invitations = invitations;
     }
 
     @Override

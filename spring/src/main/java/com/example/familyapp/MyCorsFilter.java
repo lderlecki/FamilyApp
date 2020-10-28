@@ -10,7 +10,7 @@ import java.io.IOException;
 @Component
 public class MyCorsFilter implements Filter {
 
-    private final String FRONTEND_URL = "http://localhost:4201";
+    public static final String FRONTEND_URL = "http://localhost:4201";
     public MyCorsFilter() {
     }
 

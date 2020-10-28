@@ -43,11 +43,15 @@ import {CalendarComponent} from './components/calendar/calendar.component';
 import {UserService} from './services/user.service';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {MyTableComponent} from './components/table/my-table.component';
+import {MyTableComponent} from './components/tables/list-users-families-table/my-table.component';
 import {ListFamilyComponent} from './views/list-families/list-family.component';
 import {CookieService} from 'ngx-cookie-service';
 import { PasswordResetComponent } from './components/account/password-reset/password-reset.component';
 import { ResponseResetPasswordComponent } from './components/account/response-reset-password/response-reset-password.component';
+import {ListInvitationTableComponent} from './components/tables/list-invitation-table/list-invitation-table.component';
+import {ListInvitationComponent} from './views/list-invitations/list-invitation.component';
+import {ListProfileComponent} from './views/list-profiles/list-profile.component';
+import {InviteToFamilyDialogComponent} from './components/dialogs/invite-to-family/invite-to-family-dialog';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -63,6 +67,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MyTableComponent,
     PasswordResetComponent,
     ResponseResetPasswordComponent,
+    ListInvitationTableComponent,
+    ListInvitationComponent,
+    ListProfileComponent,
+    InviteToFamilyDialogComponent
   ],
   imports: [
     AppRoutingModule,

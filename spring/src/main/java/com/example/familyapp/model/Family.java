@@ -1,15 +1,18 @@
 package com.example.familyapp.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
-public class Family {
+public class Family implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
@@ -17,7 +20,13 @@ public class Family {
     private String familyName;
     private double budget;
     @OneToMany(mappedBy = "family")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Set<Profile> familyMembers;
+
+    @OneToMany(mappedBy = "family")
+    @JsonIgnore
+    private List<Invitation> invitations;
+
 
     @OneToOne(mappedBy = "family")
     private Address address;
@@ -27,6 +36,7 @@ public class Family {
 
     @OneToOne
     @JoinColumn(name="family_head_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Profile familyHead;
 
     public Profile getFamilyHead() {
@@ -60,6 +70,14 @@ public class Family {
 
     public UUID getGroupId() {
         return groupId;
+    }
+
+    public List<Invitation> getInvitations() {
+        return invitations;
+    }
+
+    public void setInvitations(List<Invitation> invitations) {
+        this.invitations = invitations;
     }
 
 

@@ -53,6 +53,43 @@
     "COLUMN_HEADER":
     {"familyName": "Nom", "budget": "Budget"},
     "FETCHSUCCESS": "Les données de la table ont été récupérées avec succès",
-    "FETCHERROR": "Upss quelque chose s'est mal passé"
+    "FETCHERROR": "Upss quelque chose s'est mal passé",
+    "BUTTON_INVITE": "Rejoindre la famille",
+    "INVITE_CONFLICT_1": "Vous avez déjà une invitation en famille ",
+    "INVITE_CONFLICT_2": " Vérifiez vos invitations!",
+    "INVITE_NOT_ACCEPTABLE_1": "Vous êtes déjà membre de la famille ",
+    "INVITE_SUCCESS_1": "La demande d'invitation a été envoyée à la famille avec succès "
+  },
+  "LIST_PROFILES": {
+    "COLUMN_HEADER":
+    {"name": "Nom", "surname": "Nom de famille"},
+    "FETCHSUCCESS": "Les données de la table ont été récupérées avec succès",
+    "FETCHERROR": "Upss quelque chose s'est mal passé",
+    "BUTTON_INVITE": "Inviter en famille",
+    "INVITE_CONFLICT_1": "Utilisateur ",
+    "INVITE_CONFLICT_2": "  a déjà une invitation pour votre famille",
+    "INVITE_NOT_ACCEPTABLE_1": "Utilisateur ",
+    "INVITE_NOT_ACCEPTABLE_2": " est déjà membre de votre famille",
+    "INVITE_SUCCESS_1": "L'invitation à votre famille a bien été envoyée à l'utilisateur "
+  },
+  "LIST_INVITATIONS": {
+    "COLUMN_HEADER_FAMILY":
+    {"profile": "Prénom et nom", "actions": "Actions"},
+    "COLUMN_HEADER_PROFILE":
+    {"family": "Nom de famille", "actions": "Actions"},
+    "FETCHSUCCESS": "Les données de la table ont été récupérées avec succès",
+    "FETCHERROR": "Upss quelque chose s'est mal passé",
+    "BUTTON_ACCEPT": "J'accepte",
+    "BUTTON_REJECT_1": "Jeter",
+    "BUTTON_REJECT_2": "Annuler l'invitation",
+    "ACCEPT_ALREADY_IN_FAMILY": "Profil déjà dans la famille"
+  },
+  "INVITE_FAMILY_DIALOG": {
+    "TITLE": "Envoyer une invitation/une demande de famille",
+    "TEXT1": "Créer une nouvelle invitation à la famille ",
+    "TEXT2": "pour l'utilisateur ",
+    "ACCEPT": "Oui",
+    "REJECT": "Non"
+
   }
 }
