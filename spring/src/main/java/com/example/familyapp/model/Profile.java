@@ -33,6 +33,7 @@ public class Profile {
     private List<Invitation> invitations;
 
     @OneToMany(mappedBy = "responsiblePerson")
+    @JsonIgnore
     private List<Task> taskList = new ArrayList<>();
 
     public List<Task> getTaskList() {

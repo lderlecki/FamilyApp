@@ -21,7 +21,6 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name="profile_id")
-    @JsonIgnore
     private Profile responsiblePerson;
 
     @ManyToOne

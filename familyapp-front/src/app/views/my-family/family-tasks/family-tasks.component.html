@@ -1,0 +1,50 @@
+<app-calendar [tasks]="myFamilyTasks" #myChild (outputObject)="clickedDate($event)"></app-calendar>
+<mat-spinner diameter="100" id="mySpinner"></mat-spinner>
+<div id="toDoDetails" #toDoDetails (scroll)="onScroll($event)" (dblclick)="closeMe()">
+  <h2 id="displayDate">{{displayDate}}</h2>
+
+  <mat-card class="example-card-main">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image-main"></div>
+      <mat-card-title>----</mat-card-title>
+      <mat-card-subtitle>----</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <button  mat-raised-button color="primary" (click)="addNewToDo()">ADD NEW TODO</button>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="example-card-main" *ngFor="let toDoList of toDoListsClickedDay">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image-main"></div>
+      <mat-card-title>{{toDoList?.name}} Deadline: {{toDoList?.dueDate}}</mat-card-title>
+      <mat-card-subtitle>{{toDoList?.description}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-card class="example-card" *ngFor="let task of toDoList?.tasks">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{task.name}}</mat-card-title>
+          <mat-card-subtitle>{{task.responsiblePerson.name}}  {{task.responsiblePerson.surname}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ul>
+            <!--#TODO CHANGE STYLE HERE-->
+            <li>{{task.description}} <span class="taskStatus" *ngIf="task.done" style="color: green"> DONE &#10003;</span><span class="taskStatus" *ngIf="task.done === false" style="color: red">NOT DONE X <button  mat-raised-button color="primary" (click)="changeTaskStatus(task.id)">CHANGE STATUS</button></span></li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>----</mat-card-title>
+          <mat-card-subtitle>----</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <button  mat-raised-button color="primary" (click)="addNewTask()">ADD NEW TASK</button>
+        </mat-card-content>
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+  <img src="https://image.flaticon.com/icons/png/512/61/61155.png" id="closeIcon" (click)="closeMe()" #closeIcon>
+</div>
+

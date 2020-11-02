@@ -5,8 +5,8 @@
       <a class="nav-item" routerLink="/families" routerLinkActive='active'>List families</a>
       <a class="nav-item" routerLink="/profiles" routerLinkActive='active'>List profiles</a>
       <a class="nav-item" routerLink="#" routerLinkActive='active'>El_2</a>
-      <a class="nav-item" routerLink="/invitationsForFamily" routerLinkActive='active'>Invitations for family</a>
       <a class="nav-item" routerLink="/invitationsForProfile" routerLinkActive='active'>Invitations for profile</a>
+      <a class="nav-item" routerLink="/myFamily" routerLinkActive='active'>{{ 'NAV.MY_FAMILY' | translate }}</a>
       <a class="nav-item" routerLink="/calendar" routerLinkActive='active'>{{ 'NAV.CALENDAR' | translate }}</a>
           <span class="nav-item"><select  #langSelect (change)="translate.use(langSelect.value)">
             <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>

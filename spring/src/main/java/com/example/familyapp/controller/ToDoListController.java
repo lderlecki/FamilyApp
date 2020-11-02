@@ -6,6 +6,8 @@ import com.example.familyapp.service.ToDoListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/todolist")
 public class ToDoListController {
@@ -32,5 +34,10 @@ public class ToDoListController {
     @DeleteMapping(value = "/")
     void deleteToDoList(@RequestParam long id){
         toDoListService.delete(toDoListService.findById(id));
+    }
+
+    @GetMapping(value = "/forFamily/")
+    List<ToDoList> getTasksForFamily(@RequestParam long id){
+        return toDoListService.findByFamilyId(id);
     }
 }

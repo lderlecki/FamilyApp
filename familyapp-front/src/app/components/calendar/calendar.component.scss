@@ -53,12 +53,13 @@
 }
 .navBox
 {
-  font-size: 25px;
+  font-size: 30px !important;
   font-weight: bold;
   user-select: none;
 }
 #flexContainer .box .dayBox,#flexContainer .box .dayBoxName,#flexContainer .box .dayBoxEmpty, #flexContainer .box .navBox
 {
+  font-size: 20px;
   line-height: 50px;
   text-align: center;
   position: absolute;
@@ -78,3 +79,16 @@
  {
   background: gray;
  }
+
+.taskHere
+{
+  position: absolute;
+  top: 2px;
+  right: 15px;
+  border-radius: 50%;
+  background: red;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+ font-size: 16px;
+}

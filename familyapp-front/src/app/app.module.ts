@@ -52,6 +52,10 @@ import {ListInvitationTableComponent} from './components/tables/list-invitation-
 import {ListInvitationComponent} from './views/list-invitations/list-invitation.component';
 import {ListProfileComponent} from './views/list-profiles/list-profile.component';
 import {InviteToFamilyDialogComponent} from './components/dialogs/invite-to-family/invite-to-family-dialog';
+import {MyFamilyComponent} from './views/my-family/my-family.component';
+import {FamilyMembersComponent} from './views/my-family/family-members/family-members.component';
+import {FamilyTasksComponent} from './views/my-family/family-tasks/family-tasks.component';
+import {FamilyInvitationsComponent} from './views/my-family/list-family-invitations/family-invitations.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -70,7 +74,11 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ListInvitationTableComponent,
     ListInvitationComponent,
     ListProfileComponent,
-    InviteToFamilyDialogComponent
+    InviteToFamilyDialogComponent,
+    MyFamilyComponent,
+    FamilyMembersComponent,
+    FamilyTasksComponent,
+    FamilyInvitationsComponent
   ],
   imports: [
     AppRoutingModule,

@@ -1,16 +1,21 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable, ReplaySubject, Subject} from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import {Family} from '../model/family';
+import {Data} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FamilyService {
+  private familySubject: Subject<Family> = new BehaviorSubject<Family>(null);
   API_FAMILY_URL = 'http://localhost:8081/family/';
 
   private httpHeaders: HttpHeaders;
   private params: HttpParams;
+  private family: Family;
+
 
 
   constructor(private http: HttpClient) {  }
@@ -18,5 +23,13 @@ export class FamilyService {
   getAllFamilies(): Observable<any> {
     console.log('fetching families');
     return this.http.get<any>(this.API_FAMILY_URL + 'all', {observe: 'response'});
+  }
+
+
+  sendFamilyData(family: Family) {
+    this.familySubject.next(family);
+  }
+  getData() {
+    return this.familySubject.asObservable();
   }
 }

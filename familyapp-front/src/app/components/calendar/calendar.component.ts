@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Todolist} from '../../model/todolist';
 
+export class SelectedDateDto {
+  selectedDate: Date;
+  familyToDoList: Todolist[];
+}
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -13,11 +18,11 @@ export class CalendarComponent implements OnInit {
   currentDate: Date;
   firstDay;
   appYearAndMonth: boolean;
-  selectedDate: Date;
-  testDay: Date;
-  monthsEng = ['January', 'February', ' March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  monthsPl = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
+  @Input() tasks;
   years = [2020, 2021, 2022, 2023, 2024, 2025 , 2026, 2027];
+  toDoLists: Todolist[];
+  @Output()
+  public outputObject = new EventEmitter<Object>();
   constructor( ) { }
 
   ngOnInit(): void {
@@ -83,12 +88,35 @@ export class CalendarComponent implements OnInit {
 
   }
 
-  getClickedDayAndCreateFullDate(event: any) {
-    this.selectedDate = new Date(this.years[this.yearIndex], this.monthIndex, event.target.innerText);
-    alert('SELECTED DATE ' + this.selectedDate);
-
+  getClickedDayAndCreateFullDate(day: number) {
+    const outputDto = new SelectedDateDto();
+    outputDto.familyToDoList = this.toDoLists;
+    outputDto.selectedDate = new Date(this.years[this.yearIndex], this.monthIndex - 1, day + 1);
+    this.outputObject.emit(outputDto);
   }
 
+  init(data: Todolist[]) {
+    this.toDoLists = data;
+  }
+
+  checkTasksForDay(dayNum: number) {
+    if (this.toDoLists !== undefined) {
+      let totalTasksForDay = 0;
+      for (let i = 0; i < this.toDoLists.length; i++) {
+        const taskDate = new Date(Date.parse(this.toDoLists[i].dueDate.toString()));
+        const myDayString = this.years[this.yearIndex] + ' ' + this.monthIndex + ' ' + dayNum;
+        const taskDateString = taskDate.getFullYear() + ' ' + (taskDate.getMonth() + 1) + ' ' + taskDate.getDate();
+        if (myDayString === taskDateString) {
+          for (let j = 0; j < this.toDoLists[i].tasks.length; j++) {
+            // if(this.toDoLists[i].tasks[j].responsiblePerson.id === this.loggedUser.id) // #TODO PRINT TASKS ONLY FOR LOGGED USER?
+            totalTasksForDay += 1;
+          }
+        }
+      }
+      return totalTasksForDay;
+    }
+    return 0;
+  }
 
 
 }

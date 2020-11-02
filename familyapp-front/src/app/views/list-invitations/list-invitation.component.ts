@@ -32,33 +32,11 @@ export class ListInvitationComponent implements OnInit {
   }
 
   prepareData() {
-    if (this.route.snapshot.routeConfig.path.includes('invitationsForProfile')) {
       this.viewForFamily = false;
       this.fetchDataForProfile(20); // #TODO HARD CODED VALUE
-    } else {
-      this.viewForFamily = true;
-      this.fetchDataForFamily(3); // #TODO HARD CODED VALUE
-    }
   }
   fetchDataForProfile(profileId: number) {
     this.invitationService.getInvitationsForProfile(profileId).subscribe(response => {
-      if (response.status === 200) {
-        this.translate.get('LIST_INVITATIONS.FETCHSUCCESS').subscribe(res => {
-          this.toastr.success(res);
-        });
-        this.tableData = response.body;
-        console.log(this.tableData)
-        this.myChild.init(this.tableData);
-      }
-    }, error => {
-      this.translate.get('LIST_INVITATIONS.FETCHERROR').subscribe(res => {
-        this.toastr.error(res);
-      });
-    });
-  }
-
-  fetchDataForFamily(familyId: number) {
-    this.invitationService.getInvitationsForFamily(familyId).subscribe(response => {
       if (response.status === 200) {
         this.translate.get('LIST_INVITATIONS.FETCHSUCCESS').subscribe(res => {
           this.toastr.success(res);

@@ -1,5 +1,6 @@
 package com.example.familyapp.controller;
 
+import com.example.familyapp.model.Family;
 import com.example.familyapp.model.Invitation;
 import com.example.familyapp.model.Profile;
 import com.example.familyapp.service.ProfileService;
@@ -27,6 +28,11 @@ public class ProfileController {
     @GetMapping(value = "/")
     public Profile getProfile(@RequestParam long id){
         return profileService.findById(id);
+    }
+
+    @GetMapping(value = "/family")
+    public Family getFamilyForProfile(@RequestParam long id){
+        return profileService.findById(id).getFamily();
     }
 
     @PutMapping(value = "/")

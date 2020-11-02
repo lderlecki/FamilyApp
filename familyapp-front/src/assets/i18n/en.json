@@ -3,7 +3,8 @@
     "HOME": "Home",
     "CALENDAR": "Calendar",
     "REGISTER": "Register",
-    "LOGIN": "Login"
+    "LOGIN": "Login",
+    "MY_FAMILY": "My family"
   },
   "LOGIN": {
     "PASSWORD": "Password",
@@ -91,5 +92,10 @@
     "ACCEPT": "Yes",
     "REJECT": "No"
 
+  },
+  "MY_FAMILY": {
+    "NAV_TASKS": "Tasks",
+    "NAV_INVITATIONS": "Invitations",
+    "NAV_MEMBERS": "Members"
   }
 }

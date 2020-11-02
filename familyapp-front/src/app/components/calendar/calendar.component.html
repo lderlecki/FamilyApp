@@ -45,10 +45,11 @@
           </div>
         </div>
         <div class="box" *ngFor="let day of daysInMonth">
-          <div class="dayBox" (click)="getClickedDayAndCreateFullDate($event);" *ngIf="appYearAndMonth==true && day == currentDate.getDate()" style="border: 2px solid #DA3A21; left: 0px">
+          <div class="dayBox" (click)="getClickedDayAndCreateFullDate(day);" *ngIf="appYearAndMonth==true && day == currentDate.getDate()" style="border: 2px solid #DA3A21; left: 0px">
         {{day}}
           </div>
-          <div class="dayBox" (click)="getClickedDayAndCreateFullDate($event);" *ngIf="appYearAndMonth==false || day != currentDate.getDate()">
+          <div class="taskHere" *ngIf="checkTasksForDay(day) >0 ? checkTasksForDay(day): null; let totalTaskNumber">{{totalTaskNumber}}</div>
+          <div class="dayBox" (click)="getClickedDayAndCreateFullDate(day);" *ngIf="appYearAndMonth==false || day != currentDate.getDate()">
             {{day}}
           </div>
         </div>

@@ -1,0 +1,62 @@
+@import '../../../../globalScssVariables';
+
+#toDoDetails
+{
+  padding: 15px;
+  position: absolute;
+  width: 90%;
+  height: 0;
+  left: 50%;
+  background: $salmon;
+  margin-left: -45%;
+  top:5%;
+  opacity: 0;
+  transition: all 0.5s ease-in ;
+  overflow-y: scroll;
+  border:1px solid $black;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+#displayDate
+{
+  width: 90%;
+  top:5%;
+  margin: auto;
+  text-align: center;
+  border-bottom: 2px solid black;
+}
+.taskStatus
+{
+  font-size: 20px;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+#closeIcon
+{
+  position: absolute;
+  right:1px;
+  top:1px;
+  width:40px;
+  height: 40px;
+}
+#closeIcon:hover
+{
+  cursor: pointer;
+}
+.example-header-image {
+  background-image: url('https://e1.pngegg.com/pngimages/546/393/png-clipart-snow-alphabet-and-numbers-red-letter-t.png');
+  background-size: cover;
+}
+.example-header-image-main
+{
+  background-image: url('https://cdn.iconscout.com/icon/free/png-512/reminder-1605719-1361068.png');
+  background-size: cover;
+}
+.example-card-main
+{
+
+  position: relative;
+  background: $bg-color;
+  margin-bottom: 1%;
+}
+

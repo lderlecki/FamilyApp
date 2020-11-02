@@ -16,7 +16,12 @@ export class ProfileService {
   constructor(private http: HttpClient) {  }
 
   getAllProfiles(): Observable<any> {
-    console.log('fetching families');
     return this.http.get<any>(this.API_PROFILE_URL + 'all', {observe: 'response'});
+  }
+  getProfile(profileId: number): Observable<any> {
+    return this.http.get<any>(this.API_PROFILE_URL + '?id='  + profileId, {observe: 'response'});
+  }
+  getFamilyForProfile(profileId: number): Observable<any> {
+    return this.http.get<any>(this.API_PROFILE_URL + 'family/?id='  + profileId, {observe: 'response'});
   }
 }

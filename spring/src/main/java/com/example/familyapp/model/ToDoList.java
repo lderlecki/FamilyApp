@@ -1,6 +1,9 @@
 package com.example.familyapp.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -31,6 +34,8 @@ public class ToDoList {
     private List<Task> tasks = new ArrayList<>();
 
     @Column(nullable = false)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonFormat(pattern="YYYY-MM-dd HH:mm:ss")
     private LocalDateTime dueDate;
 
     public LocalDateTime getDueDate() {
