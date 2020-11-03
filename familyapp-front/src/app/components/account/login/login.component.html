@@ -19,8 +19,8 @@
         <input required [(ngModel)]="loginData.password" type="password" matInput>
       </mat-form-field>
       <br>
-      <button (click)="loginUser()" style="margin-right: 5px" mat-raised-button color="primary">{{ 'LOGIN.LOGIN' | translate }}</button>
-      <button (click)="generateTokenViaSpring()" mat-raised-button color="primary">{{ 'LOGIN.LOGIN' | translate }} Spring</button>
+      <button (click)="loginUser()" class="account-btn" mat-raised-button color="primary">{{ 'LOGIN.LOGIN' | translate }}</button>
+      <button (click)="generateTokenViaSpring()" class="account-btn" mat-raised-button color="primary">{{ 'LOGIN.LOGIN' | translate }} Spring</button>
     </div>
     <span class="subscript">{{ 'LOGIN.DONTHAVEACC' | translate }}
       <a class="url_rm_visited" routerLink="/register" routerLinkActive='active'>{{ 'LOGIN.REGISTER' | translate }}</a>

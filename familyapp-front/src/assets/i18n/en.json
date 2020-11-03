@@ -3,7 +3,9 @@
     "HOME": "Home",
     "CALENDAR": "Calendar",
     "REGISTER": "Register",
-    "LOGIN": "Login"
+    "LOGIN": "Login",
+    "PROFILE": "Profile",
+    "LOGOUT": "Logout"
   },
   "LOGIN": {
     "PASSWORD": "Password",

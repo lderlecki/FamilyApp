@@ -1,4 +1,10 @@
 @import '../globalScssVariables';
+
+body{
+  margin: 0;
+  padding: 0;
+}
+
 .navbar {
   overflow: hidden;
   background-color: $nav-color;

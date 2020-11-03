@@ -3,7 +3,9 @@
     "HOME": "Principale",
     "CALENDAR": "Calendrier",
     "REGISTER": "S'inscrire",
-    "LOGIN": "S'identifier"
+    "LOGIN": "S'identifier",
+    "PROFILE": "Profil",
+    "LOGOUT": "Se déconnecter"
   },
   "LOGIN": {
     "PASSWORD": "Mot de passe",

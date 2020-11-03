@@ -3,7 +3,9 @@
     "HOME": "Strona główna",
     "CALENDAR": "Kalendarz",
     "REGISTER": "Zerejestruj",
-    "LOGIN": "Zaloguj"
+    "LOGIN": "Zaloguj",
+    "PROFILE": "Profil",
+    "LOGOUT": "Wyloguj"
   },
   "LOGIN": {
     "PASSWORD": "Hasło",
@@ -50,8 +52,10 @@
     "FILTER": "Filtruj"
   },
   "LIST_FAMILIES": {
-    "COLUMN_HEADER":
-    {"familyName": "Nazwisko", "budget": "Budżet"},
+    "COLUMN_HEADER": {
+      "familyName": "Nazwisko",
+      "budget": "Budżet"
+    },
     "FETCHSUCCESS": "Dane tabeli zostały pobrane pomyślnie",
     "FETCHERROR": "Upss coś poszło nie tak"
   }

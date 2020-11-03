@@ -39,7 +39,7 @@ export class MyTableComponent implements OnInit {
 
   init(data) {
     this.tableData = data; // get data
-    console.log('inside ' + data)
+    console.log('inside ' + data);
     this.initializeTable(); // and initlize table
   }
 }
