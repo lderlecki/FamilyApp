@@ -7,24 +7,23 @@
       <a class="nav-item" routerLink="#" routerLinkActive='active'>El_2</a>
       <a class="nav-item" routerLink="/invitationsForProfile" routerLinkActive='active'>Invitations for profile</a>
       <a class="nav-item" routerLink="/myFamily" routerLinkActive='active'>{{ 'NAV.MY_FAMILY' | translate }}</a>
-      <a class="nav-item" routerLink="/calendar" routerLinkActive='active'>{{ 'NAV.CALENDAR' | translate }}</a>
           <span class="nav-item"><select  #langSelect (change)="translate.use(langSelect.value)">
-            <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+            <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">
+              {{ lang }}
+            </option>
           </select></span>
     </div>
 
-
-    <!--<mat-form-field appearance="fill" style="background: white !important">-->
-      <!--<mat-label >Language</mat-label>-->
-      <!--<mat-select [(ngModel)]="selectedValue">-->
-        <!--<mat-option *ngFor="let lang of languages" [value]="lang.value" (click)="setLanguage()">-->
-          <!--{{lang.viewValue}}-->
-        <!--</mat-option>-->
-      <!--</mat-select>-->
-    <!--</mat-form-field>-->
     <div class="nav-account">
-      <a class="nav-item" routerLink="/account/login" routerLinkActive='active'>{{ 'NAV.LOGIN' | translate }}</a>
-      <a class="nav-item" routerLink="/register" routerLinkActive='active'>{{ 'NAV.REGISTER' | translate }}</a>
+      <div *ngIf="!authService.isTokenExpired(); then authorizedBlock; else anonymousBlock"></div>
+      <ng-template #authorizedBlock>
+        <a class="nav-item" routerLink="/account/profile" routerLinkActive='active'>{{ 'NAV.PROFILE' | translate }}</a>
+        <a class="nav-item" routerLink="" (click)="authService.logout()">{{ 'NAV.LOGOUT' | translate }}</a>
+      </ng-template>
+      <ng-template #anonymousBlock>
+        <a class="nav-item" routerLink="/account/login" routerLinkActive='active'>{{ 'NAV.LOGIN' | translate }}</a>
+        <a class="nav-item" routerLink="/register" routerLinkActive='active'>{{ 'NAV.REGISTER' | translate }}</a>
+      </ng-template>
     </div>
   </div>
 </nav>

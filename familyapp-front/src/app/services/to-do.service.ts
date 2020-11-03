@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable, ReplaySubject, Subject} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {Family} from '../model/family';
+import {Family} from '../models/family';
 import {Data} from '@angular/router';
 
 @Injectable({

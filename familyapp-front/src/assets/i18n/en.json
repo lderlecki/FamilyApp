@@ -4,7 +4,9 @@
     "CALENDAR": "Calendar",
     "REGISTER": "Register",
     "LOGIN": "Login",
-    "MY_FAMILY": "My family"
+    "MY_FAMILY": "My family",
+    "PROFILE": "Profile",
+    "LOGOUT": "Logout"
   },
   "LOGIN": {
     "PASSWORD": "Password",

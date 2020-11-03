@@ -1,10 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FamilyService} from '../../services/family.service';
 import {ToastrService} from 'ngx-toastr';
-import {TranslateModule, TranslatePipe, TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import {InvitationService} from '../../services/invitation.service';
 import {ListInvitationTableComponent} from '../../components/tables/list-invitation-table/list-invitation-table.component';
-import {Family} from '../../model/family';
 import {ActivatedRoute} from '@angular/router';
 
 export interface PeriodicElement {
@@ -24,7 +22,8 @@ export class ListInvitationComponent implements OnInit {
   viewForFamily: boolean;
   @ViewChild('myChild') private myChild: ListInvitationTableComponent;
   tableData: PeriodicElement[];
-  constructor(private route: ActivatedRoute, private invitationService: InvitationService, private toastr: ToastrService, private translate: TranslateService ) { }
+  constructor(private route: ActivatedRoute, private invitationService: InvitationService,
+              private toastr: ToastrService, private translate: TranslateService ) { }
 
 
   ngOnInit(): void {

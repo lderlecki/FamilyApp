@@ -4,7 +4,9 @@
     "CALENDAR": "Calendrier",
     "REGISTER": "S'inscrire",
     "LOGIN": "S'identifier",
-    "MY_FAMILY": "Ma famille"
+    "MY_FAMILY": "Ma famille",
+    "PROFILE": "Profil",
+    "LOGOUT": "Se déconnecter"
   },
   "LOGIN": {
     "PASSWORD": "Mot de passe",

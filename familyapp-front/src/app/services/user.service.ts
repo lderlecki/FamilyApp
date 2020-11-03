@@ -1,21 +1,24 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  BASE_URL = 'http://localhost:8000/api/';
+  BASE_URL = environment.djangoApiUrl;
   private registerUrl = 'register/';
   private apiAuthUrl = 'token/';
   private profileDataUrl = 'profiles/';
+  private changePasswordUrl = 'change-password/';
   private requestPasswordResetUrl = 'request-reset-email/';
   private passwordResetTokenValidateUrl = 'password-reset/';
   private passwordResetCompleteUrl = 'password-reset-complete/';
 
   private httpHeaders: HttpHeaders;
   private params: HttpParams;
+  private AUTH_PREFIX = 'Bearer';
 
 
   constructor(private http: HttpClient) {
@@ -41,8 +44,16 @@ export class UserService {
   }
 
   getProfileData(token, user_id): Observable<any> {
-    this.httpHeaders = new HttpHeaders({'Authorization': `Bearer ${token}`});
-    return this.http.get(this.BASE_URL + this.profileDataUrl + `${user_id}/`, {headers: this.httpHeaders});
+    // this.httpHeaders = new HttpHeaders({'Authorization': `${this.AUTH_PREFIX} ${token}`});
+    return this.http.get(this.BASE_URL + this.profileDataUrl + `${user_id}/`);
+  }
+
+  updateProfileData(token, user_id, data): Observable<any> {
+    return this.http.patch(this.BASE_URL + this.profileDataUrl + `${user_id}/`, data);
+  }
+
+  changeUserPassword(data): Observable<any> {
+    return this.http.patch(this.BASE_URL + this.changePasswordUrl, data, {observe: 'response'});
   }
 
   requestPasswordReset(email: string): Observable<any> {

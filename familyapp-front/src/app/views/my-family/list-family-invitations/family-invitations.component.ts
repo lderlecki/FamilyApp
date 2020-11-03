@@ -10,7 +10,7 @@ import {FamilyService} from '../../../services/family.service';
 import {ListInvitationTableComponent} from '../../../components/tables/list-invitation-table/list-invitation-table.component';
 import {PeriodicElement} from '../../list-invitations/list-invitation.component';
 import {Subscription} from 'rxjs';
-import {Family} from '../../../model/family';
+import {Family} from '../../../models/family';
 
 @Component({
   selector: 'app-my-family-invitations',

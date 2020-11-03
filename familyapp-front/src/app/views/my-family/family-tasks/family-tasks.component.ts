@@ -5,7 +5,7 @@ import {Subscription} from 'rxjs';
 import {FamilyService} from '../../../services/family.service';
 import {CalendarComponent, SelectedDateDto} from '../../../components/calendar/calendar.component';
 import {ToDoService} from '../../../services/to-do.service';
-import {Todolist} from '../../../model/todolist';
+import {Todolist} from '../../../models/todolist';
 
 @Component({
   selector: 'app-my-family',

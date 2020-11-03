@@ -1,12 +1,12 @@
-import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
-import {TranslateModule, TranslatePipe, TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import {ProfileService} from '../../services/profile.service';
 import {MatDialog} from '@angular/material/dialog';
 import {InvitationService} from '../../services/invitation.service';
 import {Location} from '@angular/common';
-import {Family} from '../../model/family';
-import {Profile} from '../../model/profile';
+import {Family} from '../../models/family';
+import {Profile} from '../../models/profile';
 import {FamilyService} from '../../services/family.service';
 
 @Component({
@@ -18,8 +18,8 @@ import {FamilyService} from '../../services/family.service';
 export class MyFamilyComponent implements OnInit {
   myFamily: Family;
   myProfile: Profile;
-  constructor(protected familyService: FamilyService, protected invitationService: InvitationService, protected profileService: ProfileService,
-              protected toastr: ToastrService, protected translate: TranslateService, protected dialog: MatDialog,
+  constructor(protected familyService: FamilyService, protected profileService: ProfileService,
+              protected toastr: ToastrService, protected translate: TranslateService,
               protected _location: Location) {
 
   }

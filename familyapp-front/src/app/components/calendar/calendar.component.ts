@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Todolist} from '../../model/todolist';
+import {Todolist} from '../../models/todolist';
 
 export class SelectedDateDto {
   selectedDate: Date;

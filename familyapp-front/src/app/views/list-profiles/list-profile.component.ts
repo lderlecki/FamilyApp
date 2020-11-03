@@ -1,15 +1,11 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
-import {UserService} from '../../services/user.service';
-import {FamilyService} from '../../services/family.service';
+import {Component,OnInit, ViewChild} from '@angular/core';
 import {MyTableComponent} from '../../components/tables/list-users-families-table/my-table.component';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateModule, TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {ProfileService} from '../../services/profile.service';
 import {MatDialog} from '@angular/material/dialog';
 import {InviteToFamilyDialogComponent} from '../../components/dialogs/invite-to-family/invite-to-family-dialog';
-import {Profile} from '../../model/profile';
+import {Profile} from '../../models/profile';
 import {InvitationService} from '../../services/invitation.service';
 
 export interface PeriodicElement {

@@ -1,9 +1,9 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FamilyService} from '../../services/family.service';
 import {MyTableComponent} from '../../components/tables/list-users-families-table/my-table.component';
 import {ToastrService} from 'ngx-toastr';
-import {TranslateModule, TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {Family} from '../../model/family';
+import {TranslateService} from '@ngx-translate/core';
+import {Family} from '../../models/family';
 import {InviteToFamilyDialogComponent} from '../../components/dialogs/invite-to-family/invite-to-family-dialog';
 import {InvitationDTO} from '../list-profiles/list-profile.component';
 import {MatDialog} from '@angular/material/dialog';

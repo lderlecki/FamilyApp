@@ -1,0 +1,56 @@
+<section class="account">
+  <div class="account-container">
+    <h4>{{ 'REGISTER.REGISTER' | translate }}</h4>
+    <div class="account-content">
+      <div class="account-form">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input required matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                 [(ngModel)]="registerData.email" placeholder="Ex. pat@example.com">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>{{ 'REGISTER.PASSWORD' | translate }}</mat-label>
+          <input required [(ngModel)]="registerData.password" type="password" matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>{{ 'REGISTER.RPASSWORD' | translate }}</mat-label>
+          <input required [(ngModel)]="registerData.password2" type="password" matInput>
+        </mat-form-field>
+      </div>
+
+      <div class="profile-form">
+        <mat-form-field>
+          <mat-label>{{ 'REGISTER.NAME' | translate }}</mat-label>
+          <input required [(ngModel)]="profileData.name" matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>{{ 'REGISTER.SURNAME' | translate }}</mat-label>
+          <input required [(ngModel)]="profileData.surname" matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>{{ 'REGISTER.PHONE' | translate }}</mat-label>
+          <input required [(ngModel)]="profileData.phoneNumber" matInput>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <button (click)="registerUser()" style="margin-right: 5px" mat-raised-button color="primary">{{ 'REGISTER.REGISTER' | translate }}</button>
+    <br>
+    <div class="subscript">
+      <span>{{ 'REGISTER.ALREADYHAVEACC' | translate }} <a class="url_rm_visited" routerLink="/account/login" routerLinkActive='active'>{{ 'REGISTER.LOGIN' | translate }}</a></span>
+    </div>
+  </div>
+</section>
+
+
+

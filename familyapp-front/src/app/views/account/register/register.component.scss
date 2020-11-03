@@ -1,0 +1,15 @@
+@import "../account.style";
+@import '../../../../globalScssVariables';
+
+
+.account-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.account-form {
+  padding-right: 15px;
+  margin-right: 0;
+  border-right: 4px solid $bg-color ;
+}

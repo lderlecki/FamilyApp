@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="profile-wrapper">
+    <section class="profile">
+      <div class="user-data-wrapper">
+        <div class="profile-form profile-data">
+          <div class="user-info">
+            <mat-form-field class="form-field">
+              <mat-label>Name</mat-label>
+              <input required [(ngModel)]="profileData.name" matInput type="text">
+            </mat-form-field>
+          </div>
+          <div class="user-info">
+            <mat-form-field class="form-field">
+              <mat-label>Surname</mat-label>
+              <input required [(ngModel)]="profileData.surname" matInput type="text">
+            </mat-form-field>
+          </div>
+          <div class="user-info">
+            <mat-form-field class="form-field">
+              <mat-label>Email address</mat-label>
+              <input required [(ngModel)]="profileData.email" matInput type="text">
+            </mat-form-field>
+          </div>
+          <div class="user-info">
+            <mat-form-field class="form-field">
+              <mat-label>Phone number</mat-label>
+              <input required [(ngModel)]="profileData.phone" type="text" matInput>
+            </mat-form-field>
+          </div>
+          <button (click)="updateProfileData()" mat-raised-button color="primary">Save</button>
+        </div>
+
+        <div class="profile-form password-form">
+          <div class="user-info">
+            <mat-form-field class="form-field">
+              <mat-label>Current password</mat-label>
+              <input [(ngModel)]="password" required matInput type="password">
+            </mat-form-field>
+          </div>
+          <div class="user-info">
+            <mat-form-field class="form-field">
+              <mat-label>New password</mat-label>
+              <input [(ngModel)]="newPassword" required matInput type="password">
+            </mat-form-field>
+          </div>
+          <div class="user-info">
+            <mat-form-field class="form-field">
+              <mat-label>Repeat password</mat-label>
+              <input [(ngModel)]="newPassword2" required matInput type="password">
+            </mat-form-field>
+          </div>
+          <button (click)="changePassword()" class="form-btn" mat-raised-button color="primary">Change password</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="profile-family">
+      <div>
+        family info here
+      </div>
+    </section>
+  </div>
+</div>
+
+
+
+
+
