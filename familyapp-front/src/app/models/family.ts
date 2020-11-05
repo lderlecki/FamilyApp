@@ -1,7 +1,7 @@
-import {Profile} from '../model/profile';
+import {Profile} from '../models/profile';
 
 export interface Family {
   id: number;
-  familyName: string;
-  familyMembers: Profile[];
+  family_name: string;
+  family_members: Profile[];
 }

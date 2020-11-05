@@ -22,9 +22,9 @@ export class FamilyTasksComponent implements OnInit {
   myFamilyTasks: Todolist[];
   displayDate: string;
   toDoListsClickedDay: Todolist[];
+
   constructor(private familyService: FamilyService, private toDoService: ToDoService) {
   }
-
 
   ngOnInit(): void {
     this.subscription = this.familyService.getData().subscribe(data => {
@@ -37,7 +37,6 @@ export class FamilyTasksComponent implements OnInit {
             }
             , 500);
         });
-
       }
     });
   }
@@ -53,13 +52,16 @@ export class FamilyTasksComponent implements OnInit {
       }
     }
   }
+
   onScroll(event) {
     this.closeIcon.nativeElement.style.top = event.target.scrollTop + 'px';
   }
+
   closeMe() {
     this.toDoDetails.nativeElement.style.opacity = '0';
     this.toDoDetails.nativeElement.style.height = '0';
   }
+
 // #TODO WRITE FUNCTIONALITY FOR FUNCTIONS BELOW
   changeTaskStatus(taskId: number) {
     alert('write functionality');
@@ -70,6 +72,6 @@ export class FamilyTasksComponent implements OnInit {
   }
 
   addNewToDo() {
-  alert('write functionality');
+    alert('write functionality');
   }
 }

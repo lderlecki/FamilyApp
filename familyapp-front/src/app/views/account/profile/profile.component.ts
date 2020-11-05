@@ -22,12 +22,12 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileData = JSON.parse(localStorage.getItem('profile'));
+    this.profileData = this.authService.profileValue;
   }
 
   updateProfileData() {
-    const token = this.authService.getToken();
-    const uid = this.authService.getUid();
+    const token = this.authService.token;
+    const uid = this.authService.uid;
     this.userService.updateProfileData(token, uid, this.profileData).subscribe(
       response => {
         this.toastr.success('Personal data updated successfully');

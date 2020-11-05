@@ -61,7 +61,6 @@ export class LoginComponent implements OnInit {
           const uid = body['uid'];
           this.authService.set('access', accessToken);
           this.authService.set('refresh', body['refresh']);
-          this.authService.login(accessToken, uid);
           this.getUserData(accessToken, uid);
         }
       },
@@ -77,6 +76,8 @@ export class LoginComponent implements OnInit {
     this.userService.getProfileData(accessToken, user_id).subscribe(
       response => {
         localStorage.setItem('profile', JSON.stringify(response));
+        this.authService.login(accessToken, user_id, response);
+
         if (this.returnUrl === undefined) {
           this.router.navigate(['account/profile']);
         } else {

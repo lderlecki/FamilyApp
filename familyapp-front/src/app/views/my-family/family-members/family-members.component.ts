@@ -23,10 +23,9 @@ export class FamilyMembersComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   ngOnInit(): void {
-
-
     this.subscription = this.familyService.getData().subscribe(data => {
-      this.tableData = data?.familyMembers;
+      console.log('subscrie members data:', data);
+      this.tableData = data?.family_members;
       setTimeout(() => {
         this.myChild.init(this.tableData);
         document.getElementById('mySpinner').remove();

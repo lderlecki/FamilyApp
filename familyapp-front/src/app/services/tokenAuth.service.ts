@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Profile} from '../models/profile';
 import * as jwt_decode from 'jwt-decode';
+import {Router} from '@angular/router';
 
 
 @Injectable({
@@ -11,21 +12,24 @@ import * as jwt_decode from 'jwt-decode';
 })
 export class TokenAuthService {
   private httpHeaders: HttpHeaders;
-  private currentUserProfileSubject: BehaviorSubject<Profile>;
-  private currentProfile: Observable<Profile>;
+  private userProfileSubject: BehaviorSubject<Profile>;
+  public userProfile: Observable<Profile>;
 
   private isLoggedIn = false;
-  private token: string;
-  private uid: number;
 
   constructor(
     private http: HttpClient,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router,
   ) {
     if (!this.isTokenExpired()) {
-      this.uid = JSON.parse(localStorage.getItem('profile')).id;
-      this.token = this.get('access');
+      const profile = JSON.parse(localStorage.getItem('profile'));
+      this.userProfileSubject = new BehaviorSubject<Profile>(profile);
+      this.userProfile = this.userProfileSubject.asObservable();
       this.isLoggedIn = true;
+    } else {
+      this.userProfileSubject = new BehaviorSubject<Profile>(null);
+      this.userProfile = this.userProfileSubject.asObservable();
     }
   }
 
@@ -47,27 +51,32 @@ export class TokenAuthService {
     this.cookieService.delete(name, path);
   }
 
-  login(token, uid) {
-    this.token = token;
+  login(token, uid, profile) {
+    profile['jwtToken'] = token;
+    this.userProfileSubject.next(profile);
+
     this.isLoggedIn = true;
-    this.uid = uid;
   }
 
   logout() {
+    this.userProfileSubject.next(null);
     localStorage.removeItem('profile');
     this.remove('access');
     this.remove('refresh');
-    this.token = null;
     this.isLoggedIn = false;
-    this.uid = null;
+    this.router.navigate(['account/login']);
   }
 
-  getToken() {
-    return this.token;
+  public get profileValue(): Profile {
+    return this.userProfileSubject.value;
   }
 
-  getUid() {
-    return this.uid;
+  public get token() {
+    return this.profileValue.jwtToken;
+  }
+
+  public get uid() {
+    return this.profileValue.jwtToken;
   }
 
   isAuthenticated() {

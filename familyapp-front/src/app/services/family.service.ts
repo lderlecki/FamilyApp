@@ -16,19 +16,18 @@ export class FamilyService {
   private params: HttpParams;
   private family: Family;
 
-
-
-  constructor(private http: HttpClient) {  }
+  constructor(private http: HttpClient) {
+  }
 
   getAllFamilies(): Observable<any> {
     console.log('fetching families');
     return this.http.get<any>(this.API_FAMILY_URL + 'all', {observe: 'response'});
   }
 
-
   sendFamilyData(family: Family) {
     this.familySubject.next(family);
   }
+
   getData() {
     return this.familySubject.asObservable();
   }
