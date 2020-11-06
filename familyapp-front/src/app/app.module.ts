@@ -59,6 +59,7 @@ import {FamilyInvitationsComponent} from './views/my-family/list-family-invitati
 import {ErrorInterceptor} from './_helpers/error.interceptor';
 import { ProfileComponent } from './views/account/profile/profile.component';
 import {JwtInterceptor} from './_helpers/jwt.interceptor';
+import {MainpageComponent} from './views/mainpage/mainpage.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -83,6 +84,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     FamilyTasksComponent,
     FamilyInvitationsComponent,
     ProfileComponent,
+    MainpageComponent
   ],
   imports: [
     AppRoutingModule,

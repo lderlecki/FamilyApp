@@ -13,7 +13,7 @@ export class JwtInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // add authorization header with jwt token if available
     const token = this.authService.get('access');
-    const isApiUrl = request.url.startsWith(environment.djangoApiUrl);
+    const isApiUrl = request.url.startsWith(environment.djangoApiUrl) || request.url.startsWith(environment.springApiUrl);
     if (!this.authService.isTokenExpired() && isApiUrl) {
       request = request.clone({
         setHeaders: {

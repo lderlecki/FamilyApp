@@ -13,16 +13,17 @@ import {FamilyTasksComponent} from './views/my-family/family-tasks/family-tasks.
 import {FamilyInvitationsComponent} from './views/my-family/list-family-invitations/family-invitations.component';
 import {AuthGuard} from './_helpers/auth.guards';
 import {ProfileComponent} from './views/account/profile/profile.component';
+import {MainpageComponent} from './views/mainpage/mainpage.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/', pathMatch: 'full'},
+  {path: '',  component: MainpageComponent},
   {path: 'account/login', component: LoginComponent},
   {path: 'account/password-reset', component: PasswordResetComponent},
   {path: 'account/profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'password-reset-confirm/:uidb64/:token', component: ResponseResetPasswordComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'families', component: ListFamilyComponent},
   {path: 'profiles', component: ListProfileComponent},
   {path: 'invitationsForProfile', component: ListInvitationComponent},
   {
