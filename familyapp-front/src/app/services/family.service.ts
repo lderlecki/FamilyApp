@@ -4,6 +4,8 @@ import {BehaviorSubject, Observable, ReplaySubject, Subject} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Family} from '../models/family';
 import {Data} from '@angular/router';
+import {Profile} from '../models/profile';
+import {TokenAuthService} from "./tokenAuth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +16,13 @@ export class FamilyService {
 
   private httpHeaders: HttpHeaders;
   private params: HttpParams;
-  private family: Family;
+  private family: Observable<Family>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: TokenAuthService) {
+    if (authService.profileValue.family !== null) {
+      this.familySubject.next(this.authService.profileValue.family);
+      this.family = this.familySubject.asObservable();
+    }
   }
 
   getAllFamilies(): Observable<any> {
@@ -30,5 +36,15 @@ export class FamilyService {
 
   getData() {
     return this.familySubject.asObservable();
+  }
+
+  // public get familyValue(): Family {
+  //   return this.familySubject.value;
+  // }
+
+  public get members(): boolean {
+    console.log('family get data');
+    console.log(this.getData());
+    return true;
   }
 }

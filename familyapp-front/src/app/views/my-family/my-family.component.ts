@@ -29,7 +29,6 @@ export class MyFamilyComponent implements OnInit {
   ngOnInit(): void {
     const myProfile = this.authService.profileValue;
     this.myFamily = myProfile.family;
-    console.log('profile family: ', this.myFamily);
-    this.familyService.sendFamilyData(this.myFamily);
+    // this.familyService.sendFamilyData(this.myFamily);
   }
 }

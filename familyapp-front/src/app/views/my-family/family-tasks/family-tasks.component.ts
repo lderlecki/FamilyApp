@@ -20,10 +20,15 @@ export class FamilyTasksComponent implements OnInit {
   tableData: any;
   subscription: Subscription;
   myFamilyTasks: Todolist[];
+  myFamilyMembers;
   displayDate: string;
   toDoListsClickedDay: Todolist[];
+  public showTaskForm = false;
 
-  constructor(private familyService: FamilyService, private toDoService: ToDoService) {
+  constructor(
+    private familyService: FamilyService,
+    private toDoService: ToDoService
+  ) {
   }
 
   ngOnInit(): void {
@@ -63,8 +68,18 @@ export class FamilyTasksComponent implements OnInit {
   }
 
 // #TODO WRITE FUNCTIONALITY FOR FUNCTIONS BELOW
-  changeTaskStatus(taskId: number) {
-    alert('write functionality');
+  changeTaskStatus(task) {
+    // task.done = !task.done;
+    this.toDoService.changeTaskStatus(task.id, task.done)
+      .subscribe(response => {
+        console.log(response);
+        task.done = response.done;
+      }, error => console.log(error));
+  }
+
+  showAddTaskForm() {
+    const x = this.familyService.members;
+    this.showTaskForm = true;
   }
 
   addNewTask() {

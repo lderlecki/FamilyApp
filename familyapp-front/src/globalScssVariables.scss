@@ -8,6 +8,7 @@ $black:#0E0B14;
 $nav-color: #35375d;
 $content-color: #F8F4F6;
 $bg-color: #FADDD1;
+$success-color: darkgreen;
 
 body{
   margin: 0;
@@ -20,6 +21,11 @@ body{
   position: absolute;
   top:40%;
   left: 50%;
+}
+
+.mat-success {
+  color: $content-color !important;
+  background-color: $success-color !important;
 }
 
 
