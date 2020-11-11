@@ -25,27 +25,23 @@ export class FamilyInvitationsComponent implements OnInit {
   family: Family;
   @ViewChild('myChild') private myChild: ListInvitationTableComponent;
   tableData: PeriodicElement[];
+
   constructor(private familyService: FamilyService, private invitationService: InvitationService, private toastr: ToastrService,
               private translate: TranslateService, private dialog: MatDialog) {
   }
 
 
   ngOnInit(): void {
-    this.subscription = this.familyService.getData().subscribe(data => {
-      this.family = data;
-        setTimeout(() => {
-            this.prepareData();
-            document.getElementById('mySpinner').remove();
-          }
-          , 500);
-      });
+    this.family = this.familyService.familyValue;
+    document.getElementById('mySpinner').remove();
   }
+
   prepareData() {
     this.viewForFamily = true;
     this.fetchDataForFamily(this.family.id);
   }
 
-    fetchDataForFamily(familyId: number) {
+  fetchDataForFamily(familyId: number) {
     this.invitationService.getInvitationsForFamily(familyId).subscribe(response => {
       if (response.status === 200) {
         this.translate.get('LIST_INVITATIONS.FETCHSUCCESS').subscribe(res => {

@@ -24,4 +24,8 @@ export class ToDoService {
     return this.http.patch(this.API_URL_DJANGO + `tasks/${taskId}/` , {'done': !status});
   }
 
+  createTask(taskData): Observable<any> {
+    return this.http.post(this.API_URL_DJANGO + 'tasks/', taskData);
+  }
+
 }

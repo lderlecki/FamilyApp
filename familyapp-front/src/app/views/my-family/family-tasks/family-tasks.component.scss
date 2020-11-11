@@ -60,4 +60,15 @@
   margin-bottom: 1%;
 }
 
+.task-form {
+  transition: all 0.5s ease-in ;
+  margin: 10px 0 !important;
+  opacity: 0;
+  height: 0px;
+}
+
+.active {
+  opacity: 0.94 !important;
+  height: 276px !important;
+}
 

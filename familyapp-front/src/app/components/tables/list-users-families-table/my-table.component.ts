@@ -42,7 +42,7 @@ export class MyTableComponent implements OnInit {
 
   init(data) {
     this.tableData = data; // get data
-    this.initializeTable(); // and initlize table
+    this.initializeTable(); // and initialize table
   }
 
   sendInvitation(element: any) {

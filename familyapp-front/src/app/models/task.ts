@@ -1,7 +1,7 @@
 import {Profile} from '../models/profile';
 
 export interface Task {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   done: boolean;

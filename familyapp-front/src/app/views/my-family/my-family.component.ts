@@ -19,6 +19,7 @@ import {TokenAuthService} from '../../services/tokenAuth.service';
 export class MyFamilyComponent implements OnInit {
   myFamily;
   myProfile: Profile;
+  public familyMembers: any;
 
   constructor(protected familyService: FamilyService, protected profileService: ProfileService,
               protected toastr: ToastrService, protected translate: TranslateService,
@@ -27,8 +28,8 @@ export class MyFamilyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const myProfile = this.authService.profileValue;
-    this.myFamily = myProfile.family;
-    // this.familyService.sendFamilyData(this.myFamily);
+    this.myFamily = this.familyService.familyValue;
+    console.log('familymembers: ', this.familyService.familyMembers);
+    console.log('my family value in my family component: ', this.myFamily);
   }
 }

@@ -76,7 +76,7 @@ export class TokenAuthService {
   }
 
   public get uid() {
-    return this.profileValue.jwtToken;
+    return this.profileValue.id;
   }
 
   isAuthenticated() {

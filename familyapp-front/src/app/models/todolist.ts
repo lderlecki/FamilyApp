@@ -2,7 +2,7 @@ import {Profile} from './profile';
 import {Task} from './task';
 
 export interface Todolist {
-  id: number;
+  id?: number;
   name: string;
   dueDate: Date;
   description: string;

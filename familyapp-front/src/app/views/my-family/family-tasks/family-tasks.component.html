@@ -1,6 +1,6 @@
 <app-calendar [tasks]="myFamilyTasks" #myChild (outputObject)="clickedDate($event)"></app-calendar>
 <mat-spinner diameter="100" id="mySpinner"></mat-spinner>
-<div id="toDoDetails" #toDoDetails (scroll)="onScroll($event)" (dblclick)="closeMe()">
+<div id="toDoDetails" #toDoDetails (scroll)="onScroll($event)">
   <h2 id="displayDate">{{displayDate}}</h2>
 
   <mat-card class="example-card-main">
@@ -13,7 +13,7 @@
       <button  mat-raised-button color="primary" (click)="addNewToDo()">ADD NEW TODO</button>
     </mat-card-content>
   </mat-card>
-  <mat-card class="example-card-main" *ngFor="let toDoList of toDoListsClickedDay">
+  <mat-card class="example-card-main" *ngFor="let toDoList of toDoListsClickedDay;">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image-main"></div>
       <mat-card-title>{{toDoList?.name}} Deadline: {{toDoList?.dueDate}}</mat-card-title>
@@ -28,7 +28,6 @@
         </mat-card-header>
         <mat-card-content>
           <ul>
-            <!--#TODO CHANGE STYLE HERE-->
             <li>{{task.description}}
               <span class="taskStatus" *ngIf="task.done" style="color: green">
                 <button  mat-raised-button color="success" (click)="changeTaskStatus(task)">DONE &#10003;</button>
@@ -45,27 +44,32 @@
           <div mat-card-avatar class="example-header-image"></div>
         </mat-card-header>
         <mat-card-content>
-          <div *ngIf="showTaskForm">
+          <form id="{{toDoList.id}}" class="task-form" #currentForm [formGroup]="taskForm"
+                (ngSubmit)="addNewTask(taskForm.value, currentForm, toDoList)">
             <mat-form-field appearance="fill">
               <mat-label>Name</mat-label>
-              <input matInput>
+              <input formControlName="name" matInput>
             </mat-form-field>
             <br>
             <mat-form-field appearance="fill">
               <mat-label>Assign to</mat-label>
-              <mat-select>
-<!--                <mat-option *ngFor="fami"> </mat-option>-->
-                <mat-option value="option">Option</mat-option>
+              <mat-select formControlName="profile">
+                <mat-option [value]="-1">Anyone</mat-option>
+                <mat-option *ngFor="let member of this.familyService.familyMembers"
+                            [value]="member.id">
+                  {{member.name + ' ' +member.surname}}
+                </mat-option>
               </mat-select>
             </mat-form-field>
             <br>
             <mat-form-field appearance="fill">
               <mat-label>Description</mat-label>
-              <textarea matInput></textarea>
+              <textarea matInput formControlName="description"></textarea>
             </mat-form-field>
-
-          </div>
-          <button  mat-raised-button color="primary" ng-show="!showForm" (click)="showAddTaskForm()">ADD NEW TASK</button>
+            <br>
+            <button mat-raised-button color="success">Submit task</button>
+          </form>
+          <button mat-raised-button color="primary" (click)="showAddTaskForm(currentForm)">ADD NEW TASK</button>
         </mat-card-content>
       </mat-card>
     </mat-card-content>
