@@ -2,11 +2,11 @@
   <div class="account-container">
     <h4>{{ 'REGISTER.REGISTER' | translate }}</h4>
     <div class="account-content">
-      <div class="account-form">
+      <form [formGroup]="registerForm" class="account-form">
         <mat-form-field>
           <mat-label>Email</mat-label>
           <input required matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-                 [(ngModel)]="registerData.email" placeholder="Ex. pat@example.com">
+                 formControlName="email" placeholder="Ex. pat@example.com">
           <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
             Please enter a valid email address
           </mat-error>
@@ -15,36 +15,71 @@
           </mat-error>
         </mat-form-field>
         <br>
-        <mat-form-field>
+        <mat-form-field class="custom-mat-field">
           <mat-label>{{ 'REGISTER.PASSWORD' | translate }}</mat-label>
-          <input required [(ngModel)]="registerData.password" type="password" matInput>
+          <input required matInput formControlName="password" type="password">
+          <mat-error [ngClass]="registerForm.controls['password'].hasError('required') || registerForm.controls['password'].hasError('minlength')  ? '' : 'text-success'">
+            <i class="material-icons">{{ registerForm.controls['password'].hasError('required') ||
+              registerForm.controls['password'].hasError('minlength') ? 'cancel' :
+              'check_circle' }}</i>
+            At least 8 characters!
+          </mat-error>
+          <mat-error [ngClass]="registerForm.controls['password'].hasError('required') || registerForm.controls['password'].hasError('hasNumber')  ? '' : 'text-success'">
+            <i class="material-icons">{{ registerForm.controls['password'].hasError('required') ||
+              registerForm.controls['password'].hasError('hasNumber') ? 'cancel' :
+              'check_circle' }}</i>
+            At least 1 number!
+          </mat-error>
+          <mat-error [ngClass]="registerForm.controls['password'].hasError('required') || registerForm.controls['password'].hasError('hasCapitalCase')  ? '' : 'text-success'">
+            <i class="material-icons">{{ registerForm.controls['password'].hasError('required') ||
+              registerForm.controls['password'].hasError('hasCapitalCase') ? 'cancel' :
+              'check_circle' }}</i>
+            At least 1 in Capital Case!
+          </mat-error>
+          <mat-error [ngClass]="registerForm.controls['password'].hasError('required') || registerForm.controls['password'].hasError('hasSmallCase')  ? '' : 'text-success'">
+            <i class="material-icons">{{ registerForm.controls['password'].hasError('required') ||
+              registerForm.controls['password'].hasError('hasSmallCase') ? 'cancel' :
+              'check_circle' }}</i>
+            At least 1 Letter in Small Case!
+          </mat-error>
         </mat-form-field>
         <br>
+
+
+
+
+<!--        <mat-form-field>-->
+<!--          <mat-label>{{ 'REGISTER.PASSWORD' | translate }}</mat-label>-->
+<!--          <input required formControlName="password" type="password" matInput>-->
+<!--        </mat-form-field>-->
         <mat-form-field>
           <mat-label>{{ 'REGISTER.RPASSWORD' | translate }}</mat-label>
-          <input required [(ngModel)]="registerData.password2" type="password" matInput>
+          <input required formControlName="password2" type="password" matInput>
         </mat-form-field>
-      </div>
+      </form>
 
-      <div class="profile-form">
+      <form [formGroup]="profileForm" class="profile-form">
         <mat-form-field>
           <mat-label>{{ 'REGISTER.NAME' | translate }}</mat-label>
-          <input required [(ngModel)]="profileData.name" matInput>
+          <input required formControlName="name" matInput>
         </mat-form-field>
         <br>
         <mat-form-field>
           <mat-label>{{ 'REGISTER.SURNAME' | translate }}</mat-label>
-          <input required [(ngModel)]="profileData.surname" matInput>
+          <input required formControlName="surname" matInput>
         </mat-form-field>
         <br>
         <mat-form-field>
           <mat-label>{{ 'REGISTER.PHONE' | translate }}</mat-label>
-          <input required [(ngModel)]="profileData.phoneNumber" matInput>
+          <input required formControlName="phoneNumber" matInput>
         </mat-form-field>
-      </div>
+      </form>
     </div>
 
-    <button (click)="registerUser()" style="margin-right: 5px" mat-raised-button color="primary">{{ 'REGISTER.REGISTER' | translate }}</button>
+    <button (click)="registerUser(registerForm.value, profileForm.value)"
+            mat-raised-button color="primary" [disabled]="!registerForm.valid && !profileForm.valid">
+      {{ 'REGISTER.REGISTER' | translate }}
+    </button>
     <br>
     <div class="subscript">
       <span>{{ 'REGISTER.ALREADYHAVEACC' | translate }} <a class="url_rm_visited" routerLink="/account/login" routerLinkActive='active'>{{ 'REGISTER.LOGIN' | translate }}</a></span>

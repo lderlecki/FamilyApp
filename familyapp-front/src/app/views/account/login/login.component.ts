@@ -1,6 +1,6 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user.service';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {TokenAuthService} from '../../../services/tokenAuth.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -19,27 +19,24 @@ export class EmailErrorStateMatcher implements ErrorStateMatcher {
   providers: [UserService],
 })
 export class LoginComponent implements OnInit {
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email
-  ]);
   matcher = new EmailErrorStateMatcher();
-  loginData;
   private returnUrl: any;
+  public loginForm: FormGroup;
 
   constructor(
     private userService: UserService,
     public authService: TokenAuthService,
     private router: Router,
     private route: ActivatedRoute,
+    private fb: FormBuilder
   ) {
   }
 
   ngOnInit(): void {
-    this.loginData = {
-      email: '',
-      password: '',
-    };
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+    });
 
     if (this.authService.isAuthenticated()) {
       this.router.navigate(['account/profile']);
@@ -50,8 +47,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  loginUser() {
-    this.userService.loginUser(this.loginData).subscribe(
+  get emailFormControl() {
+    return this.loginForm.get('email');
+  }
+
+  loginUser(loginData) {
+    console.log(loginData);
+    this.userService.loginUser(loginData).subscribe(
       response => {
         console.log(response);
         if (response.status === 200 && response.ok) {
@@ -64,7 +66,7 @@ export class LoginComponent implements OnInit {
           this.getUserData(accessToken, uid);
         }
       },
-      err => console.log(err)
+      err => console.log('response err: ', err)
     );
   }
 
@@ -92,14 +94,6 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  // Do usunięcia?
-  generateTokenViaSpring(): void {
-    this.userService.attemptAuthViaSpring(this.loginData.email, this.loginData.password).subscribe(
-      data => {
-        console.log('token generated via spring \n' + data.token.token);
-      }
-    );
-  }
   toCamel(s: string) {
     return s.replace(/([-_][a-z])/ig, ($1) => {
         return $1.toUpperCase()

@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user.service';
 import {ErrorStateMatcher} from '@angular/material/core';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {CustomValidators} from "../../../_helpers/custom-validators";
 
 export class EmailErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -17,32 +18,46 @@ export class EmailErrorStateMatcher implements ErrorStateMatcher {
   providers: [UserService],
 })
 export class RegisterComponent implements OnInit {
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email
-  ]);
   matcher = new EmailErrorStateMatcher();
-  registerData;
-  profileData;
+  public registerForm: FormGroup;
+  public profileForm: FormGroup;
 
-  constructor(private userService: UserService) {
+  constructor(
+    private userService: UserService,
+    private fb: FormBuilder,
+  ) {
   }
 
   ngOnInit(): void {
-    this.registerData = {
-      email: '',
-      password: '',
-      password2: '',
-    };
-    this.profileData = {
-      name: '',
-      surname: '',
-      phoneNumber: '',
-    };
+    this.registerForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.compose([
+        Validators.required,
+        CustomValidators.patternValidator(/\d/, {hasNumber: true}),
+        CustomValidators.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
+        CustomValidators.patternValidator(/[a-z]/, {hasSmallCase: true}),
+        Validators.minLength(8)
+      ])],
+      password2: ['', Validators.compose([Validators.required])],
+    },
+      {
+        validator: CustomValidators.passwordMatchValidator
+      });
+    this.profileForm = this.fb.group({
+      name: ['', [Validators.required]],
+      surname: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+    });
   }
 
-  registerUser() {
-    this.userService.registerUser(this.registerData, this.profileData).subscribe(
+  get emailFormControl() {
+    return this.registerForm.get('email');
+  }
+
+  registerUser(registerData, profileData) {
+    console.log(registerData);
+    console.log(profileData);
+    this.userService.registerUser(registerData, profileData).subscribe(
       response => {
         console.log(response);
       },

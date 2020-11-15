@@ -4,12 +4,49 @@
 
 .account-content {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  //flex-wrap: wrap;
   justify-content: center;
 }
 
 .account-form {
+  display: inline-block;
   padding-right: 15px;
   margin-right: 0;
   border-right: 4px solid $bg-color ;
 }
+
+.is-invalid {
+  border-left: solid 6px red;
+}
+
+.material-icons {
+  display: inline-block;
+  font-size: 15px!important;
+}
+
+.text-success {
+  color: $success-font-color;
+}
+
+/* Additional placeholder for invalid mat-form-fields */
+/* src: https://github.com/angular/material2/issues/4580 */
+
+.custom-mat-field{
+
+}
+
+$passwordValidatorMargin: 65px;
+
+.custom-mat-field.mat-form-field.ng-invalid.ng-touched {
+  animation: example;
+  animation-duration: 0.3s;
+  margin-bottom: $passwordValidatorMargin;
+}
+
+@keyframes example {
+  from {margin-bottom: 0;}
+  to {margin-bottom: $passwordValidatorMargin;}
+}
+
+

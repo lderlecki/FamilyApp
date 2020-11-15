@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils.encoding import smart_str, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from rest_framework import viewsets, views, status, exceptions, generics
+from rest_framework.generics import UpdateAPIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -19,6 +20,7 @@ from .serializers import (
     ProfileSerializer,
     RequestPasswordResetEmailSerializer,
     SetNewPasswordSerializer,
+    ChangePasswordSerializer,
 )
 from .utils import generate_password_reset_email, send_email
 
@@ -136,3 +138,23 @@ class SetNewPasswordAPIView(generics.GenericAPIView):
 
         return Response({'success': True, 'message': 'Password reset success.'},
                         status=status.HTTP_200_OK)
+
+
+class ChangePasswordView(UpdateAPIView):
+    serializer_class = ChangePasswordSerializer
+    model = User
+    authentication_classes = [JWTAuthentication, ]
+    permission_classes = [IsAuthenticated, ]
+
+    def update(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            response = {
+                'status': 'success',
+                'code': status.HTTP_200_OK,
+                'message': 'Password changed successfully',
+                'data': []
+            }
+            return Response(response)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
