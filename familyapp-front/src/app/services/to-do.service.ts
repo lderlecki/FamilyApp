@@ -28,4 +28,8 @@ export class ToDoService {
     return this.http.post(this.API_URL_DJANGO + 'tasks/', taskData);
   }
 
+  createTodolist(todoData): Observable<any> {
+    return this.http.post(this.API_URL_DJANGO + 'todo/create/', todoData, {observe: 'response'});
+  }
+
 }

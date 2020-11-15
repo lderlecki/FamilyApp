@@ -26,6 +26,11 @@ body{
 .mat-success {
   color: $content-color !important;
   background-color: $success-color !important;
+
+  &:disabled {
+    opacity: .5;
+  }
+
 }
 
 

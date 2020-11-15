@@ -10,9 +10,84 @@
       <mat-card-subtitle>----</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <button  mat-raised-button color="primary" (click)="addNewToDo()">ADD NEW TODO</button>
+      <form #newTodoForm class="todo-form" [formGroup]="todoForm" (ngSubmit)="createTodo()">
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input formControlName="name" matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+        <br>
+        <div formArrayName="tasks">
+          <mat-accordion>
+            <h3>Fill task data</h3>
+            <div class="todo-task-panel" *ngFor="let newTask of todoForm.get('tasks')['controls']; let i=index;">
+              <div [formGroupName]="i">
+                <mat-expansion-panel
+                  #currentPanel
+                  hideToggle
+                  (opened)="panelOpenState = true"
+                  (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Task {{i+1}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <div class="task-details" *ngIf="!currentPanel.expanded">
+                        <span class="task-data">
+                          <span class="bold">Name: </span>
+                          {{newTask.controls['name'].value}}
+                        </span>
+                        <span class="task-data">
+                          <span class="bold">For: </span>
+                          {{getResponsiblePerson(newTask)}}
+                        </span>
+                        <span class="task-data">
+                          <span class="bold">Task: </span>
+                          {{newTask.controls['description'].value}}
+                        </span>
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input formControlName="name" matInput>
+                  </mat-form-field>
+                  <br>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Assign to</mat-label>
+                    <mat-select formControlName="profile">
+                      <mat-option [value]="-1">Anyone</mat-option>
+                      <mat-option *ngFor="let member of this.familyService.familyMembers"
+                                  [value]="member.id">
+                        {{member.name + ' ' +member.surname}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <br>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput formControlName="description"></textarea>
+                  </mat-form-field>
+                  <br>
+                </mat-expansion-panel>
+              </div>
+            </div>
+          </mat-accordion>
+        </div>
+        <button mat-raised-button color="primary" (click)="addNewTaskInTodo()">Add new task</button>
+        <br>
+        <button mat-raised-button class="todo-form-submit-btn" type="submit" color="success" [disabled]="!todoForm.valid" >Submit</button>
+      </form>
+      <button  mat-raised-button class="btn-show-form" color="primary" (click)="showTodoForm(newTodoForm)">ADD NEW TODO</button>
     </mat-card-content>
   </mat-card>
+
+
+
   <mat-card class="example-card-main" *ngFor="let toDoList of toDoListsClickedDay;">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image-main"></div>
@@ -45,7 +120,7 @@
         </mat-card-header>
         <mat-card-content>
           <form id="{{toDoList.id}}" class="task-form" #currentForm [formGroup]="taskForm"
-                (ngSubmit)="addNewTask(taskForm.value, currentForm, toDoList)">
+                (ngSubmit)="createTask(taskForm.value, currentForm, toDoList)">
             <mat-form-field appearance="fill">
               <mat-label>Name</mat-label>
               <input formControlName="name" matInput>
