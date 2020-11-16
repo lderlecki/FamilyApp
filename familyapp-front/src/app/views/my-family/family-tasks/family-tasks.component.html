@@ -24,7 +24,7 @@
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>{{task.name}}</mat-card-title>
-          <mat-card-subtitle>{{task.responsiblePerson.name}}  {{task.responsiblePerson.surname}}</mat-card-subtitle>
+          <mat-card-subtitle>{{task.responsiblePerson?.name}}  {{task.responsiblePerson?.surname}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
           <ul>

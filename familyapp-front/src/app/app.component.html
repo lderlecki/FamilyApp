@@ -1,30 +1,33 @@
 <nav class="navbar">
   <div class="container">
-    <div   class="nav-items">
+    <div class="nav-items" >
       <a class="nav-item" routerLink="" routerLinkActive='active'>{{ 'NAV.HOME' | translate }}</a>
-      <a class="nav-item" routerLink="/families" routerLinkActive='active'>List families</a>
-      <a class="nav-item" routerLink="/profiles" routerLinkActive='active'>List profiles</a>
-      <a class="nav-item" routerLink="/invitationsForProfile" routerLinkActive='active'>Invitations for profile</a>
-      <a class="nav-item" routerLink="/myFamily" routerLinkActive='active'>{{ 'NAV.MY_FAMILY' | translate }}</a>
-          <span class="nav-item"><select  #langSelect (change)="translate.use(langSelect.value)">
+      <div *ngIf="!authService.isTokenExpired(); then authorizedBlock; else anonymousBlock">
+      </div>
+      <ng-template #authorizedBlock>
+        <!--NEW AUTHORIZED LINKS HERE-->
+          <input class="nav-item" id="searchInput" (keyup.enter)="navigateToSearchComponent()" placeholder="{{ 'NAV.SEARCH_PLACEHOLDER' | translate }}" #searchInput>
+        <div class="nav-account">
+          <a class="nav-item" routerLink="/myFamily" routerLinkActive='active'>{{ 'NAV.MY_FAMILY' | translate }}</a>
+          <a class="nav-item" routerLink="/account/profile" routerLinkActive='active'>{{ 'NAV.PROFILE' | translate }}</a>
+          <a class="nav-item" routerLink="" (click)="authService.logout()">{{ 'NAV.LOGOUT' | translate }}</a>
+        </div>
+      </ng-template>
+      <ng-template #anonymousBlock>
+        <div class="nav-account">
+        <a class="nav-item" routerLink="/account/login" routerLinkActive='active'>{{ 'NAV.LOGIN' | translate }}</a>
+        <a class="nav-item" routerLink="/register" routerLinkActive='active'>{{ 'NAV.REGISTER' | translate }}</a>
+        </div>
+      </ng-template>
+        <span class="nav-account"><select  #langSelect (change)="translate.use(langSelect.value)">
             <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">
               {{ lang }}
             </option>
           </select></span>
     </div>
 
-    <div class="nav-account">
-      <div *ngIf="!authService.isTokenExpired(); then authorizedBlock; else anonymousBlock"></div>
-      <ng-template #authorizedBlock>
-        <a class="nav-item" routerLink="/account/profile" routerLinkActive='active'>{{ 'NAV.PROFILE' | translate }}</a>
-        <a class="nav-item" routerLink="" (click)="authService.logout()">{{ 'NAV.LOGOUT' | translate }}</a>
-      </ng-template>
-      <ng-template #anonymousBlock>
-        <a class="nav-item" routerLink="/account/login" routerLinkActive='active'>{{ 'NAV.LOGIN' | translate }}</a>
-        <a class="nav-item" routerLink="/register" routerLinkActive='active'>{{ 'NAV.REGISTER' | translate }}</a>
-      </ng-template>
+
     </div>
-  </div>
 </nav>
 
 <div class="container">

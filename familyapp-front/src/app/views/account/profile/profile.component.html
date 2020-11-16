@@ -55,9 +55,11 @@
     </section>
 
     <section class="profile-family">
-      <div>
-        family info here
-      </div>
+    </section>
+    <section class="familyInvitations">
+        <app-list-invitation-table *ngIf="viewForFamily == false" [familyView]="viewForFamily" [tableData]="tableData"
+                                   #myChild (selectedRow)="selectedRow($event)"
+                                   [columnHeader]=" 'LIST_INVITATIONS.COLUMN_HEADER_PROFILE' | translate "></app-list-invitation-table>
     </section>
   </div>
 </div>

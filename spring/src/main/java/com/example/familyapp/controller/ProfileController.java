@@ -50,5 +50,10 @@ public class ProfileController {
         return profileService.getAllProfiles();
     }
 
+    @GetMapping(value = "/searchProfile")
+    public List<Profile> findWhereNameOrSurnameLike(@RequestParam String searchedValue){
+        return profileService.findWhereNameOrSurnameLike(searchedValue);
+    }
+
 
 }

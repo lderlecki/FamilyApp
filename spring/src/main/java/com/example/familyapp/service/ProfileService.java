@@ -10,4 +10,5 @@ public interface ProfileService {
     Profile save(Profile profile);
     void delete(Profile profile);
     List<Profile> getAllProfiles();
+    List<Profile> findWhereNameOrSurnameLike(String searchedValue);
 }

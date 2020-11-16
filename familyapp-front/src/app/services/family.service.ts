@@ -24,6 +24,9 @@ export class FamilyService {
     console.log('fetching families');
     return this.http.get<any>(this.API_FAMILY_URL + 'all', {observe: 'response'});
   }
+  getFamiliesWhereFamilyNameLike(searchedValue: string): Observable<any> {
+    return this.http.get<any>(this.API_FAMILY_URL + 'searchFamily?searchedValue=' + searchedValue, {observe: 'response'});
+  }
 
 
   sendFamilyData(family: Family) {

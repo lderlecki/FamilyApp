@@ -7,13 +7,22 @@
   letter-spacing: 1px;
   color: white;
 }
+/*---------------------
+  BACKGROUNDS AND BOX-SHADOWS FOR ALL ELEMENTS
+-----------------------*/
+.carousel-inner, #whyFamilyApp, #benefits
+{
+  background: $bg-color-for-element;
+  box-shadow: $box-shadow-for-element;
+
+}
 
 /*---------------------
   CAROUSEL
 -----------------------*/
-.carousel-inner
+.carousel-caption
 {
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+
 }
 .d-block
 {
@@ -25,30 +34,27 @@
 
 .carousel-caption
 {
-
-position: absolute;
+  background: $bg-color-for-element;
+  position: absolute;
   width: 100%;
   left: 0;
   bottom: 0;
   height: 5vw;
-  background: rgba($nav-color,.8);
   z-index: 1;
   font-size: 2vw
 }
 
 /*---------------------
- SECOND BLOCK WITH IMAGE
+ SECOND BLOCK WITH IMAGE AND SOME TEXT
 -----------------------*/
 #whyFamilyApp
 {
-  background: rgba($nav-color,.8);
   position: relative;
   display: flex;
   flex-wrap: nowrap;
   margin-top: 5vw;
   height: 25vw;
   align-items: center;
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 
 }
 #whyFamilyApp img
@@ -99,7 +105,6 @@ position: absolute;
 #benefits
 {
   font-size: 1.15vw;
-  background: rgba($nav-color,.8);
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   margin-top: 5vw;
 }

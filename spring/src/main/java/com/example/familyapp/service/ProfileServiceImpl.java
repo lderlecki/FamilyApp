@@ -38,4 +38,9 @@ public class ProfileServiceImpl implements ProfileService {
     public List<Profile> getAllProfiles() {
         return profileRepository.findAll();
     }
+
+    @Override
+    public List<Profile> findWhereNameOrSurnameLike(String searchedValue) {
+        return profileRepository.findWhereNameOrSurnameLike(searchedValue);
+    }
 }

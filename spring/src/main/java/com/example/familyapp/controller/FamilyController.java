@@ -40,4 +40,9 @@ public class FamilyController {
     void deleteFamily(@RequestParam long id){
         familyService.delete(familyService.findById(id));
     }
+
+    @GetMapping(value = "/searchFamily")
+    public List<Family> findWhereFamilyNameLike(@RequestParam String searchedValue){
+        return familyService.findWhereFamilyNameLike(searchedValue);
+    }
 }

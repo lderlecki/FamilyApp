@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class Invitation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
     private LocalDateTime date = LocalDateTime.now();

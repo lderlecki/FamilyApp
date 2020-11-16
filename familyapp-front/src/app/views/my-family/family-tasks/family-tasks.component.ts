@@ -48,7 +48,7 @@ export class FamilyTasksComponent implements OnInit {
     this.toDoListsClickedDay = new Array<Todolist>();
     this.displayDate = selectedDate.selectedDate.toISOString().split('T')[0];
     for (let i = 0; i < selectedDate.familyToDoList.length; i++) {
-      if (selectedDate.familyToDoList[i].dueDate.toString().split(' ')[0] === this.displayDate) {
+      if (selectedDate.familyToDoList[i].dueDate?.toString().split(' ')[0] === this.displayDate) {
         this.toDoListsClickedDay.push(selectedDate.familyToDoList[i]);
       }
     }

@@ -11,4 +11,5 @@ public interface FamilyService {
     Family save(Family family);
     void delete(Family family);
     List<Family> getAll();
+    List<Family> findWhereFamilyNameLike(String searchedValue);
 }

@@ -43,4 +43,9 @@ public class FamilyServiceImpl implements FamilyService {
     public List<Family> getAll() {
         return familyRepository.findAll();
     }
+
+    @Override
+    public List<Family> findWhereFamilyNameLike(String searchedValue) {
+        return familyRepository.findWhereFamilyNameLike(searchedValue);
+    }
 }

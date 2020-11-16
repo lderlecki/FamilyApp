@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {TooltipPosition} from '@angular/material/tooltip';
 import {FormControl} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
@@ -14,6 +14,7 @@ import {Router} from '@angular/router';
 export class AppComponent {
   positionOptions: TooltipPosition[] = ['below', 'above', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
+  @ViewChild('searchInput') private searchInput: ElementRef;
 
   constructor(
     private router: Router,
@@ -29,6 +30,10 @@ export class AppComponent {
   logout() {
     this.authService.logout();
     this.router.navigate(['/account/login']);
+  }
+
+  navigateToSearchComponent() {
+    this.router.navigate(['/search/' + this.searchInput.nativeElement.value + '/profiles']);
   }
 
 }

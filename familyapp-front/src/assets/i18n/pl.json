@@ -6,7 +6,8 @@
     "LOGIN": "Zaloguj",
     "MY_FAMILY": "Moja rodzina",
     "PROFILE": "Profil",
-    "LOGOUT": "Wyloguj"
+    "LOGOUT": "Wyloguj",
+    "SEARCH_PLACEHOLDER": "Szukaj..."
   },
   "LOGIN": {
     "PASSWORD": "Hasło",
@@ -52,10 +53,14 @@
   "MYTABLE": {
     "FILTER": "Filtruj"
   },
+  "SEARCH_VIEW": {
+    "FAMILIES": "Rodziny",
+    "PROFILES": "Użytkownicy"
+  },
   "LIST_FAMILIES": {
     "COLUMN_HEADER": {
       "familyName": "Nazwisko",
-      "budget": "Budżet"
+      "familyMembers": "Ilość członków"
     },
     "FETCHSUCCESS": "Dane tabeli zostały pobrane pomyślnie",
     "FETCHERROR": "Upss coś poszło nie tak",

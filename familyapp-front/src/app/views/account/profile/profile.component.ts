@@ -1,7 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {TokenAuthService} from '../../../services/tokenAuth.service';
 import {UserService} from '../../../services/user.service';
 import {ToastrService} from 'ngx-toastr';
+import {ListInvitationTableComponent} from '../../../components/tables/list-invitation-table/list-invitation-table.component';
+import {TranslateService} from '@ngx-translate/core';
+import {InvitationService} from '../../../services/invitation.service';
+import {Invitation} from '../../../models/invitation';
 
 @Component({
   selector: 'app-profile',
@@ -13,16 +17,28 @@ export class ProfileComponent implements OnInit {
   public password: string;
   public newPassword: string;
   public newPassword2: string;
+  data: any;
+  viewForFamily: boolean;
+  @ViewChild('myChild') private myChild: ListInvitationTableComponent;
+  tableData: Invitation[];
 
   constructor(
     public authService: TokenAuthService,
     private userService: UserService,
     private toastr: ToastrService,
+    private translate: TranslateService,
+    private invitationService: InvitationService
   ) {
   }
 
   ngOnInit(): void {
     this.profileData = JSON.parse(localStorage.getItem('profile'));
+    this.prepareData();
+  }
+
+  prepareData() {
+    this.viewForFamily = false;
+    this.fetchDataForProfile(this.profileData.id);
   }
 
   updateProfileData() {
@@ -53,6 +69,40 @@ export class ProfileComponent implements OnInit {
         this.toastr.error('Error, please try again.');
       }
     );
+  }
+  fetchDataForProfile(profileId: number) {
+    this.invitationService.getInvitationsForProfile(profileId).subscribe(response => {
+      if (response.status === 200) {
+        this.translate.get('LIST_INVITATIONS.FETCHSUCCESS').subscribe(res => {
+          this.toastr.success(res);
+        });
+        this.tableData = response.body;
+        console.log(this.tableData)
+        this.myChild.init(this.tableData);
+      }
+    }, error => {
+      this.translate.get('LIST_INVITATIONS.FETCHERROR').subscribe(res => {
+        this.toastr.error(res);
+      });
+    });
+  }
+
+  selectedRow(data: any) {
+    if (data.acceptance) {
+      this.invitationService.acceptInvitation(data.id).subscribe(response => {
+        this.prepareData();
+      }, error1 => {
+        if (error1.error.status === 409) {
+          this.translate.get('LIST_INVITATIONS.ACCEPT_ALREADY_IN_FAMILY').subscribe(res => {
+            this.toastr.error(res);
+          });
+        }
+      });
+    } else {
+      this.invitationService.rejectInvitation(data.id).subscribe(response => {
+        this.prepareData();
+      });
+    }
   }
 
 }

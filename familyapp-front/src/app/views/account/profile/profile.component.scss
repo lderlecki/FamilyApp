@@ -1,6 +1,12 @@
 @import "../account.style";
 @import '../../../../globalScssVariables';
 
+.profile-wrapper
+{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 .profile {
   justify-content: center;
 }
@@ -24,4 +30,10 @@
 
 .form-btn {
   margin-top: auto;
+}
+
+.familyInvitations
+{
+  width: 60%;
+  height: 30vh;
 }

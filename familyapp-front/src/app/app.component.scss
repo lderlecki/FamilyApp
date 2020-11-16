@@ -20,29 +20,39 @@ body{
 
 }
 
-.nav-account{
-  float: right;
-  display: flex;
-  position: relative;
+
+:not(.nav-account) > .nav-item:last-of-type
+{
+    margin-right: auto;
 }
 
 .nav-items{
+  justify-content: flex-end;
+ align-items: center;
   display: flex;
   position: relative;
-  float: left;
+  padding: 5px;
 }
-
-
 .nav-item{
   padding: 10px 15px 9px 15px;
   text-decoration: none;
   text-align: center;
 }
+
+#searchInput
+{
+  position: relative;
+  padding: 0;
+  height: 70%;
+  font-size: 16px;
+  background: white;
+  color: black;
+}
+
 .nav-item:hover{
   transition: all 1s ease;
   background-color: black;
 }
-
 /*---------------------
   Main Container
 -----------------------*/

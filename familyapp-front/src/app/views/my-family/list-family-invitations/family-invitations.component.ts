@@ -8,9 +8,9 @@ import {Location} from '@angular/common';
 import {MyFamilyComponent} from '../my-family.component';
 import {FamilyService} from '../../../services/family.service';
 import {ListInvitationTableComponent} from '../../../components/tables/list-invitation-table/list-invitation-table.component';
-import {PeriodicElement} from '../../list-invitations/list-invitation.component';
 import {Subscription} from 'rxjs';
 import {Family} from '../../../models/family';
+import {Invitation} from '../../../models/invitation';
 
 @Component({
   selector: 'app-my-family-invitations',
@@ -24,7 +24,7 @@ export class FamilyInvitationsComponent implements OnInit {
   subscription: Subscription;
   family: Family;
   @ViewChild('myChild') private myChild: ListInvitationTableComponent;
-  tableData: PeriodicElement[];
+  tableData: Invitation[];
   constructor(private familyService: FamilyService, private invitationService: InvitationService, private toastr: ToastrService,
               private translate: TranslateService, private dialog: MatDialog) {
   }
