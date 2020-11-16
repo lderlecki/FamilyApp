@@ -49,6 +49,25 @@ services:
     
     depends_on:
       - spring
-      - django 
+      - django  
+
+  rabbitmq3:
+    build: ./rabbitmq
+    environment:
+      - RABBITMQ_CONFIG_FILE=/etc/rabbitmq/rabbitmq.conf
+      - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbit log [{console,[{level,debug}]}]
+    ports:
+      - 15672:15672
+      - 5672:5672
+
+ 
+  
+
+
+
+
+
+   
+
   
 
