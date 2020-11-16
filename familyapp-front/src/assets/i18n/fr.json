@@ -11,6 +11,8 @@
   "LOGIN": {
     "PASSWORD": "Mot de passe",
     "LOGIN": "S'identifier",
+    "FORGOTPASSWORD": "Mot de passe oublié?",
+    "RESETPASSWORD": "Réinitialisez-le ici.",
     "DONTHAVEACC": "Je n'ai pas de compte?",
     "REGISTER": "S'inscrire"
   },
@@ -39,13 +41,15 @@
       "Dim"
     ]
   },
-  "REGISTER": {
+  "PROFILE": {
+    "SAVE": "Sauvegarder",
+    "PASSWORDCHANGE": "Changer le mot de passe",
     "OLDPASSWORD": "Ancien mot de passe",
     "PASSWORD": "Mot de passe",
     "RPASSWORD": "Répéter le mot de passe",
     "NAME": "Nom",
     "SURNAME": "Nom de famille",
-    "PHONE": "Téléphone",
+    "PHONE": "Numéro de téléphone",
     "REGISTER": "S'inscrire",
     "ALREADYHAVEACC": "Vous avez déjà un compte?",
     "LOGIN": "S'identifier"
@@ -99,5 +103,19 @@
     "NAV_TASKS": "Tâches",
     "NAV_INVITATIONS": "Invitations",
     "NAV_MEMBERS": "Membres"
+  },
+    "TODO": {
+      "ADDTODO": "Ajouter une nouvelle liste",
+      "NAME": "Nom",
+      "DESCRIPTION": "Description",
+      "TASKCREATE": "Remplissez les informations de la tâche",
+      "TASK": "Tâche",
+      "RESPPERSON": "Pour",
+      "ASSIGNTASK": "Attribuer à",
+      "ADDTASK": "Ajouter une nouvelle tâche",
+      "SUBMIT": "Soumettre",
+      "EVERYONE": "Tout le monde",
+      "DONE": "Terminé",
+      "NOTDONE": "Non terminé"
   }
 }

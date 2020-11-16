@@ -4,34 +4,37 @@
       <div class="user-data-wrapper">
         <form [formGroup]="profileForm" class="profile-form profile-data">
             <mat-form-field class="form-field">
-              <mat-label>Name</mat-label>
+              <mat-label>{{ 'PROFILE.NAME' | translate }}</mat-label>
               <input required formControlName="name" matInput type="text">
             </mat-form-field>
             <mat-form-field class="form-field">
-              <mat-label>Surname</mat-label>
+              <mat-label>{{ 'PROFILE.SURNAME' | translate }}</mat-label>
               <input required formControlName="surname" matInput type="text">
             </mat-form-field>
             <mat-form-field class="form-field">
-              <mat-label>Email address</mat-label>
+              <mat-label>Email</mat-label>
               <input required formControlName="email" matInput type="email">
             </mat-form-field>
             <mat-form-field class="form-field">
-              <mat-label>Phone number</mat-label>
+              <mat-label>{{ 'PROFILE.PHONE' | translate }}</mat-label>
               <input required formControlName="phone" matInput type="text">
             </mat-form-field>
-          <button (click)="updateProfileData(profileForm.value)" [disabled]="!profileForm.valid" mat-raised-button class="form-btn" color="primary">Save</button>
+          <button (click)="updateProfileData(profileForm.value)"
+                  [disabled]="!profileForm.valid" mat-raised-button class="form-btn" color="primary">
+            {{ 'PROFILE.SAVE' | translate }}
+          </button>
         </form>
 
         <form [formGroup]="passwordForm" class="profile-form password-form">
           <mat-form-field class="form-field">
-            <mat-label>{{ 'REGISTER.OLDPASSWORD' | translate }}</mat-label>
+            <mat-label>{{ 'PROFILE.OLDPASSWORD' | translate }}</mat-label>
             <input formControlName="old_password" required matInput type="password">
             <mat-error *ngIf="passwordForm.controls['old_password'].hasError('required')">
               Field required
             </mat-error>
           </mat-form-field>
           <mat-form-field class="custom-mat-field">
-            <mat-label>{{ 'REGISTER.PASSWORD' | translate }}</mat-label>
+            <mat-label>{{ 'PROFILE.PASSWORD' | translate }}</mat-label>
             <input required matInput formControlName="password" type="password">
             <mat-error [ngClass]="passwordForm.controls['password'].hasError('required') || passwordForm.controls['password'].hasError('minlength')  ? '' : 'text-success'">
               <i class="material-icons">{{ passwordForm.controls['password'].hasError('required') ||
@@ -59,7 +62,7 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field class="form-field">
-            <mat-label>{{ 'REGISTER.RPASSWORD' | translate }}</mat-label>
+            <mat-label>{{ 'PROFILE.RPASSWORD' | translate }}</mat-label>
             <input formControlName="password2" required matInput type="password">
             <mat-error *ngIf="passwordForm.controls['password2'].hasError('required')">
               Field required
@@ -68,7 +71,11 @@
               Passwords do not match
             </mat-error>
           </mat-form-field>
-          <button (click)="changePassword(passwordForm.value)" [disabled]="!passwordForm.valid" class="form-btn" mat-raised-button color="primary">Change password</button>
+          <button (click)="changePassword(passwordForm.value)"
+                  [disabled]="!passwordForm.valid" class="form-btn"
+                  mat-raised-button color="primary">
+            {{ 'PROFILE.PASSWORDCHANGE' | translate }}
+          </button>
         </form>
       </div>
     </section>

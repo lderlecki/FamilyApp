@@ -11,6 +11,8 @@
   "LOGIN": {
     "PASSWORD": "Password",
     "LOGIN": "Login",
+    "FORGOTPASSWORD": "Forgot password?",
+    "RESETPASSWORD": "Reset it here.",
     "DONTHAVEACC": "Don't have an account?",
     "REGISTER": "Register"
   },
@@ -39,12 +41,14 @@
       "Sun"
     ]
   },
-  "REGISTER": {
-    "OLDPASSWORD": "Password",
+  "PROFILE": {
+    "SAVE": "Save",
+    "PASSWORDCHANGE": "Change password",
+    "OLDPASSWORD": "Old password",
     "PASSWORD": "Password",
     "RPASSWORD": "Repeat password",
     "NAME": "Name",
-    "PHONE": "Phone",
+    "PHONE": "Phone number",
     "SURNAME": "Surname",
     "REGISTER": "Register",
     "ALREADYHAVEACC": "Already have an account?",
@@ -100,5 +104,19 @@
     "NAV_TASKS": "Tasks",
     "NAV_INVITATIONS": "Invitations",
     "NAV_MEMBERS": "Members"
+  },
+    "TODO": {
+      "ADDTODO": "Add new list",
+      "NAME": "Name",
+      "DESCRIPTION": "Description",
+      "TASKCREATE": "Fill in task information",
+      "TASK": "Task",
+      "RESPPERSON": "For",
+      "ASSIGNTASK": "Assign to",
+      "ADDTASK": "Add new task",
+      "SUBMIT": "Submit",
+      "EVERYONE": "Everyone",
+      "DONE": "Done",
+      "NOTDONE": "Not Done"
   }
 }

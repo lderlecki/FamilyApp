@@ -1,6 +1,6 @@
 <section class="account">
   <div class="account-container">
-    <h4>{{ 'REGISTER.REGISTER' | translate }}</h4>
+    <h4>{{ 'PROFILE.REGISTER' | translate }}</h4>
     <div class="account-content">
       <form [formGroup]="registerForm" class="account-form">
         <mat-form-field>
@@ -16,7 +16,7 @@
         </mat-form-field>
         <br>
         <mat-form-field class="custom-mat-field">
-          <mat-label>{{ 'REGISTER.PASSWORD' | translate }}</mat-label>
+          <mat-label>{{ 'PROFILE.PASSWORD' | translate }}</mat-label>
           <input required matInput formControlName="password" type="password">
           <mat-error [ngClass]="registerForm.controls['password'].hasError('required') || registerForm.controls['password'].hasError('minlength')  ? '' : 'text-success'">
             <i class="material-icons">{{ registerForm.controls['password'].hasError('required') ||
@@ -45,24 +45,24 @@
         </mat-form-field>
         <br>
         <mat-form-field>
-          <mat-label>{{ 'REGISTER.RPASSWORD' | translate }}</mat-label>
+          <mat-label>{{ 'PROFILE.RPASSWORD' | translate }}</mat-label>
           <input required formControlName="password2" type="password" matInput>
         </mat-form-field>
       </form>
 
       <form [formGroup]="profileForm" class="profile-form">
         <mat-form-field>
-          <mat-label>{{ 'REGISTER.NAME' | translate }}</mat-label>
+          <mat-label>{{ 'PROFILE.NAME' | translate }}</mat-label>
           <input required formControlName="name" matInput>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <mat-label>{{ 'REGISTER.SURNAME' | translate }}</mat-label>
+          <mat-label>{{ 'PROFILE.SURNAME' | translate }}</mat-label>
           <input required formControlName="surname" matInput>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <mat-label>{{ 'REGISTER.PHONE' | translate }}</mat-label>
+          <mat-label>{{ 'PROFILE.PHONE' | translate }}</mat-label>
           <input required formControlName="phone" matInput>
         </mat-form-field>
       </form>
@@ -70,11 +70,11 @@
 
     <button (click)="registerUser(registerForm.value, profileForm.value)"
             mat-raised-button color="primary" [disabled]="!registerForm.valid && !profileForm.valid">
-      {{ 'REGISTER.REGISTER' | translate }}
+      {{ 'PROFILE.REGISTER' | translate }}
     </button>
     <br>
     <div class="subscript">
-      <span>{{ 'REGISTER.ALREADYHAVEACC' | translate }} <a class="url_rm_visited" routerLink="/account/login" routerLinkActive='active'>{{ 'REGISTER.LOGIN' | translate }}</a></span>
+      <span>{{ 'PROFILE.ALREADYHAVEACC' | translate }} <a class="url_rm_visited" routerLink="/account/login" routerLinkActive='active'>{{ 'PROFILE.LOGIN' | translate }}</a></span>
     </div>
   </div>
 </section>

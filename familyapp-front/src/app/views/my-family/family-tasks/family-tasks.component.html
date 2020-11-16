@@ -12,55 +12,53 @@
     <mat-card-content>
       <form #newTodoForm class="todo-form" [formGroup]="todoForm" (ngSubmit)="createTodo()">
         <mat-form-field appearance="fill">
-          <mat-label>Name</mat-label>
+          <mat-label>{{ 'TODO.NAME' | translate }}</mat-label>
           <input formControlName="name" matInput>
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
-          <mat-label>Description</mat-label>
+          <mat-label>{{ 'TODO.DESCRIPTION' | translate }}</mat-label>
           <textarea matInput formControlName="description"></textarea>
         </mat-form-field>
         <br>
         <div formArrayName="tasks">
           <mat-accordion>
-            <h3>Fill task data</h3>
+            <h3>{{ 'TODO.TASKCREATE' | translate }}</h3>
             <div class="todo-task-panel" *ngFor="let newTask of todoForm.get('tasks')['controls']; let i=index;">
               <div [formGroupName]="i">
                 <mat-expansion-panel
                   #currentPanel
-                  hideToggle
-                  (opened)="panelOpenState = true"
-                  (closed)="panelOpenState = false">
+                  hideToggle>
                   <mat-expansion-panel-header>
                     <mat-panel-title>
-                      Task {{i+1}}
+                      {{ 'TODO.TASK' | translate }} {{i+1}}
                     </mat-panel-title>
                     <mat-panel-description>
                       <div class="task-details" *ngIf="!currentPanel.expanded">
                         <span class="task-data">
-                          <span class="bold">Name: </span>
+                          <span class="bold">{{ 'TODO.NAME' | translate }}: </span>
                           {{newTask.controls['name'].value}}
                         </span>
                         <span class="task-data">
-                          <span class="bold">For: </span>
+                          <span class="bold">{{ 'TODO.RESPPERSON' | translate }}: </span>
                           {{getResponsiblePerson(newTask)}}
                         </span>
                         <span class="task-data">
-                          <span class="bold">Task: </span>
+                          <span class="bold">{{ 'TODO.NAME' | translate }}: </span>
                           {{newTask.controls['description'].value}}
                         </span>
                       </div>
                     </mat-panel-description>
                   </mat-expansion-panel-header>
                   <mat-form-field appearance="fill">
-                    <mat-label>Name</mat-label>
+                    <mat-label>{{ 'TODO.NAME' | translate }}</mat-label>
                     <input formControlName="name" matInput>
                   </mat-form-field>
                   <br>
                   <mat-form-field appearance="fill">
-                    <mat-label>Assign to</mat-label>
+                    <mat-label>{{ 'TODO.ASSIGNTASK' | translate }}</mat-label>
                     <mat-select formControlName="profile">
-                      <mat-option [value]="-1">Anyone</mat-option>
+                      <mat-option [value]="-1">{{ 'TODO.EVERYONE' | translate }}</mat-option>
                       <mat-option *ngFor="let member of this.familyService.familyMembers"
                                   [value]="member.id">
                         {{member.name + ' ' +member.surname}}
@@ -69,7 +67,7 @@
                   </mat-form-field>
                   <br>
                   <mat-form-field appearance="fill">
-                    <mat-label>Description</mat-label>
+                    <mat-label>{{ 'TODO.DESCRIPTION' | translate }}</mat-label>
                     <textarea matInput formControlName="description"></textarea>
                   </mat-form-field>
                   <br>
@@ -78,11 +76,11 @@
             </div>
           </mat-accordion>
         </div>
-        <button mat-raised-button color="primary" (click)="addNewTaskInTodo()">Add new task</button>
+        <button mat-raised-button color="primary" (click)="addNewTaskInTodo()">{{ 'TODO.ADDTASK' | translate }}</button>
         <br>
-        <button mat-raised-button class="todo-form-submit-btn" type="submit" color="success" [disabled]="!todoForm.valid" >Submit</button>
+        <button mat-raised-button class="todo-form-submit-btn" type="submit" color="success" [disabled]="!todoForm.valid">{{ 'TODO.SUBMIT' | translate }}</button>
       </form>
-      <button  mat-raised-button class="btn-show-form" color="primary" (click)="showTodoForm(newTodoForm)">ADD NEW TODO</button>
+      <button  mat-raised-button class="btn-show-form" color="primary" (click)="showTodoForm(newTodoForm)">{{ 'TODO.ADDTODO' | translate }}</button>
     </mat-card-content>
   </mat-card>
 
@@ -105,10 +103,10 @@
           <ul>
             <li>{{task.description}}
               <span class="taskStatus" *ngIf="task.done" style="color: green">
-                <button  mat-raised-button color="success" (click)="changeTaskStatus(task)">DONE &#10003;</button>
+                <button  mat-raised-button color="success" (click)="changeTaskStatus(task)">{{ 'TODO.DONE' | translate }} &#10003;</button>
               </span>
               <span class="taskStatus" *ngIf="task.done === false" style="color: red">
-                <button  mat-raised-button color="warn" (click)="changeTaskStatus(task)">NOT DONE X</button>
+                <button  mat-raised-button color="warn" (click)="changeTaskStatus(task)">{{ 'TODO.NOTDONE' | translate }} X</button>
               </span>
             </li>
           </ul>
@@ -122,14 +120,14 @@
           <form id="{{toDoList.id}}" class="task-form" #currentForm [formGroup]="taskForm"
                 (ngSubmit)="createTask(taskForm.value, currentForm, toDoList)">
             <mat-form-field appearance="fill">
-              <mat-label>Name</mat-label>
+              <mat-label>{{ 'TODO.NAME' | translate }}</mat-label>
               <input formControlName="name" matInput>
             </mat-form-field>
             <br>
             <mat-form-field appearance="fill">
-              <mat-label>Assign to</mat-label>
+              <mat-label>{{ 'TODO.ASSIGNTASK' | translate }}</mat-label>
               <mat-select formControlName="profile">
-                <mat-option [value]="-1">Anyone</mat-option>
+                <mat-option [value]="-1">{{ 'TODO.EVERYONE' | translate }}</mat-option>
                 <mat-option *ngFor="let member of this.familyService.familyMembers"
                             [value]="member.id">
                   {{member.name + ' ' +member.surname}}
@@ -138,13 +136,13 @@
             </mat-form-field>
             <br>
             <mat-form-field appearance="fill">
-              <mat-label>Description</mat-label>
+              <mat-label>{{ 'TODO.DESCRIPTION' | translate }}</mat-label>
               <textarea matInput formControlName="description"></textarea>
             </mat-form-field>
             <br>
-            <button mat-raised-button color="success">Submit task</button>
+            <button mat-raised-button color="success">{{ 'TODO.SUBMIT' | translate }}</button>
           </form>
-          <button mat-raised-button color="primary" (click)="showAddTaskForm(currentForm)">ADD NEW TASK</button>
+          <button mat-raised-button color="primary" (click)="showAddTaskForm(currentForm)">{{ 'TODO.ADDTASK' | translate }}</button>
         </mat-card-content>
       </mat-card>
     </mat-card-content>

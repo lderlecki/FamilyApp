@@ -12,8 +12,8 @@ import {CustomValidators} from '../../../_helpers/custom-validators';
 })
 export class ProfileComponent implements OnInit {
   public profileData: any;
-  private profileForm: FormGroup;
-  private passwordForm: FormGroup;
+  public profileForm: FormGroup;
+  public passwordForm: FormGroup;
 
   constructor(
     public authService: TokenAuthService,

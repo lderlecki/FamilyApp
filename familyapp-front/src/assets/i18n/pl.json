@@ -11,6 +11,8 @@
   "LOGIN": {
     "PASSWORD": "Hasło",
     "LOGIN": "Zaloguj",
+    "FORGOTPASSWORD": "Nie pamiętasz hasła?",
+    "RESETPASSWORD": "Zresetuj je tutaj.",
     "DONTHAVEACC": "Nie masz konta?",
     "REGISTER": "Zarejestruj"
   },
@@ -39,7 +41,9 @@
       "Ndz"
     ]
   },
-  "REGISTER": {
+  "PROFILE": {
+    "SAVE": "Zapisz",
+    "PASSWORDCHANGE": "Zmień hasło",
     "OLDPASSWORD": "Aktualne hasło",
     "PASSWORD": "Hasło",
     "RPASSWORD": "Powtórz hasło",
@@ -102,5 +106,19 @@
     "NAV_TASKS": "Zadania",
     "NAV_INVITATIONS": "Zaproszenia",
     "NAV_MEMBERS": "Członkowie"
+  },
+    "TODO": {
+      "ADDTODO": "Stwórz listę",
+      "NAME": "Nazwa",
+      "DESCRIPTION": "Opis",
+      "TASKCREATE": "Dodaj informację o zadaniach",
+      "TASK": "Zadanie",
+      "RESPPERSON": "Dla",
+      "ASSIGNTASK": "Przypisz do",
+      "ADDTASK": "Dodaj zadanie",
+      "SUBMIT": "Zatwierdź",
+      "EVERYONE": "Wszyscy",
+      "DONE": "Zrobione",
+      "NOTDONE": "Do zrobienia"
   }
 }
