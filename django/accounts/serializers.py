@@ -18,7 +18,6 @@ class UserSerializer(serializers.ModelSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     family = FamilySerializer(read_only=True)
-    # family = serializers.StringRelatedField()
 
     class Meta:
         model = Profile
@@ -101,8 +100,8 @@ class SetNewPasswordSerializer(serializers.ModelSerializer):
 
 class ChangePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(style={'input_type': 'password'}, required=True, write_only=True)
-    new_password = serializers.CharField(style={'input_type': 'password'}, required=True, write_only=True)
-    new_password2 = serializers.CharField(style={'input_type': 'password'}, required=True, write_only=True)
+    password = serializers.CharField(style={'input_type': 'password'}, required=True, write_only=True)
+    password2 = serializers.CharField(style={'input_type': 'password'}, required=True, write_only=True)
 
     class Meta:
         model = User
@@ -114,13 +113,13 @@ class ChangePasswordSerializer(serializers.Serializer):
         return value
 
     def validate(self, attrs):
-        password = attrs.get('new_password')
-        password2 = attrs.get('new_password2')
+        password = attrs.get('password')
+        password2 = attrs.get('password2')
         if password_valid(password, password2):
             return attrs
 
     def save(self, **kwargs):
-        password = self.validated_data['new_password']
+        password = self.validated_data['password']
         user = self.context['request'].user
         user.set_password(password)
         user.save()

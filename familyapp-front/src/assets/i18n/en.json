@@ -40,6 +40,7 @@
     ]
   },
   "REGISTER": {
+    "OLDPASSWORD": "Password",
     "PASSWORD": "Password",
     "RPASSWORD": "Repeat password",
     "NAME": "Name",

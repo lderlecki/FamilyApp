@@ -45,9 +45,37 @@
 
 .profile-form {
   margin: 15px;
-  //margin: auto;
 }
 
 .account-btn {
   margin: 5px;
+}
+
+.material-icons {
+  display: inline-block;
+  font-size: 15px!important;
+}
+
+.text-success {
+  color: $success-font-color;
+}
+
+/* Additional placeholder for invalid mat-form-fields */
+/* src: https://github.com/angular/material2/issues/4580 */
+
+.custom-mat-field{
+
+}
+
+$passwordValidatorMargin: 65px;
+
+.custom-mat-field.mat-form-field.ng-invalid.ng-touched {
+  animation: example;
+  animation-duration: 0.3s;
+  margin-bottom: $passwordValidatorMargin;
+}
+
+@keyframes example {
+  from {margin-bottom: 0;}
+  to {margin-bottom: $passwordValidatorMargin;}
 }

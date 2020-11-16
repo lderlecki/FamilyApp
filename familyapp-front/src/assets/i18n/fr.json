@@ -40,14 +40,15 @@
     ]
   },
   "REGISTER": {
-  "PASSWORD": "Mot de passe",
-  "RPASSWORD": "Répéter le mot de passe",
-  "NAME": "Nom",
-  "SURNAME": "Nom de famille",
-  "PHONE": "Téléphone",
-  "REGISTER": "S'inscrire",
-  "ALREADYHAVEACC": "Vous avez déjà un compte?",
-  "LOGIN": "S'identifier"
+    "OLDPASSWORD": "Ancien mot de passe",
+    "PASSWORD": "Mot de passe",
+    "RPASSWORD": "Répéter le mot de passe",
+    "NAME": "Nom",
+    "SURNAME": "Nom de famille",
+    "PHONE": "Téléphone",
+    "REGISTER": "S'inscrire",
+    "ALREADYHAVEACC": "Vous avez déjà un compte?",
+    "LOGIN": "S'identifier"
 },
   "MYTABLE": {
   "FILTER": "Filtre"

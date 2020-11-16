@@ -2,58 +2,76 @@
   <div class="profile-wrapper">
     <section class="profile">
       <div class="user-data-wrapper">
-        <div class="profile-form profile-data">
-          <div class="user-info">
+        <form [formGroup]="profileForm" class="profile-form profile-data">
             <mat-form-field class="form-field">
               <mat-label>Name</mat-label>
-              <input required [(ngModel)]="profileData.name" matInput type="text">
+              <input required formControlName="name" matInput type="text">
             </mat-form-field>
-          </div>
-          <div class="user-info">
             <mat-form-field class="form-field">
               <mat-label>Surname</mat-label>
-              <input required [(ngModel)]="profileData.surname" matInput type="text">
+              <input required formControlName="surname" matInput type="text">
             </mat-form-field>
-          </div>
-          <div class="user-info">
             <mat-form-field class="form-field">
               <mat-label>Email address</mat-label>
-              <input required [(ngModel)]="profileData.email" matInput type="text">
+              <input required formControlName="email" matInput type="email">
             </mat-form-field>
-          </div>
-          <div class="user-info">
             <mat-form-field class="form-field">
               <mat-label>Phone number</mat-label>
-              <input required [(ngModel)]="profileData.phone" type="text" matInput>
+              <input required formControlName="phone" matInput type="text">
             </mat-form-field>
-          </div>
-          <button (click)="updateProfileData()" mat-raised-button color="primary">Save</button>
-        </div>
+          <button (click)="updateProfileData(profileForm.value)" [disabled]="!profileForm.valid" mat-raised-button class="form-btn" color="primary">Save</button>
+        </form>
 
-        <div class="profile-form password-form">
-          <div class="user-info">
-            <mat-form-field class="form-field">
-              <mat-label>Current password</mat-label>
-              <input [(ngModel)]="password" required matInput type="password">
-            </mat-form-field>
-          </div>
-          <div class="user-info">
-            <mat-form-field class="form-field">
-              <mat-label>New password</mat-label>
-              <input [(ngModel)]="newPassword" required matInput type="password">
-            </mat-form-field>
-          </div>
-          <div class="user-info">
-            <mat-form-field class="form-field">
-              <mat-label>Repeat password</mat-label>
-              <input [(ngModel)]="newPassword2" required matInput type="password">
-            </mat-form-field>
-          </div>
-          <button (click)="changePassword()" class="form-btn" mat-raised-button color="primary">Change password</button>
-        </div>
+        <form [formGroup]="passwordForm" class="profile-form password-form">
+          <mat-form-field class="form-field">
+            <mat-label>{{ 'REGISTER.OLDPASSWORD' | translate }}</mat-label>
+            <input formControlName="old_password" required matInput type="password">
+            <mat-error *ngIf="passwordForm.controls['old_password'].hasError('required')">
+              Field required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="custom-mat-field">
+            <mat-label>{{ 'REGISTER.PASSWORD' | translate }}</mat-label>
+            <input required matInput formControlName="password" type="password">
+            <mat-error [ngClass]="passwordForm.controls['password'].hasError('required') || passwordForm.controls['password'].hasError('minlength')  ? '' : 'text-success'">
+              <i class="material-icons">{{ passwordForm.controls['password'].hasError('required') ||
+                passwordForm.controls['password'].hasError('minlength') ? 'cancel' :
+                'check_circle' }}</i>
+              At least 8 characters!
+            </mat-error>
+            <mat-error [ngClass]="passwordForm.controls['password'].hasError('required') || passwordForm.controls['password'].hasError('hasNumber')  ? '' : 'text-success'">
+              <i class="material-icons">{{ passwordForm.controls['password'].hasError('required') ||
+                passwordForm.controls['password'].hasError('hasNumber') ? 'cancel' :
+                'check_circle' }}</i>
+              At least 1 number!
+            </mat-error>
+            <mat-error [ngClass]="passwordForm.controls['password'].hasError('required') || passwordForm.controls['password'].hasError('hasCapitalCase')  ? '' : 'text-success'">
+              <i class="material-icons">{{ passwordForm.controls['password'].hasError('required') ||
+                passwordForm.controls['password'].hasError('hasCapitalCase') ? 'cancel' :
+                'check_circle' }}</i>
+              At least 1 in Capital Case!
+            </mat-error>
+            <mat-error [ngClass]="passwordForm.controls['password'].hasError('required') || passwordForm.controls['password'].hasError('hasSmallCase')  ? '' : 'text-success'">
+              <i class="material-icons">{{ passwordForm.controls['password'].hasError('required') ||
+                passwordForm.controls['password'].hasError('hasSmallCase') ? 'cancel' :
+                'check_circle' }}</i>
+              At least 1 in Small Case!
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="form-field">
+            <mat-label>{{ 'REGISTER.RPASSWORD' | translate }}</mat-label>
+            <input formControlName="password2" required matInput type="password">
+            <mat-error *ngIf="passwordForm.controls['password2'].hasError('required')">
+              Field required
+            </mat-error>
+            <mat-error *ngIf="passwordForm.controls['password2'].hasError('NoPasswordMatch')">
+              Passwords do not match
+            </mat-error>
+          </mat-form-field>
+          <button (click)="changePassword(passwordForm.value)" [disabled]="!passwordForm.valid" class="form-btn" mat-raised-button color="primary">Change password</button>
+        </form>
       </div>
     </section>
-
     <section class="profile-family">
       <div>
         family info here

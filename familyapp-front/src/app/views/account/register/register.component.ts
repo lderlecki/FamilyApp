@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
     this.profileForm = this.fb.group({
       name: ['', [Validators.required]],
       surname: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
+      phone: ['', Validators.required],
     });
   }
 
