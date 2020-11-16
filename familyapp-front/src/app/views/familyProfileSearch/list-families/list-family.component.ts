@@ -1,13 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FamilyService} from '../../services/family.service';
-import {MyTableComponent} from '../../components/tables/list-users-families-table/my-table.component';
+import {FamilyService} from '../../../services/family.service';
+import {MyTableComponent} from '../../../components/tables/list-users-families-table/my-table.component';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
-import {Family} from '../../models/family';
-import {InviteToFamilyDialogComponent} from '../../components/dialogs/invite-to-family/invite-to-family-dialog';
+import {Family} from '../../../models/family';
+import {InviteToFamilyDialogComponent} from '../../../components/dialogs/invite-to-family/invite-to-family-dialog';
 import {InvitationDTO} from '../list-profiles/list-profile.component';
 import {MatDialog} from '@angular/material/dialog';
-import {InvitationService} from '../../services/invitation.service';
+import {InvitationService} from '../../../services/invitation.service';
+import {ActivatedRoute} from '@angular/router';
 
 export interface PeriodicElement {
   familyName: string;
@@ -25,11 +26,11 @@ export class ListFamilyComponent implements OnInit {
   @ViewChild('myChild') private myChild: MyTableComponent;
   tableData: PeriodicElement[];
   constructor(private invitationService: InvitationService, private familyService: FamilyService, private toastr: ToastrService,
-              private translate: TranslateService, private dialog: MatDialog ) { }
+              private translate: TranslateService, private dialog: MatDialog, private route: ActivatedRoute) { }
 
 
   ngOnInit(): void {
-    this.familyService.getAllFamilies().subscribe(response => {
+    this.familyService.getFamiliesWhereFamilyNameLike(this.route.parent.snapshot.paramMap.get('searchParam')).subscribe(response => {
       if (response.status === 200) {
         this.translate.get('LIST_FAMILIES.FETCHSUCCESS').subscribe(res => {
           this.toastr.success(res);

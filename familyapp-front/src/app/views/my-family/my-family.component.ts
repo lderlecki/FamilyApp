@@ -8,6 +8,7 @@ import {Location} from '@angular/common';
 import {Family} from '../../models/family';
 import {Profile} from '../../models/profile';
 import {FamilyService} from '../../services/family.service';
+import {TokenAuthService} from '../../services/tokenAuth.service';
 
 @Component({
   selector: 'app-my-family',
@@ -16,26 +17,19 @@ import {FamilyService} from '../../services/family.service';
   providers: [ProfileService, InvitationService, FamilyService],
 })
 export class MyFamilyComponent implements OnInit {
-  myFamily: Family;
+  myFamily;
   myProfile: Profile;
+  public familyMembers: any;
+
   constructor(protected familyService: FamilyService, protected profileService: ProfileService,
               protected toastr: ToastrService, protected translate: TranslateService,
-              protected _location: Location) {
+              protected _location: Location, private authService: TokenAuthService) {
 
   }
 
-
   ngOnInit(): void {
-    this.profileService.getProfile(20).subscribe(response => {
-      this.profileService.getFamilyForProfile(response.body.id).subscribe(response1 => {
-        this.myProfile = response.body;
-        this.myFamily = response1.body;
-        this.familyService.sendFamilyData(this.myFamily);
-        if (response1.body == null) {
-          console.log('This user doesnt have family');
-          this._location.back(); // redirect to last page
-        }
-      });
-    });
+    this.myFamily = this.familyService.familyValue;
+    console.log('familymembers: ', this.familyService.familyMembers);
+    console.log('my family value in my family component: ', this.myFamily);
   }
 }

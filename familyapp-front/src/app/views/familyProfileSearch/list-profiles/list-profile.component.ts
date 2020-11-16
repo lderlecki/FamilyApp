@@ -1,12 +1,13 @@
 import {Component,OnInit, ViewChild} from '@angular/core';
-import {MyTableComponent} from '../../components/tables/list-users-families-table/my-table.component';
+import {MyTableComponent} from '../../../components/tables/list-users-families-table/my-table.component';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateModule, TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {ProfileService} from '../../services/profile.service';
+import {ProfileService} from '../../../services/profile.service';
 import {MatDialog} from '@angular/material/dialog';
-import {InviteToFamilyDialogComponent} from '../../components/dialogs/invite-to-family/invite-to-family-dialog';
-import {Profile} from '../../models/profile';
-import {InvitationService} from '../../services/invitation.service';
+import {InviteToFamilyDialogComponent} from '../../../components/dialogs/invite-to-family/invite-to-family-dialog';
+import {Profile} from '../../../models/profile';
+import {InvitationService} from '../../../services/invitation.service';
+import {ActivatedRoute} from '@angular/router';
 
 export interface PeriodicElement {
   familyName: string;
@@ -31,12 +32,13 @@ export class ListProfileComponent implements OnInit {
   tableData: PeriodicElement[];
 
   constructor(private invitationService: InvitationService, private profileService: ProfileService,
-              private toastr: ToastrService, private translate: TranslateService, private dialog: MatDialog) {
+              private toastr: ToastrService, private translate: TranslateService, private dialog: MatDialog,
+              private route: ActivatedRoute) {
   }
 
 
   ngOnInit(): void {
-    this.profileService.getAllProfiles().subscribe(response => {
+    this.profileService.findWhereNameOrSurnameLike(this.route.parent.snapshot.paramMap.get('searchParam')).subscribe(response => {
       if (response.status === 200) {
         this.translate.get('LIST_PROFILES.FETCHSUCCESS').subscribe(res => {
           this.toastr.success(res);

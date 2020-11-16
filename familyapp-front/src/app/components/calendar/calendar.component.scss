@@ -1,94 +1,179 @@
 @import '../../../globalScssVariables';
 
-#calendarFlex
-{
+#calendarFlex {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 50px;
-  min-width: 100px;
 
 }
-#flexContainer
-{
+
+#flexContainer {
   position: relative;
-  width: 900px;
+  width: 85%;
   display: flex;
   flex-wrap: wrap;
-  border:1px solid $black;
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  background: $skin;
-  padding:5px;
+  border: 1px solid $black;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  padding: 5px;
 }
-#flexContainer .box
-{
+
+#flexContainer .box {
   position: relative;
-  margin-right: 10px;
-  margin-bottom: 5px;
-  width: 120px;
+  margin-right: 1.5%;
+  margin-bottom: 1%;
+  width: 13%;
   height: 50px;
 }
-#flexContainer .box:nth-child(7n)
-{
+
+#flexContainer .box:nth-child(7n) {
   margin-right: 0;
   padding-right: 0;
 }
-#flexContainer .box .dayBox:hover
-{
+
+//different background for saturdays and sundays
+#flexContainer .box:nth-child(7n+21) > .dayBox, #flexContainer .box:nth-child(7n+20) > .dayBox {
+  background: rgba(gray, 0.4);
+}
+
+#flexContainer .box .dayBox:hover {
+  border: 2px solid black;
   cursor: pointer;
   border-radius: 30%;
-  box-shadow: inset 0px 0px 15px 8px rgba($blue,1);
   font-weight: bold;
 }
-.dayBoxName
-{
+
+//bold text for Mon,Tue, etc...
+.dayBoxName {
   font-weight: bold;
-  background: $brick;
 }
-.dayBoxName:hover, .dayBoxEmpty:hover
+
+.last-item //color for sunday text
 {
+  color: red;
+}
+
+
+.dayBoxName:hover, .dayBoxEmpty:hover {
   border-radius: 0 !important;
   box-shadow: none !important;
   cursor: not-allowed !important;
 }
-.navBox
-{
+
+.navBox {
   font-size: 30px !important;
   font-weight: bold;
   user-select: none;
 }
-#flexContainer .box .dayBox,#flexContainer .box .dayBoxName,#flexContainer .box .dayBoxEmpty, #flexContainer .box .navBox
-{
+
+#flexContainer .box .dayBox, #flexContainer .box .dayBoxName, #flexContainer .box .dayBoxEmpty, #flexContainer .box .navBox {
   font-size: 20px;
   line-height: 50px;
   text-align: center;
   position: absolute;
-  top:0;
+  top: 0;
   left: 2px;
   width: calc(100% - 4px);
   height: 90%;
 
 }
-.arrow:hover
-{
+
+#flexContainer .box .dayBox {
+  border: 1px solid black;
+}
+
+.arrow:hover {
   transform: scale(1.5);
   cursor: pointer;
 }
 
-#flexContainer .box .dayBoxEmpty
- {
-  background: gray;
- }
+// css for null days at the beggining of each month
+#flexContainer .box .dayBoxEmpty {
+}
 
-.taskHere
-{
-  position: absolute;
-  top: 2px;
-  right: 15px;
+// display number of tasks for day inside this box
+
+.taskWrapper {
+  position: relative;
+  margin: 2%;
+  margin-left: 60%;
+  width: 38%;
+  text-align: center;
+  font-size: 16px;
+  opacity: 1;
+  z-index: 10;
+  height: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.taskHere {
+  position: relative;
+  padding: 7px;
   border-radius: 50%;
   background: red;
-  width: 20px;
-  height: 20px;
-  text-align: center;
- font-size: 16px;
+}
+
+// remove default arrows from input type="number"
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+@media (max-width: 600px) {
+  #flexContainer .box {
+    height: 40px;
+    line-height: 0px;
+  }
+  #flexContainer {
+    width: 100%;
+  }
+  .taskHere {
+    line-height: 50%;
+    padding: 3px;
+    font-size: 16px;
+  }
+  .dayBoxName {
+    font-size: 12px !important;
+  }
+  .taskWrapper {
+    height: 40%;
+  }
+
+  .navBox {
+    margin: 0;
+    font-size: 8px !important;
+  }
+  .box:nth-child(4) {
+    display: none;
+  }
+  .box:nth-child(6) {
+    min-width: 27%;
+  }
+  .box:nth-child(6) .navBox {
+    font-size: 10px !important;
+  }
+
+}
+
+@media (orientation: landscape) and (max-height: 450px) {
+  .navBox {
+    margin: 0;
+    font-size: 10px !important;
+  }
+  .box:nth-child(6) .navBox {
+    font-size: 14px !important;
+  }
+  .taskWrapper {
+    height: 40%;
+  }
+  .taskHere {
+    padding: 4px;
+  }
 }

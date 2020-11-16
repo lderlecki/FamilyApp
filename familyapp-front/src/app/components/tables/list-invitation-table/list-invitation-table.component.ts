@@ -1,9 +1,6 @@
 import {Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-export interface PeriodicElement {
-  family: Object;
-  profile: Object;
-}
+import {Invitation} from '../../../models/invitation';
 export class OutputData {
   acceptance: boolean;
   id: number;
@@ -33,7 +30,7 @@ export class ListInvitationTableComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.tableData);
   }
 
-  init(data: PeriodicElement[]) {
+  init(data: Invitation[]) {
     this.tableData = data; // get data
     this.initializeTable(); // and initlize table
   }

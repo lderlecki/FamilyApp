@@ -8,6 +8,15 @@ $black:#0E0B14;
 $nav-color: #35375d;
 $content-color: #F8F4F6;
 $bg-color: #FADDD1;
+$success-color: darkgreen;
+$success-font-color: #28a745;
+$bg-color-for-element: rgba($nav-color, 0.8);
+$box-shadow-for-element: 10px 10px 5px 0px rgba(0,0,0,0.75);
+
+// tables scss variables
+$table-gray:rgba(gray, 0.4);
+$table-blue: $nav-color;
+$table-black: black;
 
 body{
   margin: 0;
@@ -20,6 +29,16 @@ body{
   position: absolute;
   top:40%;
   left: 50%;
+}
+
+.mat-success {
+  color: $content-color !important;
+  background-color: $success-color !important;
+
+  &:disabled {
+    opacity: .5;
+  }
+
 }
 
 

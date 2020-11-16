@@ -6,11 +6,14 @@
     "LOGIN": "Login",
     "MY_FAMILY": "My family",
     "PROFILE": "Profile",
-    "LOGOUT": "Logout"
+    "LOGOUT": "Logout",
+    "SEARCH_PLACEHOLDER": "Search..."
   },
   "LOGIN": {
     "PASSWORD": "Password",
     "LOGIN": "Login",
+    "FORGOTPASSWORD": "Forgot password?",
+    "RESETPASSWORD": "Reset it here.",
     "DONTHAVEACC": "Don't have an account?",
     "REGISTER": "Register"
   },
@@ -39,11 +42,14 @@
       "Sun"
     ]
   },
-  "REGISTER": {
+  "PROFILE": {
+    "SAVE": "Save",
+    "PASSWORDCHANGE": "Change password",
+    "OLDPASSWORD": "Old password",
     "PASSWORD": "Password",
     "RPASSWORD": "Repeat password",
     "NAME": "Name",
-    "PHONE": "Phone",
+    "PHONE": "Phone number",
     "SURNAME": "Surname",
     "REGISTER": "Register",
     "ALREADYHAVEACC": "Already have an account?",
@@ -52,9 +58,13 @@
   "MYTABLE": {
     "FILTER": "Filter"
   },
+  "SEARCH_VIEW": {
+    "FAMILIES": "Families",
+    "PROFILES": "User profiles"
+  },
   "LIST_FAMILIES": {
     "COLUMN_HEADER":
-     {"familyName": "Surname", "budget": "Budget"},
+     {"familyName": "Surname", "familyMembers": "Members No."},
     "FETCHSUCCESS": "Table data fetched succesfully",
     "FETCHERROR": "Upss something went wrong",
     "BUTTON_INVITE": "Join family",
@@ -99,5 +109,40 @@
     "NAV_TASKS": "Tasks",
     "NAV_INVITATIONS": "Invitations",
     "NAV_MEMBERS": "Members"
+  },
+    "TODO": {
+      "ADDTODO": "Add new list",
+      "NAME": "Name",
+      "DESCRIPTION": "Description",
+      "TASKCREATE": "Fill in task information",
+      "TASK": "Task",
+      "RESPPERSON": "For",
+      "ASSIGNTASK": "Assign to",
+      "ADDTASK": "Add new task",
+      "SUBMIT": "Submit",
+      "EVERYONE": "Everyone",
+      "DONE": "Done",
+      "NOTDONE": "Not Done"
+    },
+  "MAIN_PAGE": {
+    "CAROUSEL_1": "Family. We have nothing apart. We have everything together.",
+    "CAROUSEL_2": "Family. We have us. We have so much.",
+    "CAROUSEL_3": "Family. Life begins here and love never ends.",
+    "TEXT_BLOCK_1_1": "There is no doubt that the ability to perfectly manage time comes in handy in everyday life,\n  even the private one, where it would seem that spontaneity is the most important thing. Effective management of tasks, responsibilities, and finally also time makes that we become part of the most positive changes in the perspective of routine duties.",
+    "TEXT_BLOCK_1_2": "With ",
+    "TEXT_BLOCK_1_3": " it will be easier than ever!",
+    "TEXT_BLOCK_2": "Our offer",
+    "TEXT_BLOCK_2_1": "Don't leave your family fate to chance!",
+    "TEXT_BLOCK_2_1_1": "Plan",
+    "TEXT_BLOCK_2_1_2": "Manage",
+    "TEXT_BLOCK_2_1_3": "Work",
+    "TEXT_BLOCK_2_2": "Is your family outgoing? It's alright!",
+    "TEXT_BLOCK_2_2_1": "Communicate and make friends with other families",
+    "TEXT_BLOCK_2_2_2": "Unite into larger communities",
+    "TEXT_BLOCK_2_2_3": "Spend time together",
+    "TEXT_BLOCK_2_3": "Taking care of your family's happiness is your duty and our priority, which is why our application has everything you need!",
+    "TEXT_BLOCK_2_3_1": "Convenient interface that can be easily used by both the youngest and the oldest family members",
+    "TEXT_BLOCK_2_3_2": "Technical support in case of problems",
+    "TEXT_BLOCK_2_3_3": "Continuous improvement and adaptation of the application to your needs"
   }
 }

@@ -1,6 +1,6 @@
 <app-calendar [tasks]="myFamilyTasks" #myChild (outputObject)="clickedDate($event)"></app-calendar>
 <mat-spinner diameter="100" id="mySpinner"></mat-spinner>
-<div id="toDoDetails" #toDoDetails (scroll)="onScroll($event)" (dblclick)="closeMe()">
+<div id="toDoDetails" #toDoDetails (scroll)="onScroll($event)">
   <h2 id="displayDate">{{displayDate}}</h2>
 
   <mat-card class="example-card-main">
@@ -10,10 +10,83 @@
       <mat-card-subtitle>----</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <button  mat-raised-button color="primary" (click)="addNewToDo()">ADD NEW TODO</button>
+      <form #newTodoForm class="todo-form" [formGroup]="todoForm" (ngSubmit)="createTodo()">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'TODO.NAME' | translate }}</mat-label>
+          <input formControlName="name" matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'TODO.DESCRIPTION' | translate }}</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+        <br>
+        <div formArrayName="tasks">
+          <mat-accordion>
+            <h3>{{ 'TODO.TASKCREATE' | translate }}</h3>
+            <div class="todo-task-panel" *ngFor="let newTask of todoForm.get('tasks')['controls']; let i=index;">
+              <div [formGroupName]="i">
+                <mat-expansion-panel
+                  #currentPanel
+                  hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      {{ 'TODO.TASK' | translate }} {{i+1}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <div class="task-details" *ngIf="!currentPanel.expanded">
+                        <span class="task-data">
+                          <span class="bold">{{ 'TODO.NAME' | translate }}: </span>
+                          {{newTask.controls['name'].value}}
+                        </span>
+                        <span class="task-data">
+                          <span class="bold">{{ 'TODO.RESPPERSON' | translate }}: </span>
+                          {{getResponsiblePerson(newTask)}}
+                        </span>
+                        <span class="task-data">
+                          <span class="bold">{{ 'TODO.NAME' | translate }}: </span>
+                          {{newTask.controls['description'].value}}
+                        </span>
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <mat-form-field appearance="fill">
+                    <mat-label>{{ 'TODO.NAME' | translate }}</mat-label>
+                    <input formControlName="name" matInput>
+                  </mat-form-field>
+                  <br>
+                  <mat-form-field appearance="fill">
+                    <mat-label>{{ 'TODO.ASSIGNTASK' | translate }}</mat-label>
+                    <mat-select formControlName="profile">
+                      <mat-option [value]="-1">{{ 'TODO.EVERYONE' | translate }}</mat-option>
+                      <mat-option *ngFor="let member of this.familyService.familyMembers"
+                                  [value]="member.id">
+                        {{member.name + ' ' +member.surname}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <br>
+                  <mat-form-field appearance="fill">
+                    <mat-label>{{ 'TODO.DESCRIPTION' | translate }}</mat-label>
+                    <textarea matInput formControlName="description"></textarea>
+                  </mat-form-field>
+                  <br>
+                </mat-expansion-panel>
+              </div>
+            </div>
+          </mat-accordion>
+        </div>
+        <button mat-raised-button color="primary" (click)="addNewTaskInTodo()">{{ 'TODO.ADDTASK' | translate }}</button>
+        <br>
+        <button mat-raised-button class="todo-form-submit-btn" type="submit" color="success" [disabled]="!todoForm.valid">{{ 'TODO.SUBMIT' | translate }}</button>
+      </form>
+      <button  mat-raised-button class="btn-show-form" color="primary" (click)="showTodoForm(newTodoForm)">{{ 'TODO.ADDTODO' | translate }}</button>
     </mat-card-content>
   </mat-card>
-  <mat-card class="example-card-main" *ngFor="let toDoList of toDoListsClickedDay">
+
+
+
+  <mat-card class="example-card-main" *ngFor="let toDoList of toDoListsClickedDay;">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image-main"></div>
       <mat-card-title>{{toDoList?.name}} Deadline: {{toDoList?.dueDate}}</mat-card-title>
@@ -24,23 +97,52 @@
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>{{task.name}}</mat-card-title>
-          <mat-card-subtitle>{{task.responsiblePerson.name}}  {{task.responsiblePerson.surname}}</mat-card-subtitle>
+          <mat-card-subtitle>{{task.responsiblePerson?.name}}  {{task.responsiblePerson?.surname}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
           <ul>
-            <!--#TODO CHANGE STYLE HERE-->
-            <li>{{task.description}} <span class="taskStatus" *ngIf="task.done" style="color: green"> DONE &#10003;</span><span class="taskStatus" *ngIf="task.done === false" style="color: red">NOT DONE X <button  mat-raised-button color="primary" (click)="changeTaskStatus(task.id)">CHANGE STATUS</button></span></li>
+            <li>{{task.description}}
+              <span class="taskStatus" *ngIf="task.done" style="color: green">
+                <button  mat-raised-button color="success" (click)="changeTaskStatus(task)">{{ 'TODO.DONE' | translate }} &#10003;</button>
+              </span>
+              <span class="taskStatus" *ngIf="task.done === false" style="color: red">
+                <button  mat-raised-button color="warn" (click)="changeTaskStatus(task)">{{ 'TODO.NOTDONE' | translate }} X</button>
+              </span>
+            </li>
           </ul>
         </mat-card-content>
       </mat-card>
       <mat-card class="example-card">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>----</mat-card-title>
-          <mat-card-subtitle>----</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <button  mat-raised-button color="primary" (click)="addNewTask()">ADD NEW TASK</button>
+          <form id="{{toDoList.id}}" class="task-form" #currentForm [formGroup]="taskForm"
+                (ngSubmit)="createTask(taskForm.value, currentForm, toDoList)">
+            <mat-form-field appearance="fill">
+              <mat-label>{{ 'TODO.NAME' | translate }}</mat-label>
+              <input formControlName="name" matInput>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+              <mat-label>{{ 'TODO.ASSIGNTASK' | translate }}</mat-label>
+              <mat-select formControlName="profile">
+                <mat-option [value]="-1">{{ 'TODO.EVERYONE' | translate }}</mat-option>
+                <mat-option *ngFor="let member of this.familyService.familyMembers"
+                            [value]="member.id">
+                  {{member.name + ' ' +member.surname}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+              <mat-label>{{ 'TODO.DESCRIPTION' | translate }}</mat-label>
+              <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
+            <br>
+            <button mat-raised-button color="success">{{ 'TODO.SUBMIT' | translate }}</button>
+          </form>
+          <button mat-raised-button color="primary" (click)="showAddTaskForm(currentForm)">{{ 'TODO.ADDTASK' | translate }}</button>
         </mat-card-content>
       </mat-card>
     </mat-card-content>

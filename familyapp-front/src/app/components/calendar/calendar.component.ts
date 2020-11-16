@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Todolist} from '../../models/todolist';
 
 export class SelectedDateDto {
@@ -14,12 +14,12 @@ export class CalendarComponent implements OnInit {
   totaldaysinMonth: number;
   daysInMonth: any;
   monthIndex: number;
-  yearIndex: number;
+  currentYear: number;
   currentDate: Date;
   firstDay;
   appYearAndMonth: boolean;
   @Input() tasks;
-  years = [2020, 2021, 2022, 2023, 2024, 2025 , 2026, 2027];
+  @ViewChild('yearInput') private yearInput: ElementRef;
   toDoLists: Todolist[];
   @Output()
   public outputObject = new EventEmitter<Object>();
@@ -28,7 +28,7 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
     this.currentDate = new Date();
     this.monthIndex = this.currentDate.getMonth();
-    this.yearIndex = this.years.indexOf(this.currentDate.getFullYear());
+    this.currentYear = this.currentDate.getFullYear();
     this.calculateTotalNoOfDaysAndFirstDay();
 
   }
@@ -51,36 +51,36 @@ export class CalendarComponent implements OnInit {
 
   }
   nextYear() {
-    if (this.yearIndex === this.years.length - 1) {
-      this.yearIndex = 0;
-    } else {
-      this.yearIndex++;
-    }
+      this.currentYear = (+this.currentYear + 1 );
+    this.yearInput.nativeElement.value = this.currentYear;
     this.calculateTotalNoOfDaysAndFirstDay();
   }
   prevYear() {
-    if (this.yearIndex === 0) {
-      this.yearIndex = this.years.length - 1;
-    } else {
-      this.yearIndex--;
-    }
-    this.calculateTotalNoOfDaysAndFirstDay();
 
+    this.currentYear -= 1;
+    console.log(' current year prev year' + this.currentYear)
+    this.yearInput.nativeElement.value = this.currentYear;
+    this.calculateTotalNoOfDaysAndFirstDay();
+    }
+
+  changeYearToTypedYear() {
+    this.currentYear = +this.yearInput.nativeElement.value;
+    this.calculateTotalNoOfDaysAndFirstDay();
   }
   counter(i: number) {
     return new Array(i);
   }
 
   calculateTotalNoOfDaysAndFirstDay() {
-    this.totaldaysinMonth = new Date(this.years[this.yearIndex], this.monthIndex + 1, 0).getDate();
+    this.totaldaysinMonth = new Date(this.currentYear, this.monthIndex + 1, 0).getDate();
     this.daysInMonth = new Array();
     for (let i = 1; i <= this.totaldaysinMonth; i++) {
       this.daysInMonth[i - 1] = i;
     }
-    this.firstDay = new Date(this.years[this.yearIndex], this.monthIndex, 1).getDay() - 1;
+    this.firstDay = new Date(this.currentYear, this.monthIndex, 1).getDay() - 1;
     this.firstDay = this.firstDay === -1 ? 6 : this.firstDay;
     this.firstDay = this.firstDay === 0 ? 0 : this.firstDay;
-    if (this.currentDate.getMonth() === this.monthIndex && this.currentDate.getFullYear() === this.years[this.yearIndex]) {
+    if (this.currentDate.getMonth() === this.monthIndex && this.currentDate.getFullYear() === this.currentYear) {
       this.appYearAndMonth = true;
     } else {
       this.appYearAndMonth = false;
@@ -91,7 +91,7 @@ export class CalendarComponent implements OnInit {
   getClickedDayAndCreateFullDate(day: number) {
     const outputDto = new SelectedDateDto();
     outputDto.familyToDoList = this.toDoLists;
-    outputDto.selectedDate = new Date(this.years[this.yearIndex], this.monthIndex - 1, day + 1);
+    outputDto.selectedDate = new Date(this.currentYear, this.monthIndex, day + 1);
     this.outputObject.emit(outputDto);
   }
 
@@ -103,9 +103,9 @@ export class CalendarComponent implements OnInit {
     if (this.toDoLists !== undefined) {
       let totalTasksForDay = 0;
       for (let i = 0; i < this.toDoLists.length; i++) {
-        const taskDate = new Date(Date.parse(this.toDoLists[i].dueDate.toString()));
-        const myDayString = this.years[this.yearIndex] + ' ' + this.monthIndex + ' ' + dayNum;
-        const taskDateString = taskDate.getFullYear() + ' ' + (taskDate.getMonth() + 1) + ' ' + taskDate.getDate();
+        const taskDate = new Date(Date.parse(this.toDoLists[i].dueDate?.toString()));
+        const myDayString = this.currentYear + ' ' + (this.monthIndex) + ' ' + dayNum;
+        const taskDateString = taskDate.getFullYear() + ' ' + (taskDate.getMonth()) + ' ' + taskDate.getDate();
         if (myDayString === taskDateString) {
           for (let j = 0; j < this.toDoLists[i].tasks.length; j++) {
             // if(this.toDoLists[i].tasks[j].responsiblePerson.id === this.loggedUser.id) // #TODO PRINT TASKS ONLY FOR LOGGED USER?

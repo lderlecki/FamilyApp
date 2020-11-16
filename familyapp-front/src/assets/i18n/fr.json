@@ -6,11 +6,14 @@
     "LOGIN": "S'identifier",
     "MY_FAMILY": "Ma famille",
     "PROFILE": "Profil",
-    "LOGOUT": "Se déconnecter"
+    "LOGOUT": "Se déconnecter",
+    "SEARCH_PLACEHOLDER": "Chercher..."
   },
   "LOGIN": {
     "PASSWORD": "Mot de passe",
     "LOGIN": "S'identifier",
+    "FORGOTPASSWORD": "Mot de passe oublié?",
+    "RESETPASSWORD": "Réinitialisez-le ici.",
     "DONTHAVEACC": "Je n'ai pas de compte?",
     "REGISTER": "S'inscrire"
   },
@@ -39,22 +42,29 @@
       "Dim"
     ]
   },
-  "REGISTER": {
-  "PASSWORD": "Mot de passe",
-  "RPASSWORD": "Répéter le mot de passe",
-  "NAME": "Nom",
-  "SURNAME": "Nom de famille",
-  "PHONE": "Téléphone",
-  "REGISTER": "S'inscrire",
-  "ALREADYHAVEACC": "Vous avez déjà un compte?",
-  "LOGIN": "S'identifier"
+  "PROFILE": {
+    "SAVE": "Sauvegarder",
+    "PASSWORDCHANGE": "Changer le mot de passe",
+    "OLDPASSWORD": "Ancien mot de passe",
+    "PASSWORD": "Mot de passe",
+    "RPASSWORD": "Répéter le mot de passe",
+    "NAME": "Nom",
+    "SURNAME": "Nom de famille",
+    "PHONE": "Numéro de téléphone",
+    "REGISTER": "S'inscrire",
+    "ALREADYHAVEACC": "Vous avez déjà un compte?",
+    "LOGIN": "S'identifier"
 },
   "MYTABLE": {
   "FILTER": "Filtre"
 },
+  "SEARCH_VIEW": {
+    "FAMILIES": "Des familles",
+    "PROFILES": "Des profils d'utilisateurs"
+  },
   "LIST_FAMILIES": {
     "COLUMN_HEADER":
-    {"familyName": "Nom", "budget": "Budget"},
+    {"familyName": "Nom", "familyMembers": "Membres No."},
     "FETCHSUCCESS": "Les données de la table ont été récupérées avec succès",
     "FETCHERROR": "Upss quelque chose s'est mal passé",
     "BUTTON_INVITE": "Rejoindre la famille",
@@ -98,5 +108,40 @@
     "NAV_TASKS": "Tâches",
     "NAV_INVITATIONS": "Invitations",
     "NAV_MEMBERS": "Membres"
+  },
+    "TODO": {
+      "ADDTODO": "Ajouter une nouvelle liste",
+      "NAME": "Nom",
+      "DESCRIPTION": "Description",
+      "TASKCREATE": "Remplissez les informations de la tâche",
+      "TASK": "Tâche",
+      "RESPPERSON": "Pour",
+      "ASSIGNTASK": "Attribuer à",
+      "ADDTASK": "Ajouter une nouvelle tâche",
+      "SUBMIT": "Soumettre",
+      "EVERYONE": "Tout le monde",
+      "DONE": "Terminé",
+      "NOTDONE": "Non terminé"
+    },
+  "MAIN_PAGE": {
+    "CAROUSEL_1": "Famille. Nous n'avons rien à part. Nous avons tout ensemble.",
+    "CAROUSEL_2": "Famille. Nous avons nous. Nous en avons tellement.",
+    "CAROUSEL_3": "Famille. La vie commence ici et l'amour ne s'arrête jamais.",
+    "TEXT_BLOCK_1_1": "Il ne fait aucun doute que la capacité à gérer parfaitement le temps est utile dans la vie quotidienne, même privée, où il semblerait que la spontanéité soit la chose la plus importante. Une gestion efficace des tâches, des responsabilités, et enfin aussi du temps fait que nous faisons partie des changements les plus positifs dans la perspective des tâches courantes.",
+    "TEXT_BLOCK_1_2": "Avec ",
+    "TEXT_BLOCK_1_3": " ce sera plus facile que jamais!",
+    "TEXT_BLOCK_2": "Notre offre",
+    "TEXT_BLOCK_2_1": "Ne laissez pas le destin de votre famille au hasard!",
+    "TEXT_BLOCK_2_1_1": "Plan",
+    "TEXT_BLOCK_2_1_2": "Gérer",
+    "TEXT_BLOCK_2_1_3": "Travail",
+    "TEXT_BLOCK_2_2": "Votre famille est-elle extravertie? C'est d'accord!",
+    "TEXT_BLOCK_2_2_1": "Communiquer et se faire des amis avec d'autres familles",
+    "TEXT_BLOCK_2_2_2": "Unissez-vous dans de plus grandes communautés",
+    "TEXT_BLOCK_2_2_3": "Passer du temps ensemble",
+    "TEXT_BLOCK_2_3": "Prendre soin du bonheur de votre famille est votre devoir et notre priorité, c'est pourquoi notre application a tout ce dont vous avez besoin!",
+    "TEXT_BLOCK_2_3_1": "Interface pratique qui peut être facilement utilisée par les membres de la famille les plus jeunes et les plus âgés",
+    "TEXT_BLOCK_2_3_2": "Assistance technique en cas de problème",
+    "TEXT_BLOCK_2_3_3": "Amélioration continue et adaptation de l'application à vos besoins"
   }
 }

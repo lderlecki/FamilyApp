@@ -9,7 +9,7 @@ from .views import (
     TokenValidationView,
     PasswordTokenValidateAPI,
     RequestPasswordResetEmail,
-    SetNewPasswordAPIView,
+    SetNewPasswordAPIView, ChangePasswordView,
 )
 
 
@@ -20,8 +20,12 @@ router.register('profiles', ProfileViewSet, basename='profile')
 urlpatterns = [
     path(r'', include(router.urls)),
     path(r'register/', UserRegisterView.as_view(), name='register'),
+
     path(r'validate/access/', TokenValidationView.as_view(), name='validate-token'),
+
     path(r'request-reset-email/', RequestPasswordResetEmail.as_view(), name='request-reset-email'),
     path(r'password-reset/<uidb64>/<token>/', PasswordTokenValidateAPI.as_view(), name='password-reset-confirm'),
-    path(r'password-reset-complete/', SetNewPasswordAPIView.as_view(), name='password-reset-complete')
+    path(r'password-reset-complete/', SetNewPasswordAPIView.as_view(), name='password-reset-complete'),
+
+    path(r'change-password/', ChangePasswordView.as_view(), name='user-password-change')
 ]

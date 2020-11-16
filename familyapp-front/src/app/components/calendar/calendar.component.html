@@ -7,9 +7,7 @@
           </div>
         </div>
         <div class="box">
-          <div class="navBox">
-            {{years[yearIndex]}}
-          </div>
+          <input type="number" (keyup.enter)="changeYearToTypedYear()" class="navBox" value="{{currentYear}}" #yearInput>
         </div>
         <div class="box">
           <div class="navBox">
@@ -35,7 +33,7 @@
             <img class="arrow" src="../../../assets/images/arrowR24.png" (click)="nextMonth()">
           </div>
         </div>
-        <div class="box" *ngFor="let item of counter(7); let i = index;">
+        <div class="box" *ngFor="let item of counter(7); let i = index; let last = last"  [class.last-item]="last">
           <div class="dayBoxName">
             {{ 'CALENDAR.WEEKDAYS.'+i | translate }}
           </div>
@@ -45,10 +43,14 @@
           </div>
         </div>
         <div class="box" *ngFor="let day of daysInMonth">
-          <div class="dayBox" (click)="getClickedDayAndCreateFullDate(day);" *ngIf="appYearAndMonth==true && day == currentDate.getDate()" style="border: 2px solid #DA3A21; left: 0px">
+          <div class="dayBox" id="currentDay" (click)="getClickedDayAndCreateFullDate(day);" *ngIf="appYearAndMonth==true && day == currentDate.getDate()" style="border: 4px solid #DA3A21; left: -2px; top: -2px;">
         {{day}}
           </div>
-          <div class="taskHere" *ngIf="checkTasksForDay(day) >0 ? checkTasksForDay(day): null; let totalTaskNumber">{{totalTaskNumber}}</div>
+          <div class="taskWrapper" *ngIf="checkTasksForDay(day) >0 ? checkTasksForDay(day): null; let totalTaskNumber">
+            <div class="taskHere">
+              {{totalTaskNumber}}
+            </div>
+          </div>
           <div class="dayBox" (click)="getClickedDayAndCreateFullDate(day);" *ngIf="appYearAndMonth==false || day != currentDate.getDate()">
             {{day}}
           </div>

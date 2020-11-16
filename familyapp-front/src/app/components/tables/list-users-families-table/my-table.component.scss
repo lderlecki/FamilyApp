@@ -1,54 +1,67 @@
 @import '../../../../globalScssVariables';
 
+#flexDiv
+{
+  margin: auto;
+  width: 50vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#flexDiv > *
+{
+  margin-bottom:  1%;
+}
 
 #filtrInput ::ng-deep .mat-form-field-underline .mat-form-field-ripple, #filtrInput ::ng-deep .mat-form-field-underline, #myTable::-webkit-scrollbar{
 
   background:$content-color;
 
-
 }
+
+
 //FILTER
 #filtrInput
 {
+  border:1px solid $table-black;
   border-radius: 5%;
-  background:$skin;
-  color: $black;
-  left:35%;
+  background: $table-gray;
+  color: $table-black;
   padding: 5px;
-  top:10%;
-  position: absolute;
-  width: 200px;
-
+  width: 30%;
 }
 
 input ::ng-deep{
+  padding: 5px;
+  width: calc(100% - 10px);
+  position: relative;
   font-size: 30px;
   background: $content-color;
 }
 //////////////////
 // MAIN TABLE STYLE
 #myTable {
-  border: 1px solid $black;
-  position: absolute;
-  left: 20%;
-  top:30%;
+  position: relative;
+  user-select: none;
+  height: 80%;
   width: 70%;
-  height: 60%;
+  border: 1px solid $table-black;
   overflow-y: scroll;
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 
 }
 
 #myTableContent {
-  background: $skin;
+  background: $content-color; //background color of rows with data
   width: 100%;
 }
 
 #myTableBackground {
-  position: absolute;
   width: 100%;
   height: 101%; //always do overflow
-  background: $skin;
+  background: $table-gray;
 }
 table {
   width: 100%;
@@ -57,33 +70,51 @@ table {
 
 //////////////////////////
 // EXPANDABLE ROW PROPERTIES
-
+tr.example-detail-row:hover
+{
+  font-weight: normal;
+  cursor: default;
+}
 tr.example-detail-row {
+
   height: 0;
-  background: $lavenderpink;
+  background: $content-color;
 }
 .example-element-detail {
   overflow: hidden;
   display: flex;
+  border-bottom:1px solid $table-black;
 }
 
 .example-element-diagram {
+  margin: auto;
   padding: 8px;
 }
-
+button
+{
+  font-size: 12px;
+}
+//PAGINATOR
+::ng-deep.mat-paginator .mat-paginator-container
+{
+  border:1px solid $table-black;
+  //background: rgba($nav-color,.8);
+  color: $table-black;
+  justify-content: center;
+}
 
 
 //ROWS HEADER AND CELLS PROPERTIES
 //////////////////////
 
+.mat-cell { //CENTER TEXT IN TD
+  color: $table-black;
+  text-align: center;
+}
+
 ::ng-deep .mat-sort-header-container { //CENTER TEXT IN HEADER FOR SORTED HEADER
   display:flex;
   justify-content:center;
-}
-::ng-deep .mat-row::ng-deep //CENTER TEXT IN TD
-{
-  color: $black;
-  text-align: center;
 }
 .mat-row:hover{
   font-weight: bold;
@@ -91,20 +122,42 @@ tr.example-detail-row {
 }
 ::ng-deep th.mat-header-cell::ng-deep
 {
-
-  background: $brick !important;
+  padding: 5px;
+  background: $table-blue !important;
   color: $content-color !important;
-  font-size: 1rem !important;
+  font-size: 16px !important;
 }
 th.mat-sort-header-sorted::ng-deep,::ng-deep .mat-sort-header-sorted {
-  color: $blue;
+  color: $brick;
+  font-weight: bold;
 
 }
 
 // SCROLLBAR
 #myTable::-webkit-scrollbar-thumb {
-  background: $brick;
+  background: $table-blue;
 }
+
+@media (max-width: 600px) {
+  #flexDiv {
+    width: 75vw;
+  }
+  #myTable {
+    width: 100%;
+    height: 90%;
+  }
+}
+
+  @media (orientation:landscape) and (max-height: 450px)
+  {
+    #flexDiv {
+      height: 120vh;
+    }
+    #myTable{
+      height: 90%;
+    }
+  }
+
 
 
 

@@ -1,0 +1,124 @@
+@import '../../../globalScssVariables';
+@import "carousel.bootstrap.min.css";
+*
+{
+  font-family: Roboto, Helvetica;
+  text-align: justify;
+  letter-spacing: 1px;
+  color: white;
+}
+/*---------------------
+  BACKGROUNDS AND BOX-SHADOWS FOR ALL ELEMENTS
+-----------------------*/
+.carousel-inner, #whyFamilyApp, #benefits
+{
+  background: $bg-color-for-element;
+  box-shadow: $box-shadow-for-element;
+
+}
+
+/*---------------------
+  CAROUSEL
+-----------------------*/
+.carousel-caption
+{
+
+}
+.d-block
+{
+  height: 30vw;
+  width: 100%;
+  z-index: -1;
+
+}
+
+.carousel-caption
+{
+  background: $bg-color-for-element;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: 5vw;
+  z-index: 1;
+  font-size: 2vw
+}
+
+/*---------------------
+ SECOND BLOCK WITH IMAGE AND SOME TEXT
+-----------------------*/
+#whyFamilyApp
+{
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 5vw;
+  height: 25vw;
+  align-items: center;
+
+}
+#whyFamilyApp img
+{
+  margin: 2% 2%;
+  width: 46%;
+
+}
+
+
+/*---------------------
+ THIRD BLOCK WITH FAMILYAPP BENEFITS
+-----------------------*/
+#mainTextSection
+{
+  font-size: 1.3vw;
+  margin: 2% 2%;
+  line-height: 2vw;
+  width: 48%;
+
+}
+
+#familyAppBeneftis
+{
+  display: flex;
+  position: relative;
+  flex-wrap: nowrap;
+  margin-top: 1vw;
+  height: 38vw;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.flexItem
+{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 26%;
+  padding: 1vw;
+}
+
+.flexItem > *
+{
+  padding: 5px;
+}
+
+#benefits
+{
+  font-size: 1.15vw;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  margin-top: 5vw;
+}
+#benefitText
+{
+  font-size: 2.4vw;
+  text-align: center;
+}
+.flexItem img
+{
+  width: 6vw;
+}
+
+.flexItem div
+{
+  text-align: center;
+}

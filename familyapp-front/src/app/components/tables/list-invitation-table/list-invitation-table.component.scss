@@ -1,6 +1,7 @@
 @import '../../../../globalScssVariables';
 
 
+
 #myTable::-webkit-scrollbar{
 
   background:$content-color;
@@ -11,18 +12,16 @@
 // MAIN TABLE STYLE
 #myTable {
   border: 1px solid $black;
-  position: absolute;
-  left: 20%;
-  top:30%;
-  width: 70%;
-  height: 60%;
+  position: relative;
+  width: 100%;
+  height: 100%;
   overflow-y: scroll;
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 
 }
 
 #myTableContent {
-  background: $skin;
+  background: $content-color;
   width: 100%;
 }
 
@@ -30,7 +29,7 @@
   position: absolute;
   width: 100%;
   height: 101%; //always do overflow
-  background: $skin;
+  background: $table-gray;
 }
 
 table {
@@ -60,12 +59,12 @@ margin: 10px;
 ::ng-deep th.mat-header-cell::ng-deep
 {
   text-align: center !important; //CENTER TEXT FOR NON SORT HEADER
-  background: $brick !important;
+  background: $nav-color !important;
   color: $content-color !important;
   font-size: 1rem !important;
 }
 
 // SCROLLBAR
 #myTable::-webkit-scrollbar-thumb {
-  background: $brick;
+  background: $nav-color;
 }

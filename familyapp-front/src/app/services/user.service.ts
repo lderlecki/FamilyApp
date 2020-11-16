@@ -44,7 +44,6 @@ export class UserService {
   }
 
   getProfileData(token, user_id): Observable<any> {
-    // this.httpHeaders = new HttpHeaders({'Authorization': `${this.AUTH_PREFIX} ${token}`});
     return this.http.get(this.BASE_URL + this.profileDataUrl + `${user_id}/`);
   }
 

@@ -3,6 +3,7 @@ import threading
 from django.conf import settings
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
+from rest_framework import serializers
 from django.core.mail import send_mail, EmailMessage
 from django.dispatch import receiver
 from django.urls import reverse
@@ -30,7 +31,7 @@ def generate_password_reset_email(request, user):
     body = f'Hello, \n Use link below to reset your password. \n {baseurl}'
     email = {
         'email_body': body,
-        'to_email': (user.email, ),
+        'to_email': (user.email,),
         'email_subject': 'Reset your password'
     }
     return email
@@ -41,3 +42,12 @@ def send_email(data):
         subject=data['email_subject'], body=data['email_body'], to=data['to_email']
     )
     EmailThread(email).start()
+
+
+def password_valid(p1, p2):
+    if p1 != p2:
+        raise serializers.ValidationError({'password': 'Passwords must match.'})
+    if not p1:
+        raise serializers.ValidationError({'password': 'Enter password.'})
+
+    return True

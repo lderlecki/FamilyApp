@@ -4,12 +4,18 @@
 
 .account-content {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  //flex-wrap: wrap;
   justify-content: center;
 }
 
 .account-form {
+  display: inline-block;
   padding-right: 15px;
   margin-right: 0;
   border-right: 4px solid $bg-color ;
+}
+
+.is-invalid {
+  border-left: solid 6px red;
 }

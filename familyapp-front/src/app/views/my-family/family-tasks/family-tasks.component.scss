@@ -2,6 +2,7 @@
 
 #toDoDetails
 {
+  z-index: 20;
   padding: 15px;
   position: absolute;
   width: 90%;
@@ -60,3 +61,51 @@
   margin-bottom: 1%;
 }
 
+.task-form {
+  transition: all 0.5s ease-in ;
+  margin: 10px 0 !important;
+  opacity: 0;
+  height: 0px;
+}
+
+.active {
+  opacity: 0.94 !important;
+  height: auto !important;
+  transform: scaleY(1) !important;
+
+}
+
+.mat-raised-button {
+  margin: 5px 0 !important;
+}
+
+.task-details {
+  display: flex;
+  flex-direction: row;
+}
+
+.task-data {
+  margin: 0px 20px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.todo-task-panel {
+  margin: 5px 0;
+}
+
+.todo-form {
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.5s ease;
+
+  margin: 10px 0 !important;
+  opacity: 0;
+  height: 0px;
+}
+
+.d-none {
+  display: none !important;
+}

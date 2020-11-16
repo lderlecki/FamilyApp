@@ -18,6 +18,10 @@ export class ProfileService {
   getAllProfiles(): Observable<any> {
     return this.http.get<any>(this.API_PROFILE_URL + 'all', {observe: 'response'});
   }
+
+  findWhereNameOrSurnameLike(searchedValue: string): Observable<any> {
+    return this.http.get<any>(this.API_PROFILE_URL + 'searchProfile?searchedValue=' + searchedValue, {observe: 'response'});
+  }
   getProfile(profileId: number): Observable<any> {
     return this.http.get<any>(this.API_PROFILE_URL + '?id='  + profileId, {observe: 'response'});
   }

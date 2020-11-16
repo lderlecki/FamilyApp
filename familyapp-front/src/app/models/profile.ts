@@ -1,3 +1,5 @@
+import {Family} from './family';
+
 export class Profile {
     id: number;
     user: number;
@@ -5,4 +7,6 @@ export class Profile {
     surname: string;
     email: string;
     phone: string;
+    family?: Family;
+    jwtToken?: string;
 }

@@ -30,6 +30,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws IOException, ServletException {
         String authToken = req.getHeader(JwtToken.HEADER_STRING);
         if (authToken != null) {
+            authToken = authToken.replace("Bearer ", "");
             Integer id = jwtToken.getIdFromToken(authToken);
             if (id != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 User user = userDetailsService.findById(id);

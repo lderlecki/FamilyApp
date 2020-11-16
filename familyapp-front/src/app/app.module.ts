@@ -44,13 +44,12 @@ import {UserService} from './services/user.service';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MyTableComponent} from './components/tables/list-users-families-table/my-table.component';
-import {ListFamilyComponent} from './views/list-families/list-family.component';
+import {ListFamilyComponent} from './views/familyProfileSearch/list-families/list-family.component';
 import {CookieService} from 'ngx-cookie-service';
 import { PasswordResetComponent } from './views/account/password-reset/password-reset.component';
 import { ResponseResetPasswordComponent } from './views/account/response-reset-password/response-reset-password.component';
 import {ListInvitationTableComponent} from './components/tables/list-invitation-table/list-invitation-table.component';
-import {ListInvitationComponent} from './views/list-invitations/list-invitation.component';
-import {ListProfileComponent} from './views/list-profiles/list-profile.component';
+import {ListProfileComponent} from './views/familyProfileSearch/list-profiles/list-profile.component';
 import {InviteToFamilyDialogComponent} from './components/dialogs/invite-to-family/invite-to-family-dialog';
 import {MyFamilyComponent} from './views/my-family/my-family.component';
 import {FamilyMembersComponent} from './views/my-family/family-members/family-members.component';
@@ -59,6 +58,8 @@ import {FamilyInvitationsComponent} from './views/my-family/list-family-invitati
 import {ErrorInterceptor} from './_helpers/error.interceptor';
 import { ProfileComponent } from './views/account/profile/profile.component';
 import {JwtInterceptor} from './_helpers/jwt.interceptor';
+import {MainpageComponent} from './views/mainpage/mainpage.component';
+import {FamilyProfileSearchComponent} from './views/familyProfileSearch/family-profile-search.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -75,7 +76,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     PasswordResetComponent,
     ResponseResetPasswordComponent,
     ListInvitationTableComponent,
-    ListInvitationComponent,
     ListProfileComponent,
     InviteToFamilyDialogComponent,
     MyFamilyComponent,
@@ -83,6 +83,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     FamilyTasksComponent,
     FamilyInvitationsComponent,
     ProfileComponent,
+    MainpageComponent,
+    FamilyProfileSearchComponent
   ],
   imports: [
     AppRoutingModule,

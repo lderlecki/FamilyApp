@@ -1,10 +1,13 @@
-from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import DjangoUnicodeDecodeError, force_str
 from django.utils.http import urlsafe_base64_decode
 
-from .models import User, Profile
 from rest_framework import serializers
+
+from .models import User, Profile
+from family.serializers import FamilySerializer
+
+from .utils import password_valid
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -14,13 +17,15 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    family = FamilySerializer(read_only=True)
+
     class Meta:
         model = Profile
-        fields = ('id', 'user', 'name', 'surname', 'email', 'phone', 'family_name')
+        fields = ('id', 'user', 'name', 'surname', 'email', 'phone', 'family')
 
-    def save(self, **kwargs):
-        if Profile.objects.filter(user=self.validated_data['user']).exists():
-            raise serializers.ValidationError({'profile': 'Profile already exists'})
+    # def save(self, **kwargs):
+    #     if Profile.objects.filter(user=self.validated_data['user']).exists():
+    #         raise serializers.ValidationError({'profile': 'Profile already exists'})
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -32,16 +37,15 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         fields = ('id', 'email', 'password', 'password2',)
         extra_kwargs = {'password': {'write_only': True}}
 
+    def validate(self, attrs):
+        password = attrs.get('password')
+        password2 = attrs.get('password2')
+        if password_valid(password, password2):
+            return attrs
+
     def save(self, **kwargs):
         password = self.validated_data['password']
-        password2 = self.validated_data['password2']
-        if password != password2:
-            raise serializers.ValidationError({'password': 'Passwords must match.'})
-        if not password:
-            raise serializers.ValidationError({'password': 'Enter password.'})
         user = User.objects.create_user(email=self.validated_data['email'], password=password)
-        # user.set_password(password)
-        # user.save()
         return user
 
 
@@ -50,7 +54,7 @@ class RequestPasswordResetEmailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', )
+        fields = ('email',)
 
     def validate(self, attrs):
         email = attrs.get('email', None)
@@ -67,26 +71,23 @@ class SetNewPasswordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('password', 'password_repeat', 'uidb64', 'token', )
+        fields = ('password', 'password_repeat', 'uidb64', 'token',)
 
     def validate(self, attrs):
         password = attrs.get('password')
         password_repeat = attrs.get('password_repeat')
         uidb64 = attrs.get('uidb64')
         token = attrs.get('token')
-        if password != password_repeat:
-            raise serializers.ValidationError({'password': 'Passwords must match each other'})
-        validate_password(password)
 
-        try:
-            user_id = force_str(urlsafe_base64_decode(uidb64))
-            user = User.objects.get(id=user_id)
-            if not PasswordResetTokenGenerator().check_token(user, token):
-                raise DjangoUnicodeDecodeError('Reset password link is invalid', 401)
-        except DjangoUnicodeDecodeError as e:
-            pass
-
-        return super().validate(attrs)
+        if password_valid(password, password_repeat):
+            try:
+                user_id = force_str(urlsafe_base64_decode(uidb64))
+                user = User.objects.get(id=user_id)
+                if not PasswordResetTokenGenerator().check_token(user, token):
+                    raise DjangoUnicodeDecodeError('Reset password link is invalid', 401)
+            except DjangoUnicodeDecodeError as e:
+                pass
+            return attrs
 
     def save(self, **kwargs):
         user_id = force_str(urlsafe_base64_decode(self.validated_data['uidb64']))
@@ -94,4 +95,32 @@ class SetNewPasswordSerializer(serializers.ModelSerializer):
         user.set_password(self.validated_data['password'])
         user.save()
 
+        return user
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(style={'input_type': 'password'}, required=True, write_only=True)
+    password = serializers.CharField(style={'input_type': 'password'}, required=True, write_only=True)
+    password2 = serializers.CharField(style={'input_type': 'password'}, required=True, write_only=True)
+
+    class Meta:
+        model = User
+
+    def validate_old_password(self, value):
+        user = self.context['request'].user
+        if not user.check_password(value):
+            raise serializers.ValidationError('Your old password was entered incorrectly. Please enter it again.')
+        return value
+
+    def validate(self, attrs):
+        password = attrs.get('password')
+        password2 = attrs.get('password2')
+        if password_valid(password, password2):
+            return attrs
+
+    def save(self, **kwargs):
+        password = self.validated_data['password']
+        user = self.context['request'].user
+        user.set_password(password)
+        user.save()
         return user

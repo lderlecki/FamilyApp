@@ -6,11 +6,14 @@
     "LOGIN": "Zaloguj",
     "MY_FAMILY": "Moja rodzina",
     "PROFILE": "Profil",
-    "LOGOUT": "Wyloguj"
+    "LOGOUT": "Wyloguj",
+    "SEARCH_PLACEHOLDER": "Szukaj..."
   },
   "LOGIN": {
     "PASSWORD": "Hasło",
     "LOGIN": "Zaloguj",
+    "FORGOTPASSWORD": "Nie pamiętasz hasła?",
+    "RESETPASSWORD": "Zresetuj je tutaj.",
     "DONTHAVEACC": "Nie masz konta?",
     "REGISTER": "Zarejestruj"
   },
@@ -39,7 +42,10 @@
       "Ndz"
     ]
   },
-  "REGISTER": {
+  "PROFILE": {
+    "SAVE": "Zapisz",
+    "PASSWORDCHANGE": "Zmień hasło",
+    "OLDPASSWORD": "Aktualne hasło",
     "PASSWORD": "Hasło",
     "RPASSWORD": "Powtórz hasło",
     "NAME": "Imię",
@@ -52,10 +58,14 @@
   "MYTABLE": {
     "FILTER": "Filtruj"
   },
+  "SEARCH_VIEW": {
+    "FAMILIES": "Rodziny",
+    "PROFILES": "Użytkownicy"
+  },
   "LIST_FAMILIES": {
     "COLUMN_HEADER": {
       "familyName": "Nazwisko",
-      "budget": "Budżet"
+      "familyMembers": "Ilość członków"
     },
     "FETCHSUCCESS": "Dane tabeli zostały pobrane pomyślnie",
     "FETCHERROR": "Upss coś poszło nie tak",
@@ -101,5 +111,40 @@
     "NAV_TASKS": "Zadania",
     "NAV_INVITATIONS": "Zaproszenia",
     "NAV_MEMBERS": "Członkowie"
+  },
+    "TODO": {
+      "ADDTODO": "Stwórz listę",
+      "NAME": "Nazwa",
+      "DESCRIPTION": "Opis",
+      "TASKCREATE": "Dodaj informację o zadaniach",
+      "TASK": "Zadanie",
+      "RESPPERSON": "Dla",
+      "ASSIGNTASK": "Przypisz do",
+      "ADDTASK": "Dodaj zadanie",
+      "SUBMIT": "Zatwierdź",
+      "EVERYONE": "Wszyscy",
+      "DONE": "Zrobione",
+      "NOTDONE": "Do zrobienia"
+    },
+  "MAIN_PAGE": {
+    "CAROUSEL_1": "Rodzina. Osobno nie mamy nic. Razem mamy wszystko.",
+    "CAROUSEL_2": "Rodzina. Mamy siebie. Mamy tak wiele.",
+    "CAROUSEL_3": "Rodzina. Tu zaczyna się życie, a miłość nigdy się nie kończy.",
+    "TEXT_BLOCK_1_1": "Nie ulega wątpliwości, że umiejętność doskonałego zarządzania czasem przydaje się w codziennym życiu,\n  nawet tym prywatnym, w którym zdawałoby się, że największe znaczenie ma jednak spontaniczność. Efektywne zarządzanie zadaniami, obowiązkami, a w końcu także i czasem sprawia, że stajemy się częścią jak najbardziej pozytywnych zmian w perspektywie rutynowych obowiązków.",
+    "TEXT_BLOCK_1_2": "Z ",
+    "TEXT_BLOCK_1_3": " będzie to proste jak nigdy dotąd!",
+    "TEXT_BLOCK_2": "Nasza oferta",
+    "TEXT_BLOCK_2_1": "Nie pozostawiaj losu rodziny przypadkowi!",
+    "TEXT_BLOCK_2_1_1": "Planuj",
+    "TEXT_BLOCK_2_1_2": "Zarządzaj",
+    "TEXT_BLOCK_2_1_3": "Działaj",
+    "TEXT_BLOCK_2_2": "Twoja rodzina jest towarzyska? Dobrze się składa!",
+    "TEXT_BLOCK_2_2_1": "Korespondujcie i zaprzyjaźniajcie się z innymi rodzinami",
+    "TEXT_BLOCK_2_2_2": "Łączcie się w większe społeczności",
+    "TEXT_BLOCK_2_2_3": "Spędzajcie wspólnie czas",
+    "TEXT_BLOCK_2_3": "Dbanie o szczęście Twojej rodziny to dla Ciebie obowiązek, a dla nas priorytet, dlatego też nasza aplikacja posiada wszystko czego potrzebujesz!",
+    "TEXT_BLOCK_2_3_1": "Wygodny interfejs, z którym poradzą sobie zarówno najmłodsi i najstarsi członkowie rodziny",
+    "TEXT_BLOCK_2_3_2": "Wsparcie techniczne w razie występienia problemów",
+    "TEXT_BLOCK_2_3_3": "Ciągłe udoskonalanie i dostosowywanie aplikacji do Twoich potrzeb"
   }
 }

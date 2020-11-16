@@ -1,9 +1,9 @@
-import {Profile} from '../model/profile';
+import {Profile} from '../models/profile';
 
 export interface Task {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   done: boolean;
-  responsiblePerson: Profile;
+  responsiblePerson?: Profile;
 }

@@ -23,8 +23,6 @@ export class FamilyMembersComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   ngOnInit(): void {
-
-
     this.subscription = this.familyService.getData().subscribe(data => {
       this.tableData = data?.familyMembers;
       setTimeout(() => {
