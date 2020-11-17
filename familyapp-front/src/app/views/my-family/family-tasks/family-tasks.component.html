@@ -16,6 +16,15 @@
           <input formControlName="name" matInput>
         </mat-form-field>
         <br>
+        <div>
+          <label>
+            Time
+            <input [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4">
+            <owl-date-time [pickerType]="'timer'" #dt4></owl-date-time>
+          </label>
+        </div>
+
+        <br>
         <mat-form-field appearance="fill">
           <mat-label>{{ 'TODO.DESCRIPTION' | translate }}</mat-label>
           <textarea matInput formControlName="description"></textarea>

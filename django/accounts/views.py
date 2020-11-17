@@ -36,18 +36,17 @@ class UserRegisterView(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         user_data = request.data['userData']
         serializer = self.serializer_class(data=user_data)
-        if serializer.is_valid():
-            user = serializer.save()
-            profile_data = request.data.get('profileData', None)
-            if profile_data:
-                profile = user.profile
-                profile.name = profile_data.get('name', None)
-                profile.surname = profile_data.get('surname', None)
-                profile.phone = profile_data.get('phoneNumber', None)
-                profile.save()
-            return Response('', status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        profile_data = request.data.get('profileData', None)
+        if profile_data:
+            profile = user.profile
+            profile.name = profile_data.get('name', None)
+            profile.surname = profile_data.get('surname', None)
+            profile.phone = profile_data.get('phoneNumber', None)
+            profile.save()
+        return Response('', status=status.HTTP_201_CREATED)
+
 
 
 class ProfileViewSet(viewsets.ModelViewSet):

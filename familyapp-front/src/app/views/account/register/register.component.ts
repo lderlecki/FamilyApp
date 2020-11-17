@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user.service';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {CustomValidators} from "../../../_helpers/custom-validators";
+import {CustomValidators} from '../../../_helpers/custom-validators';
+import {ToastrService} from 'ngx-toastr';
+import {Router} from "@angular/router";
 
 export class EmailErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -25,21 +27,23 @@ export class RegisterComponent implements OnInit {
   constructor(
     private userService: UserService,
     private fb: FormBuilder,
+    private toastr: ToastrService,
+    private router: Router,
   ) {
   }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.compose([
-        Validators.required,
-        CustomValidators.patternValidator(/\d/, {hasNumber: true}),
-        CustomValidators.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
-        CustomValidators.patternValidator(/[a-z]/, {hasSmallCase: true}),
-        Validators.minLength(8)
-      ])],
-      password2: ['', Validators.compose([Validators.required])],
-    },
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.compose([
+          Validators.required,
+          CustomValidators.patternValidator(/\d/, {hasNumber: true}),
+          CustomValidators.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
+          CustomValidators.patternValidator(/[a-z]/, {hasSmallCase: true}),
+          Validators.minLength(8)
+        ])],
+        password2: ['', Validators.compose([Validators.required])],
+      },
       {
         validator: CustomValidators.passwordMatchValidator
       });
@@ -59,10 +63,18 @@ export class RegisterComponent implements OnInit {
     console.log(profileData);
     this.userService.registerUser(registerData, profileData).subscribe(
       response => {
-        console.log(response);
+        this.toastr.success('User registered successfully');
+        this.router.navigate(['account/login/']);
       },
-      error => console.log(error)
+      error => {
+        console.log(error.error);
+        this.toastr.error(this.capitalize(error.error['email'][0]));
+      }
     );
+  }
+
+  capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
 }

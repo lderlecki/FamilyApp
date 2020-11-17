@@ -9,6 +9,7 @@ import {Family} from '../../models/family';
 import {Profile} from '../../models/profile';
 import {FamilyService} from '../../services/family.service';
 import {TokenAuthService} from '../../services/tokenAuth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-my-family',
@@ -21,14 +22,24 @@ export class MyFamilyComponent implements OnInit {
   myProfile: Profile;
   public familyMembers: any;
 
-  constructor(protected familyService: FamilyService, protected profileService: ProfileService,
-              protected toastr: ToastrService, protected translate: TranslateService,
-              protected _location: Location, private authService: TokenAuthService) {
+  constructor(
+    protected familyService: FamilyService,
+    protected profileService: ProfileService,
+    protected toastr: ToastrService,
+    protected translate: TranslateService,
+    protected _location: Location,
+    private authService: TokenAuthService,
+    private router: Router,
+  ) {
 
   }
 
   ngOnInit(): void {
     this.myFamily = this.familyService.familyValue;
+    if (this.myFamily === null) {
+      this.router.navigate(['account/profile']);
+      return;
+    }
     console.log('familymembers: ', this.familyService.familyMembers);
     console.log('my family value in my family component: ', this.myFamily);
   }
