@@ -26,15 +26,18 @@ body{
     margin-right: auto;
 }
 
+.nav-account {
+  margin-right: 5px;
+}
+
 .nav-items{
   justify-content: flex-end;
- align-items: center;
+  align-items: center;
   display: flex;
   position: relative;
-  padding: 5px;
 }
 .nav-item{
-  padding: 10px 15px 9px 15px;
+  padding: 10px 15px;
   text-decoration: none;
   text-align: center;
 }
@@ -50,7 +53,7 @@ body{
 }
 
 .nav-item:hover{
-  transition: all 1s ease;
+  transition: all 1.5s ease;
   background-color: black;
 }
 /*---------------------

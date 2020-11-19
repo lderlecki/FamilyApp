@@ -56,16 +56,13 @@ export class FamilyTasksComponent implements OnInit {
 
   ngOnInit(): void {
     const data = this.familyService.familyValue;
-    console.log('members: ', this.familyService.familyMembers);
-    console.log('family id:', data);
     this.toDoService.getToDosForFamily(data?.id).subscribe(response => {
       this.myFamilyTasks = response.body;
-      console.log('family tasks: ', this.myFamilyTasks);
       setTimeout(() => {
           this.myChild.init(this.myFamilyTasks);
-          document.getElementById('mySpinner').remove();
+          // document.getElementById('mySpinner').remove();
         }
-        , 500);
+        , 250);
     });
   }
 
@@ -85,6 +82,7 @@ export class FamilyTasksComponent implements OnInit {
     this.toDoListsClickedDay = new Array<Todolist>();
     this.selectedDateTime = selectedDate.selectedDate.toISOString();
     this.displayDate = this.selectedDateTime.split('T')[0];
+
     for (let i = 0; i < selectedDate.familyToDoList.length; i++) {
       if (selectedDate.familyToDoList[i].dueDate?.toString().split(' ')[0] === this.displayDate) {
         console.log('clicked date:');
@@ -161,27 +159,27 @@ export class FamilyTasksComponent implements OnInit {
 
   }
 
-  createTodo() {
+  createTodo(data) {
     if (!this.todoForm.valid) {
       const btn = <HTMLInputElement>document.querySelector('.todo-form-submit-btn');
       btn.disabled = true;
       return;
     }
-    const data = this.todoForm.value;
+    data['due_date'] = this.transformDueDate(data['due_date']);
     data['family'] = this.familyService.familyValue.id;
+    console.log('form before post: ', data);
     this.toDoService.createTodolist(this.todoForm.value).subscribe(
       (response) => {
-        console.log(response);
-        console.log('task create response: ', response.body);
-        this.todoCreateSuccess(response.body, this.todoForm);
+        this.todoCreateSuccess(response.body);
       }, error => console.log(error.message)
     );
     console.log('final form: ', this.todoForm.value);
   }
 
-  todoCreateSuccess(newTodoData, todoForm) {
+  todoCreateSuccess(newTodoData) {
+    // TODO: Display response todolist in calendar
     this.myFamilyTasks.push(newTodoData);
-    console.log('updated family todos: ', this.myFamilyTasks);
+    this.closeMe();
   }
 
   addNewTaskInTodo() {
@@ -193,6 +191,10 @@ export class FamilyTasksComponent implements OnInit {
         description: ['', Validators.required],
       })
     );
+  }
+
+  removeTask(i) {
+    this.getTasksArray.removeAt(i);
   }
 
   getResponsiblePerson(task) {
@@ -208,7 +210,8 @@ export class FamilyTasksComponent implements OnInit {
     return this.todoForm.get('tasks') as FormArray;
   }
 
+  private transformDueDate(date) {
+    return [this.displayDate, date.toISOString().split('T')[1]].join('T');
+  }
+
 }
-
-
-

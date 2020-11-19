@@ -1,5 +1,5 @@
 <app-calendar [tasks]="myFamilyTasks" #myChild (outputObject)="clickedDate($event)"></app-calendar>
-<mat-spinner diameter="100" id="mySpinner"></mat-spinner>
+<!--<mat-spinner diameter="100" id="mySpinner"></mat-spinner>-->
 <div id="toDoDetails" #toDoDetails (scroll)="onScroll($event)">
   <h2 id="displayDate">{{displayDate}}</h2>
 
@@ -10,19 +10,17 @@
       <mat-card-subtitle>----</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <form #newTodoForm class="todo-form" [formGroup]="todoForm" (ngSubmit)="createTodo()">
+      <form #newTodoForm class="todo-form" [formGroup]="todoForm" (ngSubmit)="createTodo(todoForm.value)">
         <mat-form-field appearance="fill">
           <mat-label>{{ 'TODO.NAME' | translate }}</mat-label>
           <input formControlName="name" matInput>
         </mat-form-field>
         <br>
-        <div>
-          <label>
-            Time
-            <input [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4">
-            <owl-date-time [pickerType]="'timer'" #dt4></owl-date-time>
-          </label>
-        </div>
+        <mat-form-field appearance="fill">
+          <mat-label>Time</mat-label>
+          <input matInput formControlName="due_date" [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4">
+          <owl-date-time [pickerType]="'timer'" #dt4></owl-date-time>
+        </mat-form-field>
 
         <br>
         <mat-form-field appearance="fill">
@@ -35,9 +33,7 @@
             <h3>{{ 'TODO.TASKCREATE' | translate }}</h3>
             <div class="todo-task-panel" *ngFor="let newTask of todoForm.get('tasks')['controls']; let i=index;">
               <div [formGroupName]="i">
-                <mat-expansion-panel
-                  #currentPanel
-                  hideToggle>
+                <mat-expansion-panel #currentPanel hideToggle>
                   <mat-expansion-panel-header>
                     <mat-panel-title>
                       {{ 'TODO.TASK' | translate }} {{i+1}}
@@ -53,9 +49,10 @@
                           {{getResponsiblePerson(newTask)}}
                         </span>
                         <span class="task-data">
-                          <span class="bold">{{ 'TODO.NAME' | translate }}: </span>
+                          <span class="bold">{{ 'TODO.DESCRIPTION' | translate }}: </span>
                           {{newTask.controls['description'].value}}
                         </span>
+
                       </div>
                     </mat-panel-description>
                   </mat-expansion-panel-header>
@@ -82,9 +79,11 @@
                   <br>
                 </mat-expansion-panel>
               </div>
+              <button mat-raised-button color="warn" (click)="removeTask(i)">Delete task {{i+1}}</button>
             </div>
           </mat-accordion>
         </div>
+<!--        <button mat-raised-button color="primary" (click)="showFormValue(todoForm.value)">Form Value</button>-->
         <button mat-raised-button color="primary" (click)="addNewTaskInTodo()">{{ 'TODO.ADDTASK' | translate }}</button>
         <br>
         <button mat-raised-button class="todo-form-submit-btn" type="submit" color="success" [disabled]="!todoForm.valid">{{ 'TODO.SUBMIT' | translate }}</button>

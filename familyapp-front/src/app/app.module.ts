@@ -60,6 +60,7 @@ import { ProfileComponent } from './views/account/profile/profile.component';
 import {JwtInterceptor} from './_helpers/jwt.interceptor';
 import {MainpageComponent} from './views/mainpage/mainpage.component';
 import {FamilyProfileSearchComponent} from './views/familyProfileSearch/family-profile-search.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -84,7 +85,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     FamilyInvitationsComponent,
     ProfileComponent,
     MainpageComponent,
-    FamilyProfileSearchComponent
+    FamilyProfileSearchComponent,
+    SpinnerComponent
   ],
   imports: [
     AppRoutingModule,

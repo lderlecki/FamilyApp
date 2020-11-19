@@ -39,7 +39,6 @@ class TodolistSerializer(serializers.ModelSerializer):
         return data
 
     def validate(self, attrs):
-        # TODO: if due_date exists check if it is at least today's date
         due_date = attrs.get('due_date', None)
         if due_date is None or due_date == '':
             attrs['due_date'] = timezone.now()

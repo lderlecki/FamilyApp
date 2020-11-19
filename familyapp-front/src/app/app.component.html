@@ -15,8 +15,8 @@
       </ng-template>
       <ng-template #anonymousBlock>
         <div class="nav-account">
-        <a class="nav-item" routerLink="/account/login" routerLinkActive='active'>{{ 'NAV.LOGIN' | translate }}</a>
-        <a class="nav-item" routerLink="/register" routerLinkActive='active'>{{ 'NAV.REGISTER' | translate }}</a>
+          <a class="nav-item" routerLink="/account/login" routerLinkActive='active'>{{ 'NAV.LOGIN' | translate }}</a>
+          <a class="nav-item" routerLink="/register" routerLinkActive='active'>{{ 'NAV.REGISTER' | translate }}</a>
         </div>
       </ng-template>
         <span class="nav-account"><select  #langSelect (change)="translate.use(langSelect.value)">
@@ -36,6 +36,7 @@
   </section>
 </div>
 
+<app-spinner></app-spinner>
 
 <!-- Copyright 2020 Google LLC. All Rights Reserved.
     Use of this source code is governed bsy an MIT-style license that

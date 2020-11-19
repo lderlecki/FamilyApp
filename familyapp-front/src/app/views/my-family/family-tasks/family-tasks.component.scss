@@ -1,6 +1,16 @@
 @import '../../../../globalScssVariables';
 
+mat-expansion-panel {
+  width: 80%;
+}
 
+.task-details {
+  width: 100%;
+}
+.task-data {
+  width: 33.3%;
+  margin-right: auto;
+}
 
 #toDoDetails
 {
@@ -94,10 +104,6 @@
   font-weight: bold;
 }
 
-.todo-task-panel {
-  margin: 5px 0;
-}
-
 .todo-form {
   transform: scaleY(0);
   transform-origin: top;
@@ -111,3 +117,5 @@
 .d-none {
   display: none !important;
 }
+
+

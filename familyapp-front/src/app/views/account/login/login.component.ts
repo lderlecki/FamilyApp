@@ -54,7 +54,6 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser(loginData) {
-    console.log(loginData);
     this.userService.loginUser(loginData).subscribe(
       response => {
         if (response.status === 200 && response.ok) {
@@ -69,7 +68,12 @@ export class LoginComponent implements OnInit {
       },
       error => {
         console.log(error.error);
-        this.toastr.error(error.error['detail']);
+        const errMsg = error.error['detail'];
+        if (errMsg !== null) {
+          this.toastr.error(errMsg);
+        } else {
+          this.toastr.error('Unknown error occurred.\nPlease try again.');
+        }
       }
     );
   }
@@ -94,7 +98,11 @@ export class LoginComponent implements OnInit {
         }
 
       },
-      err => console.log(err)
+      err => {
+        this.logout();
+        this.toastr.error('Error occurred.\nPlease try again.');
+        console.log(err);
+      }
     );
   }
 

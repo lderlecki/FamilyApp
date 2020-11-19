@@ -32,7 +32,7 @@ export class FamilyInvitationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.family = this.familyService.familyValue;
-    document.getElementById('mySpinner').remove();
+    // document.getElementById('mySpinner').remove();
     this.prepareData();
   }
 
