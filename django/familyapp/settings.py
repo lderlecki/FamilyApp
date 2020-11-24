@@ -154,8 +154,8 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(hours=5),
-
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(seconds=10),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=10),
     'SIGNING_KEY': env('SIGNING_KEY')
 }
 '''

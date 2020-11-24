@@ -23,6 +23,7 @@ export class AppComponent {
     public translate: TranslateService,
     public authService: TokenAuthService,
   ) {
+    console.log('app component constructor');
     translate.addLangs(['en', 'fr', 'pl']);
     translate.setDefaultLang('en');
     const browserLang = translate.getBrowserLang();

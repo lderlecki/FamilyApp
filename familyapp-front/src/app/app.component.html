@@ -2,7 +2,7 @@
   <div class="container">
     <div class="nav-items" >
       <a class="nav-item" routerLink="" routerLinkActive='active'>{{ 'NAV.HOME' | translate }}</a>
-      <div *ngIf="!authService.isTokenExpired(); then authorizedBlock; else anonymousBlock">
+      <div *ngIf="authService.profileValue; then authorizedBlock; else anonymousBlock">
       </div>
       <ng-template #authorizedBlock>
         <!--NEW AUTHORIZED LINKS HERE-->

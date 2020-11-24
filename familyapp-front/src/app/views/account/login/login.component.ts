@@ -35,14 +35,14 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.authService.profileValue) {
+      this.router.navigate(['account/profile']);
+    }
+
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
-
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['account/profile']);
-    }
 
     this.route.queryParams.subscribe(params => {
       this.returnUrl = params['returnUrl'];
@@ -61,12 +61,13 @@ export class LoginComponent implements OnInit {
           const body = response['body'];
           const accessToken = body['access'];
           const uid = body['uid'];
-          this.authService.set('access', accessToken);
-          this.authService.set('refresh', body['refresh']);
+          this.authService.set('access', accessToken, true);
+          this.authService.set('refresh', body['refresh'], true);
           this.getUserData(accessToken, uid);
         }
       },
       error => {
+        console.log('LOGIN ERROR');
         console.log(error.error);
         const errMsg = error.error['detail'];
         if (errMsg !== null) {
@@ -83,6 +84,7 @@ export class LoginComponent implements OnInit {
   }
 
   getUserData(accessToken, user_id) {
+    console.log('GET USER DATA');
     this.userService.getProfileData(accessToken, user_id).subscribe(
       response => {
         if (response.family !== null) {

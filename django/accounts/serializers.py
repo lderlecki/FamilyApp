@@ -23,10 +23,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ('id', 'user', 'name', 'surname', 'email', 'phone', 'family')
 
-    # def save(self, **kwargs):
-    #     if Profile.objects.filter(user=self.validated_data['user']).exists():
-    #         raise serializers.ValidationError({'profile': 'Profile already exists'})
-
 
 class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(style={'input_type': 'password'}, write_only=True)

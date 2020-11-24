@@ -136,7 +136,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
   providers: [
     {provide: TranslateLoader, useFactory: HttpLoaderFactory, deps: [HttpClient]},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    // {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import {TokenAuthService} from "../services/tokenAuth.service";
+import {TokenAuthService} from '../services/tokenAuth.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (!this.authService.isTokenExpired()) {
+        if (this.authService.profileValue) {
           return true;
         }
         // not logged in so redirect to login page with the return url

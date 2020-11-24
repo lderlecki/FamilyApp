@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
@@ -48,7 +50,6 @@ class UserRegisterView(generics.GenericAPIView):
         return Response('', status=status.HTTP_201_CREATED)
 
 
-
 class ProfileViewSet(viewsets.ModelViewSet):
     authentication_classes = [JWTAuthentication, ]
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly, ]
@@ -70,6 +71,9 @@ class LoginView(TokenObtainPairView):
         user = User.objects.filter(email=email).first()
         if not user or not user.check_password(password):
             raise exceptions.AuthenticationFailed('Email or password incorrect')
+
+        user.last_login = datetime.now()
+        user.save()
 
         refresh = RefreshToken.for_user(user)
 

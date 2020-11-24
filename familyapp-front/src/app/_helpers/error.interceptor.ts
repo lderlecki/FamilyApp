@@ -7,20 +7,26 @@ import {
   HttpResponse,
   HttpErrorResponse
 } from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {catchError, exhaustMap, filter, map, switchMap, take, tap} from 'rxjs/operators';
 
 import {TokenAuthService} from '../services/tokenAuth.service';
 import {SpinnerService} from "../services/spinner.service";
+import {UserService} from "../services/user.service";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private authService: TokenAuthService, private spinnerService: SpinnerService) {
+  private isRefreshing = false;
+  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
+  constructor(private authService: TokenAuthService,
+              private spinnerService: SpinnerService,
+              private userService: UserService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.spinnerService.requestStarted();
-
+    // console.log('error interceptor');
     return next.handle(request)
       .pipe(
         tap(
@@ -31,8 +37,6 @@ export class ErrorInterceptor implements HttpInterceptor {
           },
           (error: HttpErrorResponse) => {
             if ([401, 403].includes(error.status) && this.authService.profileValue) {
-              // auto logout if 401 response returned from api
-              console.log('interceptor error: ', error);
               this.authService.logout();
               location.reload();
             }
@@ -41,15 +45,6 @@ export class ErrorInterceptor implements HttpInterceptor {
           }
         )
       );
-
-
-    // return next.handle(request).pipe(catchError(err => {
-    //       if ([401, 403].includes(err.status) && this.authService.profileValue) {
-    //           // auto logout if 401 response returned from api
-    //           this.authService.logout();
-    //           location.reload();
-    //       }
-    //       return throwError(err);
-    //   }));
   }
+
 }
