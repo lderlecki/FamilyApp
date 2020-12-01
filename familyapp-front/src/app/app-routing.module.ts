@@ -14,6 +14,7 @@ import {AuthGuard} from './_helpers/auth.guards';
 import {ProfileComponent} from './views/account/profile/profile.component';
 import {MainpageComponent} from './views/mainpage/mainpage.component';
 import {FamilyProfileSearchComponent} from './views/familyProfileSearch/family-profile-search.component';
+import {FamilyGalleryComponent} from './views/my-family/family-gallery/family-gallery.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {
     path: 'myFamily', children: [
+      {
+        path: 'gallery',
+        component: FamilyGalleryComponent,
+      },
       {
         path: 'members',
         component: FamilyMembersComponent,

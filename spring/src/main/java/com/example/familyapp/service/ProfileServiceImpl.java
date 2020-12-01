@@ -3,9 +3,12 @@ package com.example.familyapp.service;
 import com.example.familyapp.dao.ProfileRepository;
 import com.example.familyapp.model.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.sql.DataSource;
+import java.sql.Blob;
 import java.util.List;
 
 @Transactional
@@ -13,10 +16,13 @@ import java.util.List;
 public class ProfileServiceImpl implements ProfileService {
 
     ProfileRepository profileRepository;
+    private JdbcTemplate jdbcTemp;
+
 
     @Autowired
-    public ProfileServiceImpl(ProfileRepository profileRepository) {
+    public ProfileServiceImpl(ProfileRepository profileRepository, DataSource dataSource) {
         this.profileRepository = profileRepository;
+        this.jdbcTemp = new JdbcTemplate(dataSource);
     }
 
     @Override
@@ -37,6 +43,13 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public List<Profile> getAllProfiles() {
         return profileRepository.findAll();
+    }
+
+    @Override
+    public Blob getImageById(long id) {
+        String query = "select p.image from profile p where p.id=?";
+        Blob photo = jdbcTemp.queryForObject(query, new Object[]{id}, Blob.class);
+        return photo;
     }
 
     @Override

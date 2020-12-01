@@ -1,7 +1,9 @@
 package com.example.familyapp.controller;
 
 
+import com.example.familyapp.config.JwtToken;
 import com.example.familyapp.model.ToDoList;
+import com.example.familyapp.service.ProfileService;
 import com.example.familyapp.service.ToDoListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +14,13 @@ import java.util.List;
 @RequestMapping(value = "/todolist")
 public class ToDoListController {
     private ToDoListService toDoListService;
+    private ProfileService profileService;
 
     @Autowired
-    public ToDoListController(ToDoListService toDoListService) {
+    public ToDoListController(ToDoListService toDoListService, ProfileService profileService
+    ) {
         this.toDoListService = toDoListService;
+        this.profileService = profileService;
     }
 
     @PostMapping(value = "/")
@@ -31,13 +36,10 @@ public class ToDoListController {
         return toDoListService.save(toDoList);
     }
 
-    @DeleteMapping(value = "/")
-    void deleteToDoList(@RequestParam long id){
-        toDoListService.delete(toDoListService.findById(id));
-    }
 
-    @GetMapping(value = "/forFamily/")
-    List<ToDoList> getTasksForFamily(@RequestParam long id){
-        return toDoListService.findByFamilyId(id);
+    @GetMapping(value = "/forFamily")
+    List<ToDoList> getTasksForFamily(@RequestHeader (name="Authorization") String token){
+        long userId= JwtToken.getIdFromToken(token.replaceAll("Bearer ", ""));
+        return toDoListService.findByFamilyId(profileService.findById(userId).getFamily().getId());
     }
 }

@@ -60,7 +60,6 @@ export class ListFamilyComponent implements OnInit {
         const idto = new InvitationDTO();
         idto.familyId = family.id
         idto.profileId = myId;
-        idto.invitedByFamily = false;
         this.invitationService.sendInvitation(idto).subscribe(response1 => {
           this.translate.get('LIST_FAMILIES.INVITE_SUCCESS_1').subscribe(res => {
             this.toastr.success(res + '<font color=\"#d3d3d3\"><b>' + family.familyName +

@@ -1,6 +1,7 @@
 package com.example.familyapp.controller;
 
 
+import com.example.familyapp.MyCorsFilter;
 import com.example.familyapp.config.JwtToken;
 import com.example.familyapp.dto.LoginUser;
 import com.example.familyapp.dto.Token;
@@ -9,13 +10,11 @@ import com.example.familyapp.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/token")
+@CrossOrigin(value = "*")
 public class AuthenticationController {
 
     @Autowired

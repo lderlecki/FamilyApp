@@ -9,6 +9,7 @@ import {Family} from '../../models/family';
 import {Profile} from '../../models/profile';
 import {FamilyService} from '../../services/family.service';
 import {TokenAuthService} from '../../services/tokenAuth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-my-family',
@@ -21,7 +22,7 @@ export class MyFamilyComponent implements OnInit {
   myProfile: Profile;
   public familyMembers: any;
 
-  constructor(protected familyService: FamilyService, protected profileService: ProfileService,
+  constructor(private router: Router, protected familyService: FamilyService, protected profileService: ProfileService,
               protected toastr: ToastrService, protected translate: TranslateService,
               protected _location: Location, private authService: TokenAuthService) {
 
@@ -29,6 +30,7 @@ export class MyFamilyComponent implements OnInit {
 
   ngOnInit(): void {
     this.myFamily = this.familyService.familyValue;
+    this.router.navigate(['myFamily/gallery']);
     console.log('familymembers: ', this.familyService.familyMembers);
     console.log('my family value in my family component: ', this.myFamily);
   }

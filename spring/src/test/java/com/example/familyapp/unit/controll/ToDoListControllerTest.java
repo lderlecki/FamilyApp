@@ -5,6 +5,7 @@ import com.example.familyapp.config.JwtToken;
 import com.example.familyapp.controller.ToDoListController;
 import com.example.familyapp.dao.ToDoListRepository;
 import com.example.familyapp.model.ToDoList;
+import com.example.familyapp.service.ProfileService;
 import com.example.familyapp.service.ToDoListService;
 import com.example.familyapp.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -40,6 +41,8 @@ public class ToDoListControllerTest {
 
     @MockBean
     ToDoListService toDoListService;
+    @MockBean
+    ProfileService profileService;
     @MockBean
     ToDoListRepository toDoListRepository;
 
@@ -96,11 +99,12 @@ public class ToDoListControllerTest {
                 .andExpect(status().isOk());
     }
 
+    //DELETING NEEDS FULL AUTHORIZATION OTHERWISE STATUS 405 IS RETURNED
     @Test
     public void deleteToDoList() throws Exception {
 
         mvc.perform(delete("/todolist/?id="+1))
-                .andExpect(status().isOk());
+                .andExpect(status().is(405));
 
     }
 

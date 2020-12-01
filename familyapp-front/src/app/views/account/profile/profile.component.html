@@ -2,23 +2,57 @@
   <div class="profile-wrapper">
     <section class="profile">
       <div class="user-data-wrapper">
+        <section class="profile-image">
+          <div>
+          <img src="http://localhost:8081/profile/getProfileImage?id={{profileData.id}}" #profileImage>
+          </div>
+          <div>
+          <mat-form-field>
+            <ngx-mat-file-input placeholder="{{ 'PROFILE.CHANGE_PROFILE_IMAGE' | translate }}"  (cancel)="cancelChangingImage()" [accept]="'.jpg, .jpeg, .png, .gif'" (change)="selectFile($event)" #imageInput></ngx-mat-file-input>
+          </mat-form-field>
+            <div *ngIf="imageLoaded">
+              <button class="btn btn-primary imageButton" mat-raised-button color="primary" [disabled]="!imageLoaded" (click)="upload()">{{ 'PROFILE.SAVE' | translate }}</button>
+              <button class="btn btn-primary imageButton" mat-raised-button color="primary" (click)="cancelChangingImage()">{{ 'PROFILE.CANCEL' | translate }}</button>
+            </div>
+          </div>
+        </section>
+        <div *ngIf="imageLoaded; then imageCropper; else form">
+        </div>
+        <ng-template #imageCropper>
+        <image-cropper id="imageCropper"
+                       [imageChangedEvent] = "imgUrl"
+                       [maintainAspectRatio]="true"
+                       [aspectRatio]="180/200"
+                       [cropperMinWidth]="180"
+                       [cropperMinHeight]="200"
+                       [resizeToWidth]="180"
+                       [onlyScaleDown]="true"
+                       [initialStepSize]="100"
+                       [resizeToHeight]="200"
+                       [roundCropper]="false"
+                       (imageCropped)="imageCropped($event)"
+                       [alignImage]="'center'"
+                       format="jpeg"
+        ></image-cropper>
+        </ng-template>
+        <ng-template #form>
         <form [formGroup]="profileForm" class="profile-form profile-data">
-            <mat-form-field class="form-field">
-              <mat-label>{{ 'PROFILE.NAME' | translate }}</mat-label>
-              <input required formControlName="name" matInput type="text">
-            </mat-form-field>
-            <mat-form-field class="form-field">
-              <mat-label>{{ 'PROFILE.SURNAME' | translate }}</mat-label>
-              <input required formControlName="surname" matInput type="text">
-            </mat-form-field>
-            <mat-form-field class="form-field">
-              <mat-label>Email</mat-label>
-              <input required formControlName="email" matInput type="email">
-            </mat-form-field>
-            <mat-form-field class="form-field">
-              <mat-label>{{ 'PROFILE.PHONE' | translate }}</mat-label>
-              <input required formControlName="phone" matInput type="text">
-            </mat-form-field>
+          <mat-form-field class="form-field">
+            <mat-label>{{ 'PROFILE.NAME' | translate }}</mat-label>
+            <input required formControlName="name" matInput type="text">
+          </mat-form-field>
+          <mat-form-field class="form-field">
+            <mat-label>{{ 'PROFILE.SURNAME' | translate }}</mat-label>
+            <input required formControlName="surname" matInput type="text">
+          </mat-form-field>
+          <mat-form-field class="form-field">
+            <mat-label>Email</mat-label>
+            <input required formControlName="email" matInput type="email">
+          </mat-form-field>
+          <mat-form-field class="form-field">
+            <mat-label>{{ 'PROFILE.PHONE' | translate }}</mat-label>
+            <input required formControlName="phone" matInput type="text">
+          </mat-form-field>
           <button (click)="updateProfileData(profileForm.value)"
                   [disabled]="!profileForm.valid" mat-raised-button class="form-btn" color="primary">
             {{ 'PROFILE.SAVE' | translate }}
@@ -36,27 +70,31 @@
           <mat-form-field class="custom-mat-field">
             <mat-label>{{ 'PROFILE.PASSWORD' | translate }}</mat-label>
             <input required matInput formControlName="password" type="password">
-            <mat-error [ngClass]="passwordForm.controls['password'].hasError('required') || passwordForm.controls['password'].hasError('minlength')  ? '' : 'text-success'">
+            <mat-error
+              [ngClass]="passwordForm.controls['password'].hasError('required') || passwordForm.controls['password'].hasError('minlength')  ? '' : 'text-success'">
               <i class="material-icons">{{ passwordForm.controls['password'].hasError('required') ||
-                passwordForm.controls['password'].hasError('minlength') ? 'cancel' :
+              passwordForm.controls['password'].hasError('minlength') ? 'cancel' :
                 'check_circle' }}</i>
               At least 8 characters!
             </mat-error>
-            <mat-error [ngClass]="passwordForm.controls['password'].hasError('required') || passwordForm.controls['password'].hasError('hasNumber')  ? '' : 'text-success'">
+            <mat-error
+              [ngClass]="passwordForm.controls['password'].hasError('required') || passwordForm.controls['password'].hasError('hasNumber')  ? '' : 'text-success'">
               <i class="material-icons">{{ passwordForm.controls['password'].hasError('required') ||
-                passwordForm.controls['password'].hasError('hasNumber') ? 'cancel' :
+              passwordForm.controls['password'].hasError('hasNumber') ? 'cancel' :
                 'check_circle' }}</i>
               At least 1 number!
             </mat-error>
-            <mat-error [ngClass]="passwordForm.controls['password'].hasError('required') || passwordForm.controls['password'].hasError('hasCapitalCase')  ? '' : 'text-success'">
+            <mat-error
+              [ngClass]="passwordForm.controls['password'].hasError('required') || passwordForm.controls['password'].hasError('hasCapitalCase')  ? '' : 'text-success'">
               <i class="material-icons">{{ passwordForm.controls['password'].hasError('required') ||
-                passwordForm.controls['password'].hasError('hasCapitalCase') ? 'cancel' :
+              passwordForm.controls['password'].hasError('hasCapitalCase') ? 'cancel' :
                 'check_circle' }}</i>
               At least 1 in Capital Case!
             </mat-error>
-            <mat-error [ngClass]="passwordForm.controls['password'].hasError('required') || passwordForm.controls['password'].hasError('hasSmallCase')  ? '' : 'text-success'">
+            <mat-error
+              [ngClass]="passwordForm.controls['password'].hasError('required') || passwordForm.controls['password'].hasError('hasSmallCase')  ? '' : 'text-success'">
               <i class="material-icons">{{ passwordForm.controls['password'].hasError('required') ||
-                passwordForm.controls['password'].hasError('hasSmallCase') ? 'cancel' :
+              passwordForm.controls['password'].hasError('hasSmallCase') ? 'cancel' :
                 'check_circle' }}</i>
               At least 1 in Small Case!
             </mat-error>
@@ -77,14 +115,15 @@
             {{ 'PROFILE.PASSWORDCHANGE' | translate }}
           </button>
         </form>
+        </ng-template>
       </div>
     </section>
     <section class="profile-family">
     </section>
     <section class="familyInvitations">
-        <app-list-invitation-table *ngIf="viewForFamily == false" [familyView]="viewForFamily" [tableData]="tableData"
-                                   #myChild (selectedRow)="selectedRow($event)"
-                                   [columnHeader]=" 'LIST_INVITATIONS.COLUMN_HEADER_PROFILE' | translate "></app-list-invitation-table>
+      <app-list-invitation-table *ngIf="viewForFamily == false" [familyView]="viewForFamily" [tableData]="tableData"
+                                 #myChild (selectedRow)="selectedRow($event)"
+                                 [columnHeader]=" 'LIST_INVITATIONS.COLUMN_HEADER_PROFILE' | translate "></app-list-invitation-table>
     </section>
   </div>
 </div>

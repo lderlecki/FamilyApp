@@ -17,7 +17,6 @@ export interface PeriodicElement {
 export class InvitationDTO {
   familyId: number;
   profileId: number;
-  invitedByFamily: boolean;
 }
 
 @Component({
@@ -66,7 +65,6 @@ export class ListProfileComponent implements OnInit {
         const idto = new InvitationDTO();
         idto.familyId = 3; // #TODO HERE SHOULD BE MY FAMILY ID (CHECK IF USER HAS FAMILY/IS FAMILY HEAD)
         idto.profileId = profile.id;
-        idto.invitedByFamily = true;
         this.invitationService.sendInvitation(idto).subscribe(response1 => {
           this.translate.get('LIST_PROFILES.INVITE_SUCCESS_1').subscribe(res => {
               this.toastr.success(res + '<font color=\"#d3d3d3\"><b>' + ' '  + profile.name + ' ' + profile.surname + ' ' +

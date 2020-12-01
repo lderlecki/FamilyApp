@@ -43,7 +43,9 @@
     ]
   },
   "PROFILE": {
+    "CHANGE_PROFILE_IMAGE": "Changer l'image de profil",
     "SAVE": "Sauvegarder",
+    "CANCEL": "Annuler",
     "PASSWORDCHANGE": "Changer le mot de passe",
     "OLDPASSWORD": "Ancien mot de passe",
     "PASSWORD": "Mot de passe",
@@ -105,6 +107,7 @@
     "REJECT": "Non"
   },
   "MY_FAMILY": {
+    "NAV_GALLERY": "Galerie",
     "NAV_TASKS": "Tâches",
     "NAV_INVITATIONS": "Invitations",
     "NAV_MEMBERS": "Membres"
@@ -123,6 +126,19 @@
       "DONE": "Terminé",
       "NOTDONE": "Non terminé"
     },
+  "FAMILY_GALLERY": {
+    "NO_IMAGES": "Votre galerie familiale est vide",
+    "DESCRIPTION_MAX_LENGTH": "Max 80 caractères",
+    "ADD_IMAGE": "Ajouter une image",
+    "DELETE_DIALOG_TITLE": "Suppression de l'image de famille",
+    "DELETE_DIALOG_CONTENT": "Êtes-vous sûr de vouloir supprimer cette image?",
+    "DELETE_DIALOG_ACCEPT": "Oui",
+    "DELETE_DIALOG_REJECT": "Non",
+    "ACCEPT": "J'accepte",
+    "CANCEL": "Annuler",
+    "DESCRIPTION": "Description de l'image",
+    "DESCRIPTION_REQUIRED": "Une description est requise!"
+  },
   "MAIN_PAGE": {
     "CAROUSEL_1": "Famille. Nous n'avons rien à part. Nous avons tout ensemble.",
     "CAROUSEL_2": "Famille. Nous avons nous. Nous en avons tellement.",

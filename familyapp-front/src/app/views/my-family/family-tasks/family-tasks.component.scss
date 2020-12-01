@@ -1,14 +1,14 @@
 @import '../../../../globalScssVariables';
 
 #toDoDetails
-{
+{ color: white;
   z-index: 20;
   padding: 15px;
   position: absolute;
   width: 90%;
   height: 0;
   left: 50%;
-  background: $salmon;
+  background: $nav-color;
   margin-left: -45%;
   top:5%;
   opacity: 0;
@@ -57,7 +57,7 @@
 {
 
   position: relative;
-  background: $bg-color;
+  background: $content-color;
   margin-bottom: 1%;
 }
 

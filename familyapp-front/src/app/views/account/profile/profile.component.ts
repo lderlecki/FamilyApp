@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {TokenAuthService} from '../../../services/tokenAuth.service';
 import {UserService} from '../../../services/user.service';
 import {ToastrService} from 'ngx-toastr';
@@ -8,11 +8,15 @@ import {ListInvitationTableComponent} from '../../../components/tables/list-invi
 import {TranslateService} from '@ngx-translate/core';
 import {InvitationService} from '../../../services/invitation.service';
 import {Invitation} from '../../../models/invitation';
+import {HttpEventType, HttpResponse} from '@angular/common/http';
+import {UploadFileService} from '../../../services/upload-file-service';
+import {base64ToFile, ImageCroppedEvent} from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  providers: [UploadFileService]
 })
 export class ProfileComponent implements OnInit {
   public profileData: any;
@@ -21,7 +25,12 @@ export class ProfileComponent implements OnInit {
   data: any;
   viewForFamily: boolean;
   @ViewChild('myChild') private myChild: ListInvitationTableComponent;
+  @ViewChild('profileImage') private profileImage: ElementRef;
   tableData: Invitation[];
+  @ViewChild('imageInput') private imageInput: any;
+  imageLoaded = false;
+  imgUrl;
+  croppedImage;
 
   constructor(
     public authService: TokenAuthService,
@@ -29,7 +38,8 @@ export class ProfileComponent implements OnInit {
     private toastr: ToastrService,
     private fb: FormBuilder,
     private translate: TranslateService,
-    private invitationService: InvitationService
+    private invitationService: InvitationService,
+    private uploadService: UploadFileService
   ) {
   }
 
@@ -60,7 +70,7 @@ export class ProfileComponent implements OnInit {
 
   prepareData() {
     this.viewForFamily = false;
-    this.fetchDataForProfile(this.profileData.id);
+    this.fetchDataForProfile();
   }
 
   updateProfileData(data) {
@@ -88,8 +98,8 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
-  fetchDataForProfile(profileId: number) {
-    this.invitationService.getInvitationsForProfile(profileId).subscribe(response => {
+  fetchDataForProfile() {
+    this.invitationService.getInvitationsForProfile().subscribe(response => {
       if (response.status === 200) {
         this.translate.get('LIST_INVITATIONS.FETCHSUCCESS').subscribe(res => {
           this.toastr.success(res);
@@ -123,4 +133,34 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  upload() {
+    this.cancelChangingImage();
+    this.uploadService.uploadProfileImage(this.croppedImage).subscribe(response => {
+      if (response.status === 200) {
+        (<HTMLImageElement>this.profileImage.nativeElement).src =
+          'http://localhost:8081/profile/getProfileImage?id=' + this.profileData.id;
+      }
+    });
+  }
+  selectFile(event) {
+    if (event.target.files.length > 0) {
+      this.imgUrl = event;
+      this.imageLoaded = true;
+    } else {
+      this.cancelChangingImage();
+    }
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+    event.width = 180;
+    event.height = 200;
+    this.croppedImage = event.base64;
+  }
+
+  cancelChangingImage() {
+    this.imgUrl = '';
+    this.imageLoaded = false;
+    this.imageInput.clear(); // clear input
+    this.imageInput.blur(); // lose focus
+  }
 }

@@ -2,8 +2,10 @@ package com.example.familyapp.unit.controll;
 
 import com.example.familyapp.config.JwtToken;
 import com.example.familyapp.config.WebSecurityConfig;
+import com.example.familyapp.controller.AuthenticationController;
 import com.example.familyapp.controller.ProfileController;
 import com.example.familyapp.dao.ProfileRepository;
+import com.example.familyapp.dto.LoginUser;
 import com.example.familyapp.model.Profile;
 import com.example.familyapp.model.User;
 import com.example.familyapp.service.ProfileService;
@@ -30,6 +32,8 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -49,14 +53,10 @@ import static org.hamcrest.core.Is.is;
 @WebMvcTest(ProfileController.class)
 public class ProfileControllerTest {
 
-    final String token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjAxNjAzMzY4LCJqdGkiOiIzMGEyMjBiODRhMTA0MjY5YWI3Y2Q0NDEyY2QxM2M0ZSJ9.52E17xLuDGCvNGztXGfXb2YO9Nl8vimSXqVHFtPfkJM";
-
    @Autowired
     private MockMvc mvc;
-
     @InjectMocks
     ProfileController profileController;
-
     @MockBean
     JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     @MockBean
@@ -78,25 +78,20 @@ public class ProfileControllerTest {
     @Test
     public void getProfilebyId() throws Exception {
 
-
         Profile profile = new Profile();
         profile.setId(1);
         profile.setName("Stanisław");
         User user=new  User();
         user.setEmail("test1@gmail.com");
 
-        given(jwtToken.getIdFromToken(token)).willReturn(1);
-        given(jwtToken.validateToken(token)).willReturn(true);
         given(userService.findById(1)).willReturn(user);
         given(profileController.getProfile(profile.getId())).willReturn(profile);
 
         mvc.perform(get("/profile/?id="+profile.getId())
-                .header("Authorization",token)
                 .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name", is(profile.getName())))
                 .andExpect(jsonPath("surname", is(profile.getSurname())));
-
 
     }
 

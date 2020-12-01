@@ -60,6 +60,10 @@ import { ProfileComponent } from './views/account/profile/profile.component';
 import {JwtInterceptor} from './_helpers/jwt.interceptor';
 import {MainpageComponent} from './views/mainpage/mainpage.component';
 import {FamilyProfileSearchComponent} from './views/familyProfileSearch/family-profile-search.component';
+import {MaterialFileInputModule, NGX_MAT_FILE_INPUT_CONFIG} from 'ngx-material-file-input';
+import {ImageCropperModule} from 'ngx-image-cropper';
+import {FamilyGalleryComponent} from './views/my-family/family-gallery/family-gallery.component';
+import {DeleteFamilyImageDialogComponent} from './components/dialogs/delete-family-image/delete-family-image-dialog';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -84,12 +88,17 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     FamilyInvitationsComponent,
     ProfileComponent,
     MainpageComponent,
-    FamilyProfileSearchComponent
+    FamilyProfileSearchComponent,
+    FamilyGalleryComponent,
+    DeleteFamilyImageDialogComponent
   ],
   imports: [
     AppRoutingModule,
+    MaterialFileInputModule,
     BrowserModule,
     FormsModule,
+    ImageCropperModule,
+    MaterialFileInputModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,

@@ -4,7 +4,6 @@ public class InvitationDTO {
 
     private long familyId;
     private long profileId;
-    private boolean invitedByFamily;
 
     public long getFamilyId() {
         return familyId;
@@ -22,11 +21,4 @@ public class InvitationDTO {
         this.profileId = profileId;
     }
 
-    public boolean isInvitedByFamily() {
-        return invitedByFamily;
-    }
-
-    public void setInvitedByFamily(boolean invitedByFamily) {
-        this.invitedByFamily = invitedByFamily;
-    }
 }

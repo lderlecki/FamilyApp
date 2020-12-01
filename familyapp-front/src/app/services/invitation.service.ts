@@ -15,11 +15,11 @@ export class InvitationService {
 
   constructor(private http: HttpClient) {  }
 
-  getInvitationsForFamily(familyId: number): Observable<any> {
-    return this.http.get<any>(this. API_INVITATION_URL + 'family/?id=' + familyId, {observe: 'response'});
+  getInvitationsForFamily(): Observable<any> {
+    return this.http.get<any>(this. API_INVITATION_URL + 'family', {observe: 'response'});
   }
-  getInvitationsForProfile(profileId: number): Observable<any> {
-    return this.http.get<any>(this. API_INVITATION_URL + 'profile/?id=' + profileId, {observe: 'response'});
+  getInvitationsForProfile(): Observable<any> {
+    return this.http.get<any>(this. API_INVITATION_URL + 'profile', {observe: 'response'});
   }
   sendInvitation(body: any): Observable<any> {
     return this.http.post(this. API_INVITATION_URL, body, {observe: 'response'});

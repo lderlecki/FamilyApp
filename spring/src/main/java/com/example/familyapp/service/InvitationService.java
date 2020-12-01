@@ -9,7 +9,7 @@ public interface InvitationService {
 
     List<Invitation> findByFamilyId(long familyId);
     List<Invitation> findByProfileId(long profileId);
-    Invitation safeInvitation(InvitationDTO invitationDTO);
-    void removeInvitation(long invitationId);
-    void acceptInvitation(long invitationId);
+    Invitation safeInvitation(InvitationDTO invitationDTO, long userId);
+    void removeInvitation(long invitationId, long userId);
+    void acceptInvitation(long invitationId, long userId);
 }

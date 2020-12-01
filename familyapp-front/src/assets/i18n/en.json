@@ -43,7 +43,9 @@
     ]
   },
   "PROFILE": {
+    "CHANGE_PROFILE_IMAGE": "Change profile image",
     "SAVE": "Save",
+    "CANCEL": "Cancel",
     "PASSWORDCHANGE": "Change password",
     "OLDPASSWORD": "Old password",
     "PASSWORD": "Password",
@@ -106,9 +108,23 @@
 
   },
   "MY_FAMILY": {
+    "NAV_GALLERY": "Gallery",
     "NAV_TASKS": "Tasks",
     "NAV_INVITATIONS": "Invitations",
     "NAV_MEMBERS": "Members"
+  },
+  "FAMILY_GALLERY": {
+    "NO_IMAGES": "Your family gallery is empty",
+    "DESCRIPTION_MAX_LENGTH": "Max 80 characters",
+    "ADD_IMAGE": "Add new image",
+    "DELETE_DIALOG_TITLE": "Deleting family image",
+    "DELETE_DIALOG_CONTENT": "Are you sure you want to delete this image?",
+    "DELETE_DIALOG_ACCEPT": "Yes",
+    "DELETE_DIALOG_REJECT": "No",
+    "ACCEPT": "Accept",
+    "CANCEL": "Cancel",
+    "DESCRIPTION": "Image description",
+    "DESCRIPTION_REQUIRED": "Description is required!"
   },
     "TODO": {
       "ADDTODO": "Add new list",

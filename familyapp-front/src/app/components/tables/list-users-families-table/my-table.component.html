@@ -35,6 +35,10 @@
                           (click)="sendInvitation(element)">{{ 'LIST_FAMILIES.BUTTON_INVITE' | translate }}</button>
                 </div>
                 <div *ngIf="family===false" class="example-element-position">
+                  <!--load image only if this element is expanded-->
+                  <div *ngIf="element == expandedElement">
+                  <img src="http://localhost:8081/profile/getProfileImage?id=+{{element.id}}" alt="profile image">
+                  </div>
                   <button mat-raised-button color="primary"
                           (click)="sendInvitation(element)">{{ 'LIST_PROFILES.BUTTON_INVITE' | translate }}</button>
                 </div>

@@ -24,7 +24,6 @@ export class FamilyTasksComponent implements OnInit {
     tableData: any;
     subscription: Subscription;
     myFamilyTasks: Todolist[];
-    myFamilyMembers;
 
     displayDate: string;
     toDoListsClickedDay: Todolist[];
@@ -32,8 +31,6 @@ export class FamilyTasksComponent implements OnInit {
     public showTaskForm = false;
     public taskForm: FormGroup;
     public todoForm: FormGroup;
-
-    private todolistPopupHeight = '1400px';
     panelOpenState = false;
 
     constructor(
@@ -57,7 +54,7 @@ export class FamilyTasksComponent implements OnInit {
         const data = this.familyService.familyValue;
         console.log('members: ', this.familyService.familyMembers);
         console.log('family id:', data);
-        this.toDoService.getToDosForFamily(data?.id).subscribe(response => {
+        this.toDoService.getToDosForFamily().subscribe(response => {
             this.myFamilyTasks = response.body;
             console.log('family tasks: ', this.myFamilyTasks);
             setTimeout(() => {
@@ -79,8 +76,8 @@ export class FamilyTasksComponent implements OnInit {
     }
 
     clickedDate(selectedDate: SelectedDateDto) {
-        this.toDoDetails.nativeElement.style.opacity = '0.94';
-        this.toDoDetails.nativeElement.style.height = this.todolistPopupHeight;
+        this.toDoDetails.nativeElement.style.opacity = '1';
+        this.toDoDetails.nativeElement.style.height = 'auto';
         this.toDoListsClickedDay = new Array<Todolist>();
         this.displayDate = selectedDate.selectedDate.toISOString().split('T')[0];
         for (let i = 0; i < selectedDate.familyToDoList.length; i++) {

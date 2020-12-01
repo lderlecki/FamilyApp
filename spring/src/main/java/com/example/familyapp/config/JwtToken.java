@@ -32,7 +32,7 @@ public class JwtToken implements Serializable {
         return !isTokenExpired(token); //uesrname.equals(userDetails.getUsername()) &&
     }
 
-    public Integer getIdFromToken(String token) {
+    public static Integer getIdFromToken(String token) {
         return (Integer)getAllClaimsFromToken(token).get("user_id");
     }
 
@@ -52,7 +52,7 @@ private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver
     return claimsResolver.apply(claims);
 }
 
-    private Claims getAllClaimsFromToken(String token) {
+    private static Claims getAllClaimsFromToken(String token) {
         //CHECK TOKEN SIGNING KEY AND ISSUER DIRECTLY HERE with HS256 mechanism
         //#TODO SET ISSUER IN DJANGO AND UNCOMMENT LINE 60
         try {

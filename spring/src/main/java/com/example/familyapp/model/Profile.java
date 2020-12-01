@@ -1,6 +1,8 @@
 package com.example.familyapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -35,6 +37,18 @@ public class Profile {
     @OneToMany(mappedBy = "responsiblePerson")
     @JsonIgnore
     private List<Task> taskList = new ArrayList<>();
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] image;
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 
     public List<Task> getTaskList() {
         return taskList;

@@ -5,7 +5,9 @@ import com.example.familyapp.config.JwtToken;
 import com.example.familyapp.controller.FamilyController;
 import com.example.familyapp.dao.FamilyRepository;
 import com.example.familyapp.model.Family;
+import com.example.familyapp.service.FamilyImageService;
 import com.example.familyapp.service.FamilyService;
+import com.example.familyapp.service.ProfileService;
 import com.example.familyapp.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -45,6 +47,10 @@ public class FamilyControllerTest {
     JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     @MockBean
     FamilyService familyService;
+    @MockBean
+    ProfileService profileService;
+    @MockBean
+    FamilyImageService familyImageService;
     @MockBean
     FamilyRepository familyRepository;
     @MockBean

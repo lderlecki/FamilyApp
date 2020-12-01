@@ -1,0 +1,66 @@
+<div>
+  <mat-form-field>
+    <ngx-mat-file-input placeholder="{{ 'FAMILY_GALLERY.ADD_IMAGE' | translate }}" (cancel)="cancelChangingImage()"
+                        [accept]="'.jpg, .jpeg, .png, .gif'" (change)="selectFile($event)"
+                        #imageInput></ngx-mat-file-input>
+  </mat-form-field>
+</div>
+<div id="imageLoader" #imageLoader>
+<image-cropper id="imageCropper"
+               [imageChangedEvent]="imgUrl"
+               [maintainAspectRatio]="true"
+               [aspectRatio]="280/200"
+               [cropperMinWidth]="280"
+               [cropperMinHeight]="200"
+               [resizeToWidth]="280"
+               [onlyScaleDown]="true"
+               [initialStepSize]="100"
+               [resizeToHeight]="200"
+               [roundCropper]="false"
+               (imageCropped)="imageCropped($event)"
+               [alignImage]="'center'"
+               format="jpeg"
+></image-cropper>
+  <form class="example-form" [formGroup]="descriptionForm">
+    <mat-form-field class="example-full-width" style="width: 100%" hintLabel="{{ 'FAMILY_GALLERY.DESCRIPTION_MAX_LENGTH' | translate }}">
+      <mat-label> {{ 'FAMILY_GALLERY.DESCRIPTION' | translate }}</mat-label>
+      <input matInput required formControlName="description" placeholder="Ex. Chilling with family" [maxLength]="80" #descriptionInput>
+      <mat-error *ngIf="hasError('description')">
+        {{ 'FAMILY_GALLERY.DESCRIPTION_REQUIRED' | translate }}
+      </mat-error>
+    </mat-form-field>
+    <div *ngIf="imageLoaded">
+      <button class="btn btn-primary imageButton" mat-raised-button color="primary"  [disabled]="!descriptionForm.valid"
+              (click)="upload()">{{ 'FAMILY_GALLERY.ACCEPT' | translate }}</button>
+      <button class="btn btn-primary imageButton" mat-raised-button color="primary"
+              (click)="cancelChangingImage()">{{ 'FAMILY_GALLERY.CANCEL' | translate }}</button>
+    </div>
+  </form>
+</div>
+<div id="pagination" *ngIf="displayedPages > 0">
+  <div  class="page"  *ngFor="let iterate of counter(displayedPages); let page=index" (click)="reloadData(page)">
+    {{page+1}}
+  </div>
+</div>
+
+<h1 id="noImages"*ngIf="familyImages?.length==0">{{ 'FAMILY_GALLERY.NO_IMAGES' | translate }}</h1>
+<div [@list]="exp" id="familyGalleryWrapper">
+  <span @items *ngFor="let image of displayedImages" class="familyImageHolder">
+    <div class="images">
+     <img class="familyImage" (click)="expandImage(image.image, image.description)" src="data:image/png;base64,{{image.image}}" alt="familyImage">
+    <img class="bin" src="../../../../assets/images/bin.png" (click)="deleteImage(image.id)">
+      </div>
+    <div class="imageDescription">
+     {{image.description}}</div>
+    </span>
+</div>
+
+<div id="imageExpanded" #imageExpanded>
+  <div class="expandedWrapper">
+    <div class="imageWrapper">
+      <img class="image" src="data:image/png;base64,{{expandedImageSrc}}">
+    </div>
+    <div class="expandedImageDescription">{{expandedImageDescription}}</div>
+  </div>
+  <img src="https://image.flaticon.com/icons/png/512/61/61155.png" id="closeIcon" (click)="closeMe()" #closeIcon>
+</div>

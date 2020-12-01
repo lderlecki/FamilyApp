@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Family} from '../models/family';
 import {TokenAuthService} from './tokenAuth.service';
@@ -47,6 +47,15 @@ export class FamilyService {
 
   public get familyMembers(): Profile[] {
     return this.familyValue.familyMembers;
+  }
+
+  getFamilyImages(): Observable<any> {
+    return this.http.get(
+      this.API_FAMILY_URL + 'getFamilyImages',
+      { responseType: 'json', observe: 'response' });
+  }
+  deleteFamilyImage(familyImageId: number){
+    return this.http.delete(this.API_FAMILY_URL + 'deleteFamilyImage?id=' + familyImageId, {observe: 'response'});
   }
 
 }

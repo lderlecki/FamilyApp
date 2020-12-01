@@ -43,7 +43,9 @@
     ]
   },
   "PROFILE": {
+    "CHANGE_PROFILE_IMAGE": "Zmień zdjęcie profilowe",
     "SAVE": "Zapisz",
+    "CANCEL": "Anuluj",
     "PASSWORDCHANGE": "Zmień hasło",
     "OLDPASSWORD": "Aktualne hasło",
     "PASSWORD": "Hasło",
@@ -108,6 +110,7 @@
 
   },
   "MY_FAMILY": {
+    "NAV_GALLERY": "Galeria",
     "NAV_TASKS": "Zadania",
     "NAV_INVITATIONS": "Zaproszenia",
     "NAV_MEMBERS": "Członkowie"
@@ -126,6 +129,19 @@
       "DONE": "Zrobione",
       "NOTDONE": "Do zrobienia"
     },
+  "FAMILY_GALLERY": {
+    "NO_IMAGES": "Galeria zdjęć Twojej rodziny jest pusta",
+    "DESCRIPTION_MAX_LENGTH": "Max 80 znaków",
+    "ADD_IMAGE": "Dodaj zdjęcie",
+    "DELETE_DIALOG_TITLE": "Usuwanie zdjęcia rodziny",
+    "DELETE_DIALOG_CONTENT": "Czy na pewno chcesz usunąć to zdjęcie?",
+    "DELETE_DIALOG_ACCEPT": "Tak",
+    "DELETE_DIALOG_REJECT": "Nie",
+    "ACCEPT": "Akceptuj",
+    "CANCEL": "Anuluj",
+    "DESCRIPTION": "Opis zdjęcia",
+    "DESCRIPTION_REQUIRED": "Opis jest wymagany!"
+  },
   "MAIN_PAGE": {
     "CAROUSEL_1": "Rodzina. Osobno nie mamy nic. Razem mamy wszystko.",
     "CAROUSEL_2": "Rodzina. Mamy siebie. Mamy tak wiele.",

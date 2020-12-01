@@ -1,0 +1,165 @@
+@import '../../../../globalScssVariables';
+
+#familyGalleryWrapper
+{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-start;
+  overflow: hidden;
+
+}
+
+#familyGalleryWrapper .familyImageHolder .imageDescription{
+
+  color: white;
+  width: 100%;
+  text-align: center;
+  height: 15%;
+  background: $bg-color-for-element;
+  position: relative;
+  cursor: pointer;
+  line-height: calc(0.15*45vh);
+  font-family: Roboto;
+  transform: translateX(101%);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 5px;
+}
+
+#familyGalleryWrapper .familyImageHolder:hover .imageDescription
+{
+
+  transform: translateX(0%);
+  transition-duration: 1s;
+
+}
+#familyGalleryWrapper .familyImageHolder .images .familyImage
+{
+  position: relative;
+  height: 100%;
+}
+#familyGalleryWrapper .familyImageHolder .images .bin
+{
+  position: absolute;
+  top:5px;
+  right: 5px;
+}
+#familyGalleryWrapper .familyImageHolder .images .bin:hover,
+#imageExpanded #closeIcon:hover,
+#familyGalleryWrapper .familyImageHolder .images .familyImage:hover
+{
+  cursor: pointer;
+ opacity:0.8;
+}
+
+#familyGalleryWrapper .familyImageHolder .images{
+
+  position: relative;
+  top:0;
+  height: 85%;
+}
+
+
+#imageLoader
+{
+  display: none;
+}
+#familyGalleryWrapper .familyImageHolder
+{
+  position: relative;
+  width: 50%;
+  height: 45vh;
+  text-align: center;
+  overflow: hidden;
+
+}
+
+#imageExpanded
+{
+  z-index: 20;
+  padding: 15px;
+  position: absolute;
+  width: 90%;
+  height: 0;
+  left: 50%;
+  background: $content-color;
+  margin-left: -45%;
+  top:5%;
+  opacity: 0;
+  transition: all 0.5s ease-in ;
+  overflow-y: scroll;
+  border:1px solid $black;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+#imageExpanded .expandedWrapper
+{
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  height: 100%;
+  width: 90%;
+}
+#imageExpanded .expandedWrapper .imageWrapper
+{
+  position: relative;
+  height: 100%;
+  width: 85%;
+  text-align: center;
+}
+#imageExpanded .expandedWrapper .imageWrapper .image
+{
+  height: 100%;
+}
+#imageExpanded .expandedWrapper .expandedImageDescription
+{
+  height: auto;
+  padding: 10px;
+  width: 20%;
+  position: relative;
+  background: $nav-color;
+  color: white;
+  text-align: center;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  border:1px solid black;
+}
+#imageExpanded #closeIcon
+{
+  position: absolute;
+  right:1px;
+  top:1px;
+  width:40px;
+  height: 40px;
+}
+#pagination{
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 5vh;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 5%;
+}
+#pagination .page
+{
+  line-height: 5vh;
+  height: 100%;
+  text-align: center;
+  position: relative;
+  font-size: 30px;
+  width: 10%;
+  border:1px solid black;
+}
+#pagination .page:hover
+{
+  border-bottom:4px solid black;
+  cursor: pointer;
+  font-weight: bold;
+}
+#noImages
+{
+  width: 100%;
+  text-align: center;
+}

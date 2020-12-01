@@ -4,8 +4,10 @@ import com.example.familyapp.dao.FamilyRepository;
 import com.example.familyapp.model.Family;
 import com.example.familyapp.model.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.sql.Blob;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,10 +15,12 @@ import java.util.stream.Collectors;
 public class FamilyServiceImpl implements FamilyService {
 
     FamilyRepository familyRepository;
+    private JdbcTemplate jdbcTemp;
 
     @Autowired
-    public FamilyServiceImpl(FamilyRepository familyRepository)
+    public FamilyServiceImpl(FamilyRepository familyRepository, JdbcTemplate jdbcTemp)
     {
+        this.jdbcTemp= jdbcTemp;
         this.familyRepository=familyRepository;
     }
     @Override
@@ -48,4 +52,11 @@ public class FamilyServiceImpl implements FamilyService {
     public List<Family> findWhereFamilyNameLike(String searchedValue) {
         return familyRepository.findWhereFamilyNameLike(searchedValue);
     }
+
+//    @Override
+//    public List<Blob> getFamilyImagesByFamilyId(long familyId) {
+//        String query = "select fi.images from family_images fi where fi.family_id=?";
+//        List<Blob> images = jdbcTemp.queryForList(query, new Object[]{familyId}, Blob.class);
+//        return images;
+//    }
 }

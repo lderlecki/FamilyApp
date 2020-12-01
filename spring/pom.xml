@@ -19,6 +19,13 @@
     </properties>
 
     <dependencies>
+        <!--image uploader-->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+
         <!-- postgresql -->
         <dependency>
             <groupId>org.postgresql</groupId>

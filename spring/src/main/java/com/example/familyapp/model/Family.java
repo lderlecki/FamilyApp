@@ -6,10 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 public class Family implements Serializable {
@@ -27,6 +24,8 @@ public class Family implements Serializable {
     @JsonIgnore
     private List<Invitation> invitations;
 
+   @OneToMany(mappedBy = "family", fetch = FetchType.LAZY)
+    private List<FamilyImage> images = new ArrayList<>();
 
     @OneToOne(mappedBy = "family")
     private Address address;

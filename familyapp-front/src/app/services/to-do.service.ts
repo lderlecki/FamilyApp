@@ -16,8 +16,8 @@ export class ToDoService {
   constructor(private http: HttpClient) {
   }
 
-  getToDosForFamily(familyId: number): Observable<any> {
-    return this.http.get<any>(this.API_FAMILY_URL + 'forFamily/?id=' + familyId, {observe: 'response'});
+  getToDosForFamily(): Observable<any> {
+    return this.http.get<any>(this.API_FAMILY_URL + 'forFamily', {observe: 'response'});
   }
 
   changeTaskStatus(taskId: number, status: boolean): Observable<any> {

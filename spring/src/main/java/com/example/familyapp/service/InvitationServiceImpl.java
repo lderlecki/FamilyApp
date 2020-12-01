@@ -4,9 +4,10 @@ import com.example.familyapp.dao.FamilyRepository;
 import com.example.familyapp.dao.InvitationRepository;
 import com.example.familyapp.dao.ProfileRepository;
 import com.example.familyapp.dto.InvitationDTO;
-import com.example.familyapp.exceptions.AlreadyInThisFamilyException;
-import com.example.familyapp.exceptions.AlreadyInvitedException;
-import com.example.familyapp.exceptions.HasFamilyException;
+import com.example.familyapp.exceptions.invitations.AlreadyInThisFamilyException;
+import com.example.familyapp.exceptions.invitations.AlreadyInvitedException;
+import com.example.familyapp.exceptions.invitations.ForbiddenOperationException;
+import com.example.familyapp.exceptions.invitations.HasFamilyException;
 import com.example.familyapp.model.Family;
 import com.example.familyapp.model.Invitation;
 import com.example.familyapp.model.Profile;
@@ -44,7 +45,28 @@ public class InvitationServiceImpl implements InvitationService {
     }
 
     @Override
-    public Invitation safeInvitation(InvitationDTO invitationDTO) {
+    public Invitation safeInvitation(InvitationDTO invitationDTO, long userId) {
+        Profile loggedProfile = profileRepository.findById(userId);
+        boolean invitedByFamily = false; //assume that user send invitation request to family
+
+        if(loggedProfile.getId() != invitationDTO.getProfileId()) //if famiily invited someone so we need to check
+            //if everything is ok with invitationDTO
+        {
+            Family family = loggedProfile.getFamily();
+            if(family != null) //inviting profile has family
+            {
+                if(invitationDTO.getFamilyId() != family.getId()) // and his family id is not equal to invitation family id
+                {
+                    throw new ForbiddenOperationException();
+                } else //family id equals to invitaitionDTO.familyId so everything is ok
+                {
+                    invitedByFamily = true;
+                }
+            } else // inviting user doesnt have family so he cant invite anyone
+                throw new ForbiddenOperationException();
+
+
+        }
         Profile profile=profileRepository.getOne(invitationDTO.getProfileId());
         for(Invitation invitation: profile.getInvitations())
             if(invitation.getFamily().getId()==invitationDTO.getFamilyId())
@@ -55,20 +77,41 @@ public class InvitationServiceImpl implements InvitationService {
                 throw new AlreadyInThisFamilyException();
 
         Invitation invitation=new Invitation();
-        invitation.setInvitedByFamily(invitationDTO.isInvitedByFamily());
+        invitation.setInvitedByFamily(invitedByFamily);
         invitation.setFamily(familyRepository.getOne(invitationDTO.getFamilyId()));
         invitation.setProfile(profileRepository.getOne(invitationDTO.getProfileId()));
         return invitationRepository.save(invitation);
     }
 
     @Override
-    public void removeInvitation(long invitationId) {
-        invitationRepository.delete(invitationRepository.getOne(invitationId));
+    public void removeInvitation(long invitationId, long userId) {
+        Invitation invitation = invitationRepository.getOne(invitationId);
+        Profile profile = profileRepository.findById(userId);
+        Family profileFamily = profile.getFamily();
+        if(profile.getId() == invitation.getProfile().getId() || profileFamily.getId() == invitation.getFamily().getId())
+        invitationRepository.delete(invitation);
+        else
+            throw new ForbiddenOperationException();
     }
 
     @Override
-    public void acceptInvitation(long invitationId) {
+    public void acceptInvitation(long invitationId, long userId) {
         Invitation invitation=invitationRepository.getOne(invitationId);
+        //jesli osoba probujaca akceptowac zaproszenie nie jest osoba zaproszona
+        if(invitation.getProfile().getId() != userId)
+        {
+           Profile amIMemberOfThisFamily = invitation.getFamily().getFamilyMembers().stream().filter(member -> member.getId() == userId).findAny().orElse(null);
+            //ani nie jest czlonkiem rodziny ktora wyslala zaproszenie
+           if(amIMemberOfThisFamily == null)
+               throw new ForbiddenOperationException();
+        }
+        //jesli user nie zostal zaproszony przez rodzine, i probuje akceptowac zaproszenie
+        if(!invitation.isInvitedByFamily() && userId== invitation.getProfile().getId())
+            throw new ForbiddenOperationException();
+        //jesli user zostal zaproszony przez rodzine i ktos z tej rodziny probuje akceptowac zaproszenie
+        if(invitation.isInvitedByFamily() && invitation.getFamily().getFamilyMembers().stream().filter(member -> member.getId() == userId).findAny().orElse(null) != null)
+            throw new ForbiddenOperationException();
+
         Profile profile=invitation.getProfile();
         if (profile.getFamily() != null)
             throw new HasFamilyException();
