@@ -34,7 +34,6 @@ class FamilySerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         address = validated_data.pop('address', None)
-        print('validated data: ', validated_data)
         if not address:
             raise serializers.ValidationError({'address': 'Please provide address data.'})
         address_instance = Address.objects.create(**address)

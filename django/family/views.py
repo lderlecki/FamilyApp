@@ -21,8 +21,6 @@ class FamilyCreateView(generics.CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         user = request.user
-        print(request.data)
-        print('user id:', user.profile.id)
         family_head = request.data.get('family_head', None)
         if not family_head:
             return Response(

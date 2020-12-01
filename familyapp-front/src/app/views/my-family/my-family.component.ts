@@ -43,16 +43,16 @@ export class MyFamilyComponent implements OnInit {
     this.myFamily = this.familyService.familyValue;
     if (this.myFamily === null) {
       this.createFamilyForm = this.fb.group({
-        family_name: ['1', [Validators.required]],
+        family_name: ['', [Validators.required]],
         budget: [0.0, [Validators.required]],
         family_head: [this.authService.profileValue.id, [Validators.required]],
         address: this.fb.group({
-          territory: ['1', [Validators.required]],
-          city: ['1', [Validators.required]],
-          street: ['1', [Validators.required]],
-          street_no: ['1', [Validators.required]],
-          flat_no: ['1'],
-          postal_code: ['1', [Validators.required]],
+          territory: ['', [Validators.required]],
+          city: ['', [Validators.required]],
+          street: ['', [Validators.required]],
+          street_no: ['', [Validators.required]],
+          flat_no: [''],
+          postal_code: ['', [Validators.required]],
         })
       });
     }
