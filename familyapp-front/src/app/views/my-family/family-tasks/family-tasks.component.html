@@ -45,7 +45,7 @@
                           {{newTask.controls['name'].value}}
                         </span>
                         <span class="task-data">
-                          <span class="bold">{{ 'TODO.RESPPERSON' | translate }}: </span>
+                          <span class="bold">{{ 'TODO.RESP_PERSON' | translate }}: </span>
                           {{getResponsiblePerson(newTask)}}
                         </span>
                         <span class="task-data">
@@ -65,7 +65,7 @@
                     <mat-label>{{ 'TODO.ASSIGNTASK' | translate }}</mat-label>
                     <mat-select formControlName="profile">
                       <mat-option [value]="-1">{{ 'TODO.EVERYONE' | translate }}</mat-option>
-                      <mat-option *ngFor="let member of this.familyService.familyMembers"
+                      <mat-option *ngFor="let member of myFamilyMembers"
                                   [value]="member.id">
                         {{member.name + ' ' +member.surname}}
                       </mat-option>
@@ -136,7 +136,7 @@
               <mat-label>{{ 'TODO.ASSIGNTASK' | translate }}</mat-label>
               <mat-select formControlName="profile">
                 <mat-option [value]="-1">{{ 'TODO.EVERYONE' | translate }}</mat-option>
-                <mat-option *ngFor="let member of this.familyService.familyMembers"
+                <mat-option *ngFor="let member of myFamilyMembers"
                             [value]="member.id">
                   {{member.name + ' ' +member.surname}}
                 </mat-option>

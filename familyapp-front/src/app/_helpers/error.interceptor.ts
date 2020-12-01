@@ -11,8 +11,8 @@ import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {catchError, exhaustMap, filter, map, switchMap, take, tap} from 'rxjs/operators';
 
 import {TokenAuthService} from '../services/tokenAuth.service';
-import {SpinnerService} from "../services/spinner.service";
-import {UserService} from "../services/user.service";
+import {SpinnerService} from '../services/spinner.service';
+import {UserService} from '../services/user.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -26,7 +26,6 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.spinnerService.requestStarted();
-    // console.log('error interceptor');
     return next.handle(request)
       .pipe(
         tap(
@@ -36,10 +35,6 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
           },
           (error: HttpErrorResponse) => {
-            if ([401, 403].includes(error.status) && this.authService.profileValue) {
-              this.authService.logout();
-              location.reload();
-            }
             this.spinnerService.resetSpinner();
             return throwError(error);
           }

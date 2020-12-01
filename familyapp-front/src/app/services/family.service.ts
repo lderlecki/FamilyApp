@@ -4,6 +4,8 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Family} from '../models/family';
 import {TokenAuthService} from './tokenAuth.service';
 import {Profile} from "../models/profile";
+import {environment} from '../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,7 @@ export class FamilyService {
   private familySubject: BehaviorSubject<Family>;
   private family: Observable<Family>;
   API_FAMILY_URL = 'http://localhost:8081/family/';
+  API_DJANGO_URL = environment.djangoApiUrl;
 
   constructor(private http: HttpClient, private authService: TokenAuthService) {
     const family = authService.profileValue.family;
@@ -29,6 +32,7 @@ export class FamilyService {
     console.log('fetching families');
     return this.http.get<any>(this.API_FAMILY_URL + 'all', {observe: 'response'});
   }
+
   getFamiliesWhereFamilyNameLike(searchedValue: string): Observable<any> {
     return this.http.get<any>(this.API_FAMILY_URL + 'searchFamily?searchedValue=' + searchedValue, {observe: 'response'});
   }
@@ -39,6 +43,10 @@ export class FamilyService {
 
   getData() {
     return this.familySubject.asObservable();
+  }
+
+  createFamily(data) {
+    return this.http.post<Family>(this.API_DJANGO_URL + 'family/create/', data);
   }
 
   public get familyValue(): Family {

@@ -87,9 +87,10 @@ export class LoginComponent implements OnInit {
     console.log('GET USER DATA');
     this.userService.getProfileData(accessToken, user_id).subscribe(
       response => {
-        if (response.family !== null) {
-          response.family = this.keysToCamel(response.family);
-        }
+        // if (response.family !== null) {
+        //   response.family = this.keysToCamel(response.family);
+        //   console.log('family to camel case: ', response.family);
+        // }
         localStorage.setItem('profile', JSON.stringify(response));
         this.authService.login(accessToken, user_id, response);
 
@@ -108,29 +109,29 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  toCamel(s: string) {
-    return s.replace(/([-_][a-z])/ig, ($1) => {
-      return $1.toUpperCase()
-        .replace('-', '')
-        .replace('_', '');
-    });
-  }
-
-  keysToCamel(o: any) {
-    if (o === Object(o) && !Array.isArray(o) && typeof o !== 'function') {
-      const n = {};
-      Object.keys(o)
-        .forEach((k) => {
-          n[this.toCamel(k)] = this.keysToCamel(o[k]);
-        });
-      return n;
-    } else if (Array.isArray(o)) {
-      return o.map((i) => {
-        return this.keysToCamel(i);
-      });
-    }
-    return o;
-  }
+  // toCamel(s: string) {
+  //   return s.replace(/([-_][a-z])/ig, ($1) => {
+  //     return $1.toUpperCase()
+  //       .replace('-', '')
+  //       .replace('_', '');
+  //   });
+  // }
+  //
+  // keysToCamel(o: any) {
+  //   if (o === Object(o) && !Array.isArray(o) && typeof o !== 'function') {
+  //     const n = {};
+  //     Object.keys(o)
+  //       .forEach((k) => {
+  //         n[this.toCamel(k)] = this.keysToCamel(o[k]);
+  //       });
+  //     return n;
+  //   } else if (Array.isArray(o)) {
+  //     return o.map((i) => {
+  //       return this.keysToCamel(i);
+  //     });
+  //   }
+  //   return o;
+  // }
 
 
 }

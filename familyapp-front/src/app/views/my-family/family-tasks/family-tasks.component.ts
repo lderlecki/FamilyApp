@@ -41,7 +41,7 @@ export class FamilyTasksComponent implements OnInit {
     private familyService: FamilyService,
     private toDoService: ToDoService,
     private fb: FormBuilder,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
     this.taskForm = this.fb.group({
       name: ['', Validators.required],
@@ -49,13 +49,14 @@ export class FamilyTasksComponent implements OnInit {
       profile: null,
       todolist: null,
     });
-
     this.initTodoForm();
 
   }
 
   ngOnInit(): void {
     const data = this.familyService.familyValue;
+    this.myFamilyMembers = this.familyService.familyMembers
+
     this.toDoService.getToDosForFamily(data?.id).subscribe(response => {
       this.myFamilyTasks = response.body;
       setTimeout(() => {
@@ -82,7 +83,6 @@ export class FamilyTasksComponent implements OnInit {
     this.toDoListsClickedDay = new Array<Todolist>();
     this.selectedDateTime = selectedDate.selectedDate.toISOString();
     this.displayDate = this.selectedDateTime.split('T')[0];
-
     for (let i = 0; i < selectedDate.familyToDoList.length; i++) {
       if (selectedDate.familyToDoList[i].dueDate?.toString().split(' ')[0] === this.displayDate) {
         console.log('clicked date:');
@@ -200,7 +200,7 @@ export class FamilyTasksComponent implements OnInit {
   getResponsiblePerson(task) {
     const profile = task.controls['profile'].value;
     if (profile !== -1 && profile !== '') {
-      const member = this.familyService.familyMembers.find(i => i.id === profile);
+      const member = this.myFamilyMembers.find(i => i.id === profile);
       return `${member.name} ${member.surname}`;
     }
     return this.translate.instant('TODO.EVERYONE');

@@ -46,8 +46,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MyTableComponent} from './components/tables/list-users-families-table/my-table.component';
 import {ListFamilyComponent} from './views/familyProfileSearch/list-families/list-family.component';
 import {CookieService} from 'ngx-cookie-service';
-import { PasswordResetComponent } from './views/account/password-reset/password-reset.component';
-import { ResponseResetPasswordComponent } from './views/account/response-reset-password/response-reset-password.component';
+import {PasswordResetComponent} from './views/account/password-reset/password-reset.component';
+import {ResponseResetPasswordComponent} from './views/account/response-reset-password/response-reset-password.component';
 import {ListInvitationTableComponent} from './components/tables/list-invitation-table/list-invitation-table.component';
 import {ListProfileComponent} from './views/familyProfileSearch/list-profiles/list-profile.component';
 import {InviteToFamilyDialogComponent} from './components/dialogs/invite-to-family/invite-to-family-dialog';
@@ -56,16 +56,17 @@ import {FamilyMembersComponent} from './views/my-family/family-members/family-me
 import {FamilyTasksComponent} from './views/my-family/family-tasks/family-tasks.component';
 import {FamilyInvitationsComponent} from './views/my-family/list-family-invitations/family-invitations.component';
 import {ErrorInterceptor} from './_helpers/error.interceptor';
-import { ProfileComponent } from './views/account/profile/profile.component';
+import {ProfileComponent} from './views/account/profile/profile.component';
 import {JwtInterceptor} from './_helpers/jwt.interceptor';
 import {MainpageComponent} from './views/mainpage/mainpage.component';
 import {FamilyProfileSearchComponent} from './views/familyProfileSearch/family-profile-search.component';
-import { SpinnerComponent } from './components/spinner/spinner.component';
+import {SpinnerComponent} from './components/spinner/spinner.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
+
 @NgModule({
   declarations: [
     ListFamilyComponent,
@@ -136,7 +137,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
   providers: [
     {provide: TranslateLoader, useFactory: HttpLoaderFactory, deps: [HttpClient]},
-    // {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]

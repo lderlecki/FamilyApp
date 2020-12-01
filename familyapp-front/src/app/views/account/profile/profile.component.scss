@@ -1,12 +1,12 @@
 @import "../account.style";
 @import '../../../../globalScssVariables';
 
-.profile-wrapper
-{
+.profile-wrapper {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
+
 .profile {
   justify-content: center;
 }
@@ -16,7 +16,7 @@
   justify-content: center;
 }
 
-.profile-form{
+.profile-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,6 +25,10 @@
   border: 1px solid gray;
   background-color: $content-color;
   padding: 2rem;
+
+  -webkit-box-shadow: 0px 0px 15px 0px rgba(163, 163, 163, 1);
+  -moz-box-shadow: 0px 0px 15px 0px rgba(163, 163, 163, 1);
+  box-shadow: 0px 0px 15px 0px rgba(163, 163, 163, 1);
 }
 
 
@@ -32,8 +36,7 @@
   margin-top: auto;
 }
 
-.familyInvitations
-{
+.familyInvitations {
   width: 60%;
   height: 30vh;
 }

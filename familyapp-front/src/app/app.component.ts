@@ -32,7 +32,7 @@ export class AppComponent {
   }
 
   navigateToSearchComponent() {
-    this.router.navigate(['/search/' + this.searchInput.nativeElement.value + '/profiles']);
+    this.router.navigate(['/search/' + this.searchInput.nativeElement.value + '/families']);
   }
 
 }

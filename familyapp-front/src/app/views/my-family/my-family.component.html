@@ -1,12 +1,72 @@
-<nav class="navbar">
-  <div class="container">
-    <div class="nav-items">
+<div class="nav-item" *ngIf="myFamily; then familyBlock; else noFamilyBlock"></div>
+<ng-template #familyBlock>
+  <nav class="navbar">
+    <div class="container">
       <a class="nav-item" routerLink="members" routerLinkActive='active'>{{ 'MY_FAMILY.NAV_MEMBERS' | translate }}</a>
       <a class="nav-item" routerLink="tasks" routerLinkActive='active'>{{ 'MY_FAMILY.NAV_TASKS' | translate }}</a>
       <a class="nav-item" routerLink="invitations"
          routerLinkActive='active'>{{ 'MY_FAMILY.NAV_INVITATIONS' | translate }}</a>
     </div>
-  </div>
-</nav>
+  </nav>
+</ng-template>
+
+<ng-template #noFamilyBlock>
+  <section class="create-family">
+    <div class="family-create-content">
+      <div class="family-create-container">
+        <h3>{{ 'MY_FAMILY.CREATE_FAMILY' | translate }}!</h3>
+        <form [formGroup]="createFamilyForm">
+          <div class="family-data">
+            <mat-form-field class="form-field">
+              <mat-label>{{ 'MY_FAMILY.NAME' | translate }}</mat-label>
+              <input required formControlName="family_name" type="text" matInput>
+            </mat-form-field>
+            <mat-form-field class="form-field">
+              <mat-label>{{ 'MY_FAMILY.BUDGET' | translate }}</mat-label>
+              <input required formControlName="budget" type="text" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="address-data" formGroupName="address">
+            <mat-form-field class="form-field">
+              <mat-label>{{ 'MY_FAMILY.TERRITORY' | translate }}</mat-label>
+              <input required formControlName="territory" type="text" matInput>
+            </mat-form-field>
+            <mat-form-field class="form-field">
+              <mat-label>{{ 'MY_FAMILY.CITY' | translate }}</mat-label>
+              <input required formControlName="city" type="text" matInput>
+            </mat-form-field>
+            <mat-form-field class="form-field">
+              <mat-label>{{ 'MY_FAMILY.STREET' | translate }}</mat-label>
+              <input required formControlName="street" type="text" matInput>
+            </mat-form-field>
+            <mat-form-field class="form-field">
+              <mat-label>{{ 'MY_FAMILY.STREETNO' | translate }}</mat-label>
+              <input required formControlName="street_no" type="text" matInput>
+            </mat-form-field>
+            <mat-form-field class="form-field">
+              <mat-label>{{ 'MY_FAMILY.FLATNO' | translate }}</mat-label>
+              <input required formControlName="flat_no" type="text" matInput>
+            </mat-form-field>
+            <mat-form-field class="form-field">
+              <mat-label>{{ 'MY_FAMILY.POSTALCODE' | translate }}</mat-label>
+              <input required formControlName="postal_code" type="text" matInput>
+            </mat-form-field>
+          </div>
+          <button (click)="createFamily(createFamilyForm.value)" mat-raised-button color="primary"
+                  [disabled]="!createFamilyForm.valid">
+            {{ 'MY_FAMILY.CREATE' | translate }}
+          </button>
+        </form>
+        <hr>
+
+        <h4>{{ 'MY_FAMILY.SEARCH' | translate }}:</h4>
+        <input id="searchInput" (keyup.enter)="navigateToSearchComponent()" placeholder="{{ 'NAV.SEARCH_PLACEHOLDER' | translate }}" #searchInput>
+
+      </div>
+    </div>
+  </section>
+</ng-template>
+
 <router-outlet></router-outlet>
 

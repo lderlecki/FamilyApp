@@ -78,6 +78,10 @@ class Profile(models.Model):
         return f"{self.name} {self.surname}"
 
     @property
+    def has_family(self):
+        return self.family is not None
+
+    @property
     def full_name(self):
         return f"{self.name} {self.surname}"
 

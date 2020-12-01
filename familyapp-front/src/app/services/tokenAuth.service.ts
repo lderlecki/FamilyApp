@@ -28,10 +28,10 @@ export class TokenAuthService {
     private router: Router,
   ) {
     // if (!this.isTokenExpired()) {/
-      const profile = JSON.parse(localStorage.getItem('profile'));
-      this.userProfileSubject = new BehaviorSubject<Profile>(profile);
-      this.userProfile = this.userProfileSubject.asObservable();
-      this.isLoggedIn = true;
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    this.userProfileSubject = new BehaviorSubject<Profile>(profile);
+    this.userProfile = this.userProfileSubject.asObservable();
+    this.isLoggedIn = true;
     // } else {
     //   this.userProfileSubject = new BehaviorSubject<Profile>(null);
     //   this.userProfile = this.userProfileSubject.asObservable();
@@ -61,7 +61,6 @@ export class TokenAuthService {
   login(token, uid, profile) {
     profile['jwtToken'] = token;
     this.userProfileSubject.next(profile);
-
     this.isLoggedIn = true;
   }
 
@@ -72,6 +71,15 @@ export class TokenAuthService {
     this.remove('refresh');
     this.isLoggedIn = false;
     this.router.navigate(['account/login']);
+  }
+
+  changeProfileSubject(profile: Profile): void {
+    this.userProfileSubject.next(profile);
+
+  }
+
+  updateProfileLocalStorage(): void {
+    localStorage.setItem('profile', JSON.stringify(this.profileValue));
   }
 
   public get profileValue(): Profile {

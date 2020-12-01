@@ -6,7 +6,7 @@
       </div>
       <ng-template #authorizedBlock>
         <!--NEW AUTHORIZED LINKS HERE-->
-          <input class="nav-item" id="searchInput" (keyup.enter)="navigateToSearchComponent()" placeholder="{{ 'NAV.SEARCH_PLACEHOLDER' | translate }}" #searchInput>
+        <input class="nav-item" id="searchInput" (keyup.enter)="navigateToSearchComponent()" placeholder="{{ 'NAV.SEARCH_PLACEHOLDER' | translate }}" #searchInput>
         <div class="nav-account">
           <a class="nav-item" routerLink="/myFamily" routerLinkActive='active'>{{ 'NAV.MY_FAMILY' | translate }}</a>
           <a class="nav-item" routerLink="/account/profile" routerLinkActive='active'>{{ 'NAV.PROFILE' | translate }}</a>

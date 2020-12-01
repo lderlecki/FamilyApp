@@ -71,8 +71,12 @@ export class ProfileComponent implements OnInit {
         this.toastr.success('Personal data updated successfully');
         localStorage.setItem('profile', JSON.stringify(response));
       }, error => {
-        console.log(error);
-        this.toastr.error('Error, please try again.');
+        if (error.error['email'] !== null || error.error['email'] !== undefined) {
+          this.toastr.error('The email address is already taken. Please choose another one.');
+          this.profileForm.controls['email'].setValue(this.profileData.email);
+        } else {
+          this.toastr.error('Error, please try again.');
+        }
       }
     );
     console.log(this.profileData);
@@ -88,6 +92,7 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
+
   fetchDataForProfile(profileId: number) {
     this.invitationService.getInvitationsForProfile(profileId).subscribe(response => {
       if (response.status === 200) {
