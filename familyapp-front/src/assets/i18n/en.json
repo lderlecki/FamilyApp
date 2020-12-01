@@ -65,8 +65,10 @@
     "PROFILES": "User profiles"
   },
   "LIST_FAMILIES": {
-    "COLUMN_HEADER":
-     {"familyName": "Surname", "familyMembers": "Members No."},
+    "COLUMN_HEADER": {
+      "familyName": "Surname",
+      "familyMembers": "Members No."
+    },
     "FETCHSUCCESS": "Table data fetched succesfully",
     "FETCHERROR": "Upss something went wrong",
     "BUTTON_INVITE": "Join family",
@@ -76,8 +78,10 @@
     "INVITE_SUCCESS_1": "Invitation request has been sucessfully sent to family "
   },
   "LIST_PROFILES": {
-    "COLUMN_HEADER":
-    {"name": "Name", "surname": "Surname"},
+    "COLUMN_HEADER": {
+      "name": "Name",
+      "surname": "Surname"
+    },
     "FETCHSUCCESS": "Table data fetched succesfully",
     "FETCHERROR": "Upss something went wrong",
     "BUTTON_INVITE": "Invite to family",
@@ -88,10 +92,14 @@
     "INVITE_SUCCESS_1": "The invitation to your family has been sucessfully sent to user "
   },
   "LIST_INVITATIONS": {
-    "COLUMN_HEADER_FAMILY":
-    {"profile": "Username", "actions": "Actions"},
-    "COLUMN_HEADER_PROFILE":
-    {"family": "Family name", "actions": "Actions"},
+    "COLUMN_HEADER_FAMILY": {
+      "profile": "Username",
+      "actions": "Actions"
+    },
+    "COLUMN_HEADER_PROFILE": {
+      "family": "Family name",
+      "actions": "Actions"
+    },
     "FETCHSUCCESS": "Table data fetched succesfully",
     "FETCHERROR": "Upss something went wrong",
     "BUTTON_ACCEPT": "Accept",
@@ -105,13 +113,37 @@
     "TEXT2": "for user ",
     "ACCEPT": "Yes",
     "REJECT": "No"
-
   },
   "MY_FAMILY": {
     "NAV_GALLERY": "Gallery",
     "NAV_TASKS": "Tasks",
     "NAV_INVITATIONS": "Invitations",
-    "NAV_MEMBERS": "Members"
+    "NAV_MEMBERS": "Members",
+    "NAME": "Name",
+    "BUDGET": "Budget",
+    "TERRITORY": "Territory",
+    "CITY":"City",
+    "STREET": "Street",
+    "STREETNO":"Street no",
+    "FLATNO": "Flat no",
+    "POSTALCODE":"Postal code",
+    "CREATE": "Create",
+    "SEARCH": "Search for a family to join",
+    "CREATE_FAMILY": "Create your family here"
+  },
+  "TODO": {
+    "ADDTODO": "Add new list",
+    "NAME": "Name",
+    "DESCRIPTION": "Description",
+    "TASKCREATE": "Fill in task information",
+    "TASK": "Task",
+    "RESP_PERSON": "For",
+    "ASSIGNTASK": "Assign to",
+    "ADDTASK": "Add new task",
+    "SUBMIT": "Submit",
+    "EVERYONE": "Everyone",
+    "DONE": "Done",
+    "NOTDONE": "Not Done"
   },
   "FAMILY_GALLERY": {
     "NO_IMAGES": "Your family gallery is empty",

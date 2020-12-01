@@ -54,7 +54,7 @@ def validate_todo_create(user, data):
     for task in tasks:
         task_profile = task.get('profile', None)
         # If responsible person is not None and is not a member of given family, then raise Exception
-        if task_profile is not None and not family.filter(profile=task_profile).exists():
+        if task_profile and not family.filter(profile=task_profile).exists():
             raise ValidationError(
                 {"responsiblePerson": "Selected person for task is not a member of family specified in todolist."}
             )

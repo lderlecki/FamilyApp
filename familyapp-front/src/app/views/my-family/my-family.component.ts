@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
 import {ProfileService} from '../../services/profile.service';
@@ -10,6 +10,7 @@ import {Profile} from '../../models/profile';
 import {FamilyService} from '../../services/family.service';
 import {TokenAuthService} from '../../services/tokenAuth.service';
 import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-my-family',
@@ -21,17 +22,56 @@ export class MyFamilyComponent implements OnInit {
   myFamily;
   myProfile: Profile;
   public familyMembers: any;
+  public createFamilyForm: FormGroup;
 
-  constructor(private router: Router, protected familyService: FamilyService, protected profileService: ProfileService,
-              protected toastr: ToastrService, protected translate: TranslateService,
-              protected _location: Location, private authService: TokenAuthService) {
+  @ViewChild('searchInput') private searchInput: ElementRef;
+
+  constructor(
+    protected familyService: FamilyService,
+    protected profileService: ProfileService,
+    protected toastr: ToastrService,
+    protected translate: TranslateService,
+    private fb: FormBuilder,
+    protected _location: Location,
+    private authService: TokenAuthService,
+    private router: Router,
+  ) {
 
   }
 
   ngOnInit(): void {
     this.myFamily = this.familyService.familyValue;
-    this.router.navigate(['myFamily/gallery']);
-    console.log('familymembers: ', this.familyService.familyMembers);
-    console.log('my family value in my family component: ', this.myFamily);
+    if (this.myFamily === null) {
+      this.createFamilyForm = this.fb.group({
+        family_name: ['', [Validators.required]],
+        budget: [0.0, [Validators.required]],
+        family_head: [this.authService.profileValue.id, [Validators.required]],
+        address: this.fb.group({
+          territory: ['', [Validators.required]],
+          city: ['', [Validators.required]],
+          street: ['', [Validators.required]],
+          street_no: ['', [Validators.required]],
+          flat_no: [''],
+          postal_code: ['', [Validators.required]],
+        })
+      });
+    }
+  }
+
+  createFamily(data) {
+    this.familyService.createFamily(data).subscribe(response => {
+      const profile = this.authService.profileValue;
+      console.log('in response family create');
+      console.log(response);
+      profile.family = response;
+      this.authService.changeProfileSubject(profile);
+      this.authService.updateProfileLocalStorage();
+      this.toastr.success('Family created successfully.');
+      location.reload();
+    });
+  }
+
+  navigateToSearchComponent() {
+    this.router.navigate(['/search/' + this.searchInput.nativeElement.value + '/families']);
   }
 }

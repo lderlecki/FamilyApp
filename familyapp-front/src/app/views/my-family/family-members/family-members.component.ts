@@ -27,7 +27,7 @@ export class FamilyMembersComponent implements OnInit, OnDestroy, AfterViewInit 
       this.tableData = data?.familyMembers;
       setTimeout(() => {
         this.myChild.init(this.tableData);
-        document.getElementById('mySpinner').remove();
+        // document.getElementById('mySpinner').remove();
         }
         , 500);
     });

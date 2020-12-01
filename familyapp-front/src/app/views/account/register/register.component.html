@@ -67,9 +67,8 @@
         </mat-form-field>
       </form>
     </div>
-
     <button (click)="registerUser(registerForm.value, profileForm.value)"
-            mat-raised-button color="primary" [disabled]="!registerForm.valid && !profileForm.valid">
+            mat-raised-button color="primary" [disabled]="!registerForm.valid || !profileForm.valid">
       {{ 'PROFILE.REGISTER' | translate }}
     </button>
     <br>

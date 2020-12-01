@@ -15,6 +15,7 @@ export class UserService {
   private requestPasswordResetUrl = 'request-reset-email/';
   private passwordResetTokenValidateUrl = 'password-reset/';
   private passwordResetCompleteUrl = 'password-reset-complete/';
+  private tokenRefreshUrl = 'password-reset-complete/';
 
   private httpHeaders: HttpHeaders;
   private params: HttpParams;
@@ -22,12 +23,6 @@ export class UserService {
 
 
   constructor(private http: HttpClient) {
-  }
-
-  attemptAuthViaSpring(email: string, password: string): Observable<any> {
-    const credentials = {email: email, password: password};
-    console.log('attemptAuth');
-    return this.http.post<any>('http://localhost:8081/token/generate-token', credentials);
   }
 
   registerUser(userData, profileData): Observable<any> {
@@ -73,5 +68,6 @@ export class UserService {
     };
     return this.http.patch(this.BASE_URL + this.passwordResetCompleteUrl, data, {observe: 'response'});
   }
+
 
 }

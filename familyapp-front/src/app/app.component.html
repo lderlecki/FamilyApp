@@ -2,11 +2,11 @@
   <div class="container">
     <div class="nav-items" >
       <a class="nav-item" routerLink="" routerLinkActive='active'>{{ 'NAV.HOME' | translate }}</a>
-      <div *ngIf="!authService.isTokenExpired(); then authorizedBlock; else anonymousBlock">
+      <div *ngIf="authService.profileValue; then authorizedBlock; else anonymousBlock">
       </div>
       <ng-template #authorizedBlock>
         <!--NEW AUTHORIZED LINKS HERE-->
-          <input class="nav-item" id="searchInput" (keyup.enter)="navigateToSearchComponent()" placeholder="{{ 'NAV.SEARCH_PLACEHOLDER' | translate }}" #searchInput>
+        <input class="nav-item" id="searchInput" (keyup.enter)="navigateToSearchComponent()" placeholder="{{ 'NAV.SEARCH_PLACEHOLDER' | translate }}" #searchInput>
         <div class="nav-account">
           <a class="nav-item" routerLink="/myFamily" routerLinkActive='active'>{{ 'NAV.MY_FAMILY' | translate }}</a>
           <a class="nav-item" routerLink="/account/profile" routerLinkActive='active'>{{ 'NAV.PROFILE' | translate }}</a>
@@ -15,8 +15,8 @@
       </ng-template>
       <ng-template #anonymousBlock>
         <div class="nav-account">
-        <a class="nav-item" routerLink="/account/login" routerLinkActive='active'>{{ 'NAV.LOGIN' | translate }}</a>
-        <a class="nav-item" routerLink="/register" routerLinkActive='active'>{{ 'NAV.REGISTER' | translate }}</a>
+          <a class="nav-item" routerLink="/account/login" routerLinkActive='active'>{{ 'NAV.LOGIN' | translate }}</a>
+          <a class="nav-item" routerLink="/register" routerLinkActive='active'>{{ 'NAV.REGISTER' | translate }}</a>
         </div>
       </ng-template>
         <span class="nav-account"><select  #langSelect (change)="translate.use(langSelect.value)">
@@ -36,6 +36,7 @@
   </section>
 </div>
 
+<app-spinner></app-spinner>
 
 <!-- Copyright 2020 Google LLC. All Rights Reserved.
     Use of this source code is governed bsy an MIT-style license that

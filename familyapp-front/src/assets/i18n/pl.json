@@ -113,7 +113,18 @@
     "NAV_GALLERY": "Galeria",
     "NAV_TASKS": "Zadania",
     "NAV_INVITATIONS": "Zaproszenia",
-    "NAV_MEMBERS": "Członkowie"
+    "NAV_MEMBERS": "Członkowie",
+    "NAME": "Nazwa",
+    "BUDGET": "Budżet",
+    "TERRITORY": "Województwo",
+    "CITY":"Miasto",
+    "STREET": "Ulica",
+    "STREETNO":"Numer ul.",
+    "FLATNO": "Nr mieszkania",
+    "POSTALCODE":"Kod pocztowy",
+    "CREATE": "Stwórz",
+    "SEARCH": "Wyszukaj rodzinę",
+    "CREATE_FAMILY": "Stwórz rodzinę"
   },
     "TODO": {
       "ADDTODO": "Stwórz listę",
@@ -121,7 +132,7 @@
       "DESCRIPTION": "Opis",
       "TASKCREATE": "Dodaj informację o zadaniach",
       "TASK": "Zadanie",
-      "RESPPERSON": "Dla",
+      "RESP_PERSON": "Dla",
       "ASSIGNTASK": "Przypisz do",
       "ADDTASK": "Dodaj zadanie",
       "SUBMIT": "Zatwierdź",

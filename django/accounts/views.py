@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
@@ -36,18 +38,16 @@ class UserRegisterView(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         user_data = request.data['userData']
         serializer = self.serializer_class(data=user_data)
-        if serializer.is_valid():
-            user = serializer.save()
-            profile_data = request.data.get('profileData', None)
-            if profile_data:
-                profile = user.profile
-                profile.name = profile_data.get('name', None)
-                profile.surname = profile_data.get('surname', None)
-                profile.phone = profile_data.get('phoneNumber', None)
-                profile.save()
-            return Response('', status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        profile_data = request.data.get('profileData', None)
+        if profile_data:
+            profile = user.profile
+            profile.name = profile_data.get('name', None)
+            profile.surname = profile_data.get('surname', None)
+            profile.phone = profile_data.get('phoneNumber', None)
+            profile.save()
+        return Response('', status=status.HTTP_201_CREATED)
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
@@ -71,6 +71,9 @@ class LoginView(TokenObtainPairView):
         user = User.objects.filter(email=email).first()
         if not user or not user.check_password(password):
             raise exceptions.AuthenticationFailed('Email or password incorrect')
+
+        user.last_login = datetime.now()
+        user.save()
 
         refresh = RefreshToken.for_user(user)
 

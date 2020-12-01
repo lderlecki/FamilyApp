@@ -3,6 +3,7 @@ from django.utils.encoding import DjangoUnicodeDecodeError, force_str
 from django.utils.http import urlsafe_base64_decode
 
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 
 from .models import User, Profile
 from family.serializers import FamilySerializer
@@ -18,14 +19,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     family = FamilySerializer(read_only=True)
+    email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all())])
 
     class Meta:
         model = Profile
         fields = ('id', 'user', 'name', 'surname', 'email', 'phone', 'family')
-
-    # def save(self, **kwargs):
-    #     if Profile.objects.filter(user=self.validated_data['user']).exists():
-    #         raise serializers.ValidationError({'profile': 'Profile already exists'})
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):

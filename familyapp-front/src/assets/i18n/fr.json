@@ -110,7 +110,18 @@
     "NAV_GALLERY": "Galerie",
     "NAV_TASKS": "Tâches",
     "NAV_INVITATIONS": "Invitations",
-    "NAV_MEMBERS": "Membres"
+    "NAV_MEMBERS": "Membres",
+    "NAME": "Nom",
+    "BUDGET": "Budget",
+    "TERRITORY": "Territoire",
+    "CITY":"Ville",
+    "STREET": "Rue",
+    "STREETNO":"Numéro de rue",
+    "FLATNO": "Numéro d'appartement",
+    "POSTALCODE":"Code postal",
+    "CREATE": "Créer",
+    "SEARCH": "Rechercher une famille",
+    "CREATE_FAMILY": "Créer une famille"
   },
     "TODO": {
       "ADDTODO": "Ajouter une nouvelle liste",
@@ -118,7 +129,7 @@
       "DESCRIPTION": "Description",
       "TASKCREATE": "Remplissez les informations de la tâche",
       "TASK": "Tâche",
-      "RESPPERSON": "Pour",
+      "RESP_PERSON": "Pour",
       "ASSIGNTASK": "Attribuer à",
       "ADDTASK": "Ajouter une nouvelle tâche",
       "SUBMIT": "Soumettre",

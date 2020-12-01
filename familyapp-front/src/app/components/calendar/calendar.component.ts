@@ -5,6 +5,7 @@ export class SelectedDateDto {
   selectedDate: Date;
   familyToDoList: Todolist[];
 }
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -23,15 +24,17 @@ export class CalendarComponent implements OnInit {
   toDoLists: Todolist[];
   @Output()
   public outputObject = new EventEmitter<Object>();
-  constructor( ) { }
+
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.currentDate = new Date();
     this.monthIndex = this.currentDate.getMonth();
     this.currentYear = this.currentDate.getFullYear();
     this.calculateTotalNoOfDaysAndFirstDay();
-
   }
+
   nextMonth() {
     if (this.monthIndex === 11) {
       this.monthIndex = 0;
@@ -40,6 +43,7 @@ export class CalendarComponent implements OnInit {
     }
     this.calculateTotalNoOfDaysAndFirstDay();
   }
+
   prevMonth() {
     if (this.monthIndex === 0) {
       this.monthIndex = 11;
@@ -47,26 +51,26 @@ export class CalendarComponent implements OnInit {
       this.monthIndex--;
     }
     this.calculateTotalNoOfDaysAndFirstDay();
-
-
   }
+
   nextYear() {
-      this.currentYear = (+this.currentYear + 1 );
+    this.currentYear = (+this.currentYear + 1);
     this.yearInput.nativeElement.value = this.currentYear;
     this.calculateTotalNoOfDaysAndFirstDay();
   }
-  prevYear() {
 
+  prevYear() {
     this.currentYear -= 1;
     console.log(' current year prev year' + this.currentYear)
     this.yearInput.nativeElement.value = this.currentYear;
     this.calculateTotalNoOfDaysAndFirstDay();
-    }
+  }
 
   changeYearToTypedYear() {
     this.currentYear = +this.yearInput.nativeElement.value;
     this.calculateTotalNoOfDaysAndFirstDay();
   }
+
   counter(i: number) {
     return new Array(i);
   }
@@ -85,7 +89,6 @@ export class CalendarComponent implements OnInit {
     } else {
       this.appYearAndMonth = false;
     }
-
   }
 
   getClickedDayAndCreateFullDate(day: number) {

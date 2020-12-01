@@ -32,16 +32,16 @@ export class FamilyInvitationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.family = this.familyService.familyValue;
-    document.getElementById('mySpinner').remove();
+    // document.getElementById('mySpinner').remove();
     this.prepareData();
   }
 
   prepareData() {
     this.viewForFamily = true;
-    this.fetchDataForFamily();
+    this.fetchDataForFamily(this.family.id);
   }
 
-  fetchDataForFamily() {
+  fetchDataForFamily(familyId: number) {
     this.invitationService.getInvitationsForFamily().subscribe(response => {
       if (response.status === 200) {
         this.translate.get('LIST_INVITATIONS.FETCHSUCCESS').subscribe(res => {
