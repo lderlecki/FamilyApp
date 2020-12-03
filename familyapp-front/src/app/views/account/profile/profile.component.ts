@@ -11,6 +11,7 @@ import {Invitation} from '../../../models/invitation';
 import {HttpEventType, HttpResponse} from '@angular/common/http';
 import {UploadFileService} from '../../../services/upload-file-service';
 import {base64ToFile, ImageCroppedEvent} from 'ngx-image-cropper';
+import {ProfileService} from '../../../services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit {
   imageLoaded = false;
   imgUrl;
   croppedImage;
+  profileImageBlob;
 
   constructor(
     public authService: TokenAuthService,
@@ -39,7 +41,8 @@ export class ProfileComponent implements OnInit {
     private fb: FormBuilder,
     private translate: TranslateService,
     private invitationService: InvitationService,
-    private uploadService: UploadFileService
+    private uploadService: UploadFileService,
+    private profileService: ProfileService
   ) {
   }
 
@@ -66,6 +69,17 @@ export class ProfileComponent implements OnInit {
     });
     this.profileData = JSON.parse(localStorage.getItem('profile'));
     this.prepareData();
+    this.getProfileImage();
+  }
+
+  getProfileImage() {
+    this.profileService.getProfileImage(this.profileData.id).subscribe(response => {
+      if (response.status === 200) {
+        this.profileImageBlob = response.body.image;
+      } else if (response.status === 404) {
+        console.log('profile image not found');
+      }
+    });
   }
 
   prepareData() {
@@ -89,7 +103,6 @@ export class ProfileComponent implements OnInit {
         }
       }
     );
-    console.log(this.profileData);
   }
 
   changePassword(data) {
@@ -141,8 +154,7 @@ export class ProfileComponent implements OnInit {
     this.cancelChangingImage();
     this.uploadService.uploadProfileImage(this.croppedImage).subscribe(response => {
       if (response.status === 200) {
-        (<HTMLImageElement>this.profileImage.nativeElement).src =
-          'http://localhost:8081/profile/getProfileImage?id=' + this.profileData.id;
+       this.getProfileImage();
       }
     });
   }
@@ -167,4 +179,6 @@ export class ProfileComponent implements OnInit {
     this.imageInput.clear(); // clear input
     this.imageInput.blur(); // lose focus
   }
+
+
 }

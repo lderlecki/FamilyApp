@@ -9,6 +9,7 @@ import {catchError} from 'rxjs/operators';
 export class ProfileService {
   API_PROFILE_URL = 'http://localhost:8081/profile/';
 
+
   private httpHeaders: HttpHeaders;
   private params: HttpParams;
 
@@ -28,4 +29,8 @@ export class ProfileService {
   getFamilyForProfile(profileId: number): Observable<any> {
     return this.http.get<any>(this.API_PROFILE_URL + 'family/?id='  + profileId, {observe: 'response'});
   }
+  getProfileImage(profileId: number): Observable<any> {
+    return this.http.get<any>(this.API_PROFILE_URL + 'getProfileImage/?id='  + profileId, {observe: 'response'});
+  }
+
 }

@@ -1,6 +1,7 @@
 package com.example.familyapp.controller;
 
 import com.example.familyapp.config.JwtToken;
+import com.example.familyapp.dto.BlobWrapper;
 import com.example.familyapp.model.Family;
 import com.example.familyapp.model.Invitation;
 import com.example.familyapp.model.Profile;
@@ -8,6 +9,7 @@ import com.example.familyapp.service.ProfileService;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -73,15 +75,18 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "getProfileImage")
-    public void getProfileImage(HttpServletResponse response, @RequestParam long id) throws Exception {
-        response.setContentType("image/jpeg");
+    public HttpEntity<BlobWrapper> getProfileImage(@RequestParam long id) throws Exception {
         Blob ph = profileService.getImageById(id);
         if(ph != null)
         {
             byte[] bytes = ph.getBytes(1, (int) ph.length());
-            InputStream inputStream = new ByteArrayInputStream(bytes);
-            IOUtils.copy(inputStream, response.getOutputStream());
+            return new ResponseEntity<>(
+                    new BlobWrapper(bytes),
+                    HttpStatus.OK);
         }
+        return new ResponseEntity<>(
+                null,
+                HttpStatus.NOT_FOUND);
     }
 
 

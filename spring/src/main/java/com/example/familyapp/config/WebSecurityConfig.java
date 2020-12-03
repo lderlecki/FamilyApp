@@ -45,9 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()//AUTHORIZE REQUEST BELOW
                 .csrf().disable().authorizeRequests().antMatchers().authenticated()
                 //ALLOW REQUESTS BELOW
-                .antMatchers( "/token/generate-token","/*","/**","/.~~spring-boot!~/restart").permitAll()
-                .and()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+                .antMatchers( "/token/generate-token","/.~~spring-boot!~/restart").permitAll()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()

@@ -19,7 +19,6 @@ public class FamilyImage implements Serializable {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
     @JoinColumn(name= "family_id")
     private Family family;
 

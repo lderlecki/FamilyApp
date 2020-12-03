@@ -36,8 +36,8 @@
                 </div>
                 <div *ngIf="family===false" class="example-element-position">
                   <!--load image only if this element is expanded-->
-                  <div *ngIf="element == expandedElement">
-                  <img src="http://localhost:8081/profile/getProfileImage?id=+{{element.id}}" alt="profile image">
+                  <div *ngIf="element == expandedElement" >
+                  <img src="data:image/png;base64,{{profileImageBlob}}"  alt="profile image">
                   </div>
                   <button mat-raised-button color="primary"
                           (click)="sendInvitation(element)">{{ 'LIST_PROFILES.BUTTON_INVITE' | translate }}</button>
@@ -51,7 +51,7 @@
         <tr mat-header-row *matHeaderRowDef="objectKeys(columnHeader)"></tr>
         <tr mat-row *matRowDef="let row; columns: objectKeys(columnHeader);"
             [class.example-expanded-row]="expandedElement === row"
-            (click)="expandedElement = expandedElement === row ? null : row"></tr>
+            (click)="expandedElement = expandedElement === row ? null : row;; getProfileImage(expanded,row)"></tr>
         <ng-container *ngIf="expanded===true">
           <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
         </ng-container>

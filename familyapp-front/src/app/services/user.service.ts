@@ -45,7 +45,6 @@ export class UserService {
   updateProfileData(token, user_id, data): Observable<any> {
     return this.http.patch(this.BASE_URL + this.profileDataUrl + `${user_id}/`, data);
   }
-
   changeUserPassword(data): Observable<any> {
     return this.http.patch(this.BASE_URL + this.changePasswordUrl, data, {observe: 'response'});
   }

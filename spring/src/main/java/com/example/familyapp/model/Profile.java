@@ -1,6 +1,7 @@
 package com.example.familyapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.Type;
 
@@ -40,6 +41,7 @@ public class Profile {
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
+    @JsonIgnore
     private byte[] image;
 
     public byte[] getImage() {

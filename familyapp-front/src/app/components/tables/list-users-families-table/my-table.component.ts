@@ -4,6 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatPaginator} from '@angular/material/paginator';
 import {ActivatedRoute} from '@angular/router';
+import {ProfileService} from '../../../services/profile.service';
 
 @Component({
   selector: 'app-my-table',
@@ -27,9 +28,11 @@ export class MyTableComponent implements OnInit {
   objectKeys = Object.keys;
   dataSource;
   expandedElement;
+  @Output('ngInit') initEvent: EventEmitter<any> = new EventEmitter();
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor() { }
+  profileImageBlob;
+  constructor(private profileService: ProfileService) { }
 
   ngOnInit(): void {
   }
@@ -53,5 +56,16 @@ export class MyTableComponent implements OnInit {
 
   sendInvitation(element: any) {
     this.outputObject.emit(element);
+  }
+  getProfileImage(expanded: any, row: any) {
+    if (expanded === true && this.family === false) {
+      this.profileService.getProfileImage(row.id).subscribe(response => {
+        if (response.status === 200) {
+          this.profileImageBlob = response.body.image;
+        } else if (response.status === 404) {
+          console.log('profile image not found');
+        }
+      });
+    }
   }
 }

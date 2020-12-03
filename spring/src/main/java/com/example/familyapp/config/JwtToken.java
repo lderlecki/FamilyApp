@@ -8,7 +8,6 @@ import java.util.function.Function;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.familyapp.model.User;
 import org.springframework.stereotype.Component;
@@ -27,16 +26,9 @@ public class JwtToken implements Serializable {
         return doGenerateToken(user);
     }
 
-    public Boolean validateToken(String token) { //, UserDetails userDetails
-       //getUserNameFromToken
-        return !isTokenExpired(token); //uesrname.equals(userDetails.getUsername()) &&
-    }
-
     public static Integer getIdFromToken(String token) {
         return (Integer)getAllClaimsFromToken(token).get("user_id");
     }
-
-
 
     private Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
@@ -55,15 +47,12 @@ private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver
     private static Claims getAllClaimsFromToken(String token) {
         //CHECK TOKEN SIGNING KEY AND ISSUER DIRECTLY HERE with HS256 mechanism
         //#TODO SET ISSUER IN DJANGO AND UNCOMMENT LINE 60
-        try {
-            Algorithm algorithm = Algorithm.HMAC256(SIGNING_KEY);
-            JWTVerifier verifier = JWT.require(algorithm)
-                    //.withIssuer(ISSUER)
-                    .build(); //Reusable verifier instance
-            DecodedJWT jwt = verifier.verify(token);
-        } catch (JWTVerificationException exception){
-            throw new JWTVerificationException("Invalid signing key");
-        }
+
+    Algorithm algorithm = Algorithm.HMAC256(SIGNING_KEY);
+    JWTVerifier verifier = JWT.require(algorithm)
+            //.withIssuer(ISSUER)
+            .build(); //Reusable verifier instance
+    DecodedJWT jwt = verifier.verify(token);
         return new MyJwtParser()
                 .setSigningKey(SIGNING_KEY).parseClaimsJws(token).getBody();
     }
