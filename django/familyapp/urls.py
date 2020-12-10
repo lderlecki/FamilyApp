@@ -6,9 +6,9 @@ from accounts.views import LoginView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(('accounts.urls', "user"))),
+    path('api/', include(('accounts.urls', "accounts"))),
     path('api/', include(('family.urls', "family"))),
-    path('api/', include(('task_list.urls', "task-list"))),
+    path('api/', include(('task_list.urls', "task_list"))),
     path('auth/', include('rest_framework.urls')),
     # path('family/', include('family.urls')),'
 

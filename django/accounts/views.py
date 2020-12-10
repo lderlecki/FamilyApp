@@ -1,12 +1,11 @@
 from datetime import datetime
 
-from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 from django.utils.encoding import smart_str, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from rest_framework import viewsets, views, status, exceptions, generics
+from rest_framework.exceptions import ValidationError
 from rest_framework.generics import UpdateAPIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -119,14 +118,14 @@ class PasswordTokenValidateAPI(generics.GenericAPIView):
             user_id = smart_str(urlsafe_base64_decode(uidb64))
             user = User.objects.get(id=user_id)
             if not PasswordResetTokenGenerator().check_token(user, token):
-                raise DjangoUnicodeDecodeError
+                raise ValidationError({'token': 'Invalid token, please request password reset again'})
             return Response(
                 {'success': True, 'message': 'Validation passed', 'uidb64': uidb64, 'token': token},
                 status=status.HTTP_200_OK
             )
 
-        except DjangoUnicodeDecodeError as e:
-            return Response({'error': 'Token is not valid, please request password reset again.'},
+        except ValidationError as e:
+            return Response({'error': e.detail},
                             status=status.HTTP_401_UNAUTHORIZED)
 
 

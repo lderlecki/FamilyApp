@@ -8,10 +8,10 @@ import {ToDoService} from '../../../services/to-do.service';
 import {Todolist} from '../../../models/todolist';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatExpansionPanel} from '@angular/material/expansion';
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-my-family',
+  selector: 'app-family-tasks',
   templateUrl: './family-tasks.component.html',
   styleUrls: ['./family-tasks.component.scss'],
   providers: [ProfileService, InvitationService],

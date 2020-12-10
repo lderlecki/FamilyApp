@@ -6,6 +6,6 @@ router = routers.DefaultRouter()
 router.register('tasks', TaskViewSet, basename='tasks')
 
 urlpatterns = [
-    path(r'', include(router.urls)),
+    path(r'', include(router.urls), name='tasks-view'),
     path(r'todo/create/', TodolistView.as_view(), name='todolist-create'),
 ]

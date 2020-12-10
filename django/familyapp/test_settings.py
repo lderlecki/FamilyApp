@@ -88,23 +88,11 @@ WSGI_APPLICATION = 'familyapp.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db(),
-}
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
-
-# Change db to sqlite3 for tests to speed it up a little bit
-# But when you are done with writing your tests change db to postre on aws
-# and test if it works fine
-
-if 'test' in sys.argv:
-    DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -186,14 +174,7 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': datetime.timedelta(days=1),
 }
 '''
-
-EMAIL_BACKEND = env('EMAIL_BACKEND')
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-EMAIL_HOST = env('EMAIL_HOST')
-EMAIL_PORT = env('EMAIL_PORT')
-EMAIL_USE_TLS = env('EMAIL_USE_TLS')
-
-TESTING = False
+TESTING = True
+EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 
 FRONTEND_URL = 'http://localhost:4201/'

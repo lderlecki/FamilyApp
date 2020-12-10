@@ -22,7 +22,7 @@
 
 .nav-item{
   padding: 10px 15px 9px 15px;
-  text-decoration: none;
+  display: inline-block;
   text-align: center;
 }
 .nav-item:hover{
@@ -45,28 +45,131 @@
   max-width: 500px;
   margin: auto;
   padding-bottom: 15px;
-  border-radius: 15px;
-  border: 1px solid gray;
   text-align: center;
   align-content: center;
   justify-content: center;
-  -webkit-box-shadow: 0px 0px 15px 0px rgba(163, 163, 163, 1);
-  -moz-box-shadow: 0px 0px 15px 0px rgba(163, 163, 163, 1);
-  box-shadow: 0px 0px 15px 0px rgba(163, 163, 163, 1);
+
 }
 
 .family-create-container {
   margin: 1rem;
 }
 
-.family-data{
-  //margin: 1rem;
+.family-container {
+  display: flex;
+  flex-flow: row wrap;
 }
 
-.address-data {
-  //margin: 1rem;
+.family-data{
+  background-color: $content-color;
+
+  flex-grow: 1;
+  max-width: 250px;
+
+  padding: 10px;
+  margin: 10px;
+
+  height: 400px;
+}
+
+.family-content-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-basis: 65%;
+}
+
+.family-content {
+  display: flex;
+  flex-direction: column;
+  background-color: $content-color;
+
+  padding: 10px;
+  margin: 10px;
+
+  flex-grow: 1;
+  flex-basis: 65%;
+
+  hr {
+  clear: both;
+  width: 100%;
+}
+
+}
+
+.family-members {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 -20px;
+}
+
+.member-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  width: 190px;
+  margin: 10px 20px;
+  padding: 5px;
+  background-color: white;
+  height: 300px;
+
+  img {
+    height: 100px;
+    width: 100px;
+    margin-top: 20px;
+    border-radius: 50%;
+    border: $border-image;
+    box-shadow: $box-shadow-image;
+
+  }
+
+  .card-name {
+
+    margin-top: 40px;
+    font-weight: bold;
+  }
+
+  .member-profile {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+
+  a:link{
+    color: $table-gray;
+  }
+  a:visited {
+    color: $table-gray;
+  }
+
+}
+
+.member-profile:hover {
+  transition: all 1s ease;
+  color: black !important;
+}
+
+.calendar-container {
+  margin: 10px;
+}
+
+.rounded {
+  border-radius: 15px;
+  border: 1px solid gray;
+}
+
+.shadowed {
+  -webkit-box-shadow: 0 0 10px 0 rgba(163, 163, 163, 1);
+  -moz-box-shadow: 0 0 10px 0 rgba(163, 163, 163, 1);
+  box-shadow: 0 0 10px 0 rgba(163, 163, 163, 1);
 }
 
 .form-field {
   margin-right: .75rem;
+}
+
+.no-decoration {
+  text-decoration: none;
 }

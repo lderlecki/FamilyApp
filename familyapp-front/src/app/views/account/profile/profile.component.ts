@@ -122,7 +122,7 @@ export class ProfileComponent implements OnInit {
           this.toastr.success(res);
         });
         this.tableData = response.body;
-        console.log(this.tableData)
+        console.log(this.tableData);
         this.myChild.init(this.tableData);
       }
     }, error => {

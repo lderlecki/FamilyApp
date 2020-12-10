@@ -16,7 +16,7 @@ def validate_task_create_request(request):
     user = request.user
 
     if not todolist_id:
-        raise ValidationError({"Todolist": "Todolist object not specified."})
+        raise ValidationError({"todolist": "Todolist object not specified."})
 
     todolist = TodoList.objects.filter(id=int(todolist_id), family__profile=user.profile.id)
 
@@ -24,12 +24,15 @@ def validate_task_create_request(request):
         todolist = todolist.filter(id=int(todolist_id), family__profile=int(responsible_person))
         if not todolist.exists():
             raise ValidationError(
-                {"Todolist": "You are not authorized to perform this action."}
+                {"todolist": "You are not authorized to perform this action."}
             )
-    elif not todolist.exists():
-        raise ValidationError(
-            {"Todolist": "You cannot create task for the family that you are not a member of."}
-        )
+
+    # It is already validated by IsMemberOrReadOnly permission,
+    # but leave it commented here for the purpose of future changes
+    # elif not todolist.exists():
+    #     raise ValidationError(
+    #         {"todolist": "You cannot create task for the family that you are not a member of."}
+    #     )
 
 
 def validate_todo_create(user, data):
@@ -42,13 +45,16 @@ def validate_todo_create(user, data):
     """
     family_id = data.get('family', None)
     if not family_id:
-        raise ValidationError({"Family": "Family object not specified."})
+        raise ValidationError({"family": "Family object not specified."})
 
     # check if request.user is a member of the TodoList family
     family = Family.objects.filter(id=int(family_id), profile__user_id=user.id)
+
     # If request.user is not a member of a family provided in data raise error
-    if not family.exists():
-        raise ValidationError({"User": "You cannot create todolist for the family that you are not a member of."})
+    # It is already validated by IsFamilyMember permission,
+    # but leave it commented here for the purpose of future changes
+    # if not family.exists():
+    #     raise ValidationError({"user": "You cannot create todolist for the family that you are not a member of."})
 
     tasks = data.get('tasks', None)
     for task in tasks:
@@ -56,7 +62,7 @@ def validate_todo_create(user, data):
         # If responsible person is not None and is not a member of given family, then raise Exception
         if task_profile and not family.filter(profile=task_profile).exists():
             raise ValidationError(
-                {"responsiblePerson": "Selected person for task is not a member of family specified in todolist."}
+                {"responsible_person": "Selected person for task is not a member of family specified in todolist."}
             )
     return
 

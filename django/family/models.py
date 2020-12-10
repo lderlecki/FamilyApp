@@ -20,10 +20,6 @@ class Family(models.Model):
     def family_members(self):
         return self.profile_set.all()
 
-    # @property
-    # def family_head(self):
-    #     return self.profile_set.get(family_head=True)
-
 
 class Address(models.Model):
     class Meta:

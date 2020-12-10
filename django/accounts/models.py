@@ -25,6 +25,7 @@ class UserManager(BaseUserManager):
 
     def create_user(self, email, password=None, **perm_fields):
         perm_fields.setdefault('is_staff', False)
+        perm_fields.setdefault('is_admin', False)
         perm_fields.setdefault('is_superuser', False)
         return self._create_user(email, password=password, **perm_fields)
 

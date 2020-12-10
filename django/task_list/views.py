@@ -34,6 +34,8 @@ class TaskViewSet(mixins.ListModelMixin,
 
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
+        validate_task_create_request(request)
+
         serializer = TaskSerializer(
             instance=instance,
             data=request.data,

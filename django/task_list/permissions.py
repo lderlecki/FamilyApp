@@ -14,9 +14,9 @@ class IsFamilyMember(permissions.BasePermission):
     def has_permission(self, request, view):
         family_id = request.data.get('family')
         family_id = int(family_id) if family_id else None
-        try:
-            # request.user.profile.family_id throws Attribute Error if user.profile has no family FK
-            user_family_id = request.user.profile.family_id
-        except AttributeError:
+
+        # request.user.profile.family_id throws Attribute Error if user.profile has no family FK
+        user_family_id = request.user.profile.family_id
+        if user_family_id is None:
             return False
         return family_id == user_family_id

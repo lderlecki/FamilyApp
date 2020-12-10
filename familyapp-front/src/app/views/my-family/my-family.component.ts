@@ -11,6 +11,8 @@ import {FamilyService} from '../../services/family.service';
 import {TokenAuthService} from '../../services/tokenAuth.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CalendarComponent} from "../../components/calendar/calendar.component";
+import {FamilyTasksComponent} from "./family-tasks/family-tasks.component";
 
 @Component({
   selector: 'app-my-family',
@@ -21,10 +23,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class MyFamilyComponent implements OnInit {
   myFamily;
   myProfile: Profile;
-  public familyMembers: any;
+  public familyMembers;
   public createFamilyForm: FormGroup;
 
   @ViewChild('searchInput') private searchInput: ElementRef;
+  @ViewChild('calendarTasks') private myChild: FamilyTasksComponent;
 
   constructor(
     protected familyService: FamilyService,
@@ -40,7 +43,7 @@ export class MyFamilyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.myFamily = this.familyService.familyValue;
+    this.initFamily();
     if (this.myFamily === null) {
       this.createFamilyForm = this.fb.group({
         family_name: ['', [Validators.required]],
@@ -56,6 +59,12 @@ export class MyFamilyComponent implements OnInit {
         })
       });
     }
+  }
+
+  private initFamily() {
+    this.myFamily = this.familyService.familyValue;
+    this.familyMembers = this.myFamily.familyMembers;
+
   }
 
   createFamily(data) {

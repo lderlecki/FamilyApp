@@ -3,6 +3,7 @@ import threading
 from django.conf import settings
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.sites.shortcuts import get_current_site
+from django.core import mail
 from rest_framework import serializers
 from django.core.mail import send_mail, EmailMessage
 from django.dispatch import receiver
@@ -41,7 +42,12 @@ def send_email(data):
     email = EmailMessage(
         subject=data['email_subject'], body=data['email_body'], to=data['to_email']
     )
-    EmailThread(email).start()
+    thread = EmailThread(email)
+    thread.start()
+
+    # For simplicity sake
+    if settings.TESTING:
+        thread.join()
 
 
 def password_valid(p1, p2):

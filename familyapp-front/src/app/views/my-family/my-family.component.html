@@ -2,22 +2,56 @@
 <ng-template #familyBlock>
   <nav class="navbar">
     <div class="container">
-      <a class="nav-item" routerLink="gallery" routerLinkActive='active'>{{ 'MY_FAMILY.NAV_GALLERY' | translate }}</a>
-      <a class="nav-item" routerLink="members" routerLinkActive='active'>{{ 'MY_FAMILY.NAV_MEMBERS' | translate }}</a>
-      <a class="nav-item" routerLink="tasks" routerLinkActive='active'>{{ 'MY_FAMILY.NAV_TASKS' | translate }}</a>
-      <a class="nav-item" routerLink="invitations"
+      <a class="nav-item no-decoration" routerLink="gallery" routerLinkActive='active'>{{ 'MY_FAMILY.NAV_GALLERY' | translate }}</a>
+      <a class="nav-item no-decoration" routerLink="members" routerLinkActive='active'>{{ 'MY_FAMILY.NAV_MEMBERS' | translate }}</a>
+      <a class="nav-item no-decoration" routerLink="tasks" routerLinkActive='active'>{{ 'MY_FAMILY.NAV_TASKS' | translate }}</a>
+      <a class="nav-item no-decoration" routerLink="invitations"
          routerLinkActive='active'>{{ 'MY_FAMILY.NAV_INVITATIONS' | translate }}</a>
     </div>
   </nav>
+
+  <section class="family-container">
+    <section class="family-data rounded shadowed">
+      <span>Family Data</span>
+      <hr>
+    </section>
+
+    <section class="family-content-container">
+      <div class="family-content rounded shadowed">
+        <span>Family Members</span>
+        <hr>
+        <div class="family-members">
+          <div *ngFor="let member of familyMembers" class="member-card ">
+            <img
+              src="https://lh3.googleusercontent.com/ytP9VP86DItizVX2YNA-xTYzV09IS7rh4WexVp7eilIcfHmm74B7odbcwD5DTXmL0PF42i2wnRKSFPBHlmSjCblWHDCD2oD1oaM1CGFcSd48VBKJfsCi4bS170PKxGwji8CPmehwPw=w200-h247-no"
+              alt="Person">
+            <p class="card-name">{{member.name + ' ' + member.surname}} </p>
+            <a class="member-profile no-decoration" routerLink="./" routerLinkActive="active">
+            <span class="material-icons">
+              account_circle
+            </span>
+              <span>View profile</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="calendar-container">
+        <app-family-tasks></app-family-tasks>
+      </div>
+    </section>
+
+  </section>
+
+
 </ng-template>
 
 <ng-template #noFamilyBlock>
   <section class="create-family">
-    <div class="family-create-content">
+    <div class="family-create-content rounded shadowed">
       <div class="family-create-container">
         <h3>{{ 'MY_FAMILY.CREATE_FAMILY' | translate }}!</h3>
         <form [formGroup]="createFamilyForm">
-          <div class="family-data">
+          <div>
             <mat-form-field class="form-field">
               <mat-label>{{ 'MY_FAMILY.NAME' | translate }}</mat-label>
               <input required formControlName="family_name" type="text" matInput>
@@ -28,7 +62,7 @@
             </mat-form-field>
           </div>
 
-          <div class="address-data" formGroupName="address">
+          <div formGroupName="address">
             <mat-form-field class="form-field">
               <mat-label>{{ 'MY_FAMILY.TERRITORY' | translate }}</mat-label>
               <input required formControlName="territory" type="text" matInput>
@@ -62,7 +96,8 @@
         <hr>
 
         <h4>{{ 'MY_FAMILY.SEARCH' | translate }}:</h4>
-        <input id="searchInput" (keyup.enter)="navigateToSearchComponent()" placeholder="{{ 'NAV.SEARCH_PLACEHOLDER' | translate }}" #searchInput>
+        <input id="searchInput" (keyup.enter)="navigateToSearchComponent()"
+               placeholder="{{ 'NAV.SEARCH_PLACEHOLDER' | translate }}" #searchInput>
 
       </div>
     </div>

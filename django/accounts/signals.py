@@ -8,7 +8,7 @@ def create_profile(sender, instance, created, **kwargs):
 
 
 def update_user_email(sender, instance, created, **kwargs):
-    if not created:
+    if not created and instance.user is not None:
         instance.user.email = instance.email
         instance.user.save()
 
